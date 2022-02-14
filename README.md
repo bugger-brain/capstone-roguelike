@@ -1,7 +1,7 @@
-# Capstone: Rougelike
+# Capstone: Roguelike
 
 ## Problem Statement
-Looking to kill 10 minutes? Play our game! Rougelikes are a popular genre of game where the game resets each time you die. Our game is an adventure game based on four elements: air, water, earth, and fire. Solve the puzzles, collect the treasure, and beat the boss to win!
+Looking to kill 10 minutes? Play our game! Roguelikes are a popular genre of game where the game resets each time you die. Our game is an adventure game based on four elements: air, water, earth, and fire. Solve the puzzles, collect the treasure, and beat the boss to win!
 
 Make an account and login to save your score, or play as a guest. If you get stuck, save your progress and come back later.
 
@@ -29,7 +29,15 @@ Guest23 did not feel like creating an account. However, they are very talented a
 <dd>Doing things in the game will reward the player with points. The number of points at the end of the game, win or lose, is the score. If it is the player's account-wide highest score, then that is the high score. </dd>
 <dt>Leaderboard</dt>
 <dd>Each player’s highest score will be listed here. </dd>
+<dt>Maps</dt>
+<dd>Multiple tiles with different layouts</dd>
+<dt>Monster</dt>
+<dd>Moves towards player to fight </dd>
+<dt>Elements</dt>
+<dd>Fire, Water, Earth, Air: Each element </dd>
 </dl>
+
+
 
 ## Technical Requirements
 
@@ -42,7 +50,7 @@ Guest23 did not feel like creating an account. However, they are very talented a
 
 ### Security Requirements
 
-Rougelike has three formal roles: GUEST, PLAYER and ADMIN. 
+Roguelike has three formal roles: GUEST, PLAYER and ADMIN. 
 
 Anyone can play the game as a guest. Guests who create an account will become a player, then they can save their progress and register their high score to the leaderboard.
 
