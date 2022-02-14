@@ -34,7 +34,7 @@ Guest23 did not feel like creating an account. However, they are very talented a
 <dt>Monster</dt>
 <dd>Moves towards player to fight </dd>
 <dt>Elements</dt>
-<dd>Fire, Water, Earth, Air: Each element </dd>
+<dd>Fire, Water, Earth, Air: Each element has their own power. </dd>
 </dl>
 
 
