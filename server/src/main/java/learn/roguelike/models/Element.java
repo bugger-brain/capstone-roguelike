@@ -7,4 +7,5 @@ public class Element {
     private boolean water;
     private boolean earth;
     private boolean fire;
+
 }
