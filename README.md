@@ -20,23 +20,27 @@ Guest23 did not feel like creating an account. However, they are very talented a
 
 ### Game Rules
 
-Objective: Collect all elements and defeat monsters(Possibly having ultimate treasure?)
+Objective: Collect all elements, defeat monsters and collect the ultimate treasure
 
 How Elements Work: 
-    Air - Allows hero push monster back [two?] spaces
+    Air - Allows hero push monster back three spaces back
     Water - Allows hero to walk on water
-    Earth - Allows hero to pick up rocks and throw at monster
-    Fire - Allows hero to burn building/something?
+    Earth - Allows hero to pick up rocks and throw at monster to defeat
+    Fire - Allows hero to burn walls
 
 How Scoring Works: 
     Defeating Monster - 50 points 
+    Collecting Element - 100 points
+    Collecting Ultimate Treasure - 200 points 
     
 Lives: 
     Get 100 Gold - Get another life 
-    Lose Live When defeated by monster
+    Lose Live When Hero Runs Into Monster
 
-What to avoid: 
+What to Avoid: 
     Monsters
+    Water (if you do not have the water element)
+
 
 
 
@@ -51,14 +55,20 @@ What to avoid:
 <dd>Doing things in the game will reward the player with points. The number of points at the end of the game, win or lose, is the score. If it is the player's account-wide highest score, then that is the high score. </dd>
 <dt>Leaderboard</dt>
 <dd>Each player’s highest score will be listed here. </dd>
-<dt>World Map</dt>
-<dd>Multiple tiles with different layouts. </dd>
-<dt>Individual Map</dt>
-<dd>Map player is playing. </dd>
+<dt>Game</dt>
+<dd>Multiple maps with different layouts. </dd>
+<dt>Map</dt>
+<dd>Different layouts to find elements and treasures. </dd>
+<dt>Hero</dt>
+<dd>Controlled by player </dd>
 <dt>Monster</dt>
-<dd>Moves towards player to fight. </dd>
+<dd>Defends elements from hero. </dd>
 <dt>Elements</dt>
-<dd>Fire, Water, Earth, Air: Each element has their own power. </dd>
+<dd>Each element has their own power. </dd>
+<dd>Fire: Allows hero to burn walls. </dd>
+<dd>Water: Allows hero to walk on water. </dd>
+<dd>Earth: Allows hero to pick up rocks and defeat monsters. </dd> 
+<dd>Air: Allows hero to push monsters back three tiles. </dd>
 </dl>
 
 
