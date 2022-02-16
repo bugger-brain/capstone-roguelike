@@ -18,6 +18,28 @@ Frogger_manXD starts the game and gets two of the four elements, then has to das
 
 Guest23 did not feel like creating an account. However, they are very talented at games and beat the game with a score high enough to make the top 5 on the leaderboard. To make an account or not to make an account, that is the question…
 
+### Game Rules
+
+Objective: Collect all elements and defeat monsters(Possibly having ultimate treasure?)
+
+How Elements Work: 
+    Air - Allows hero push monster back [two?] spaces
+    Water - Allows hero to walk on water
+    Earth - Allows hero to pick up rocks and throw at monster
+    Fire - Allows hero to burn building/something?
+
+How Scoring Works: 
+    Defeating Monster - 50 points 
+    
+Lives: 
+    Get 100 Gold - Get another life 
+    Lose Live When defeated by monster
+
+What to avoid: 
+    Monsters
+
+
+
 ## Vocabulary
 
 <dl>
