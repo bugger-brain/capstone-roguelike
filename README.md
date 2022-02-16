@@ -29,10 +29,12 @@ Guest23 did not feel like creating an account. However, they are very talented a
 <dd>Doing things in the game will reward the player with points. The number of points at the end of the game, win or lose, is the score. If it is the player's account-wide highest score, then that is the high score. </dd>
 <dt>Leaderboard</dt>
 <dd>Each player’s highest score will be listed here. </dd>
-<dt>Maps</dt>
-<dd>Multiple tiles with different layouts</dd>
+<dt>World Map</dt>
+<dd>Multiple tiles with different layouts. </dd>
+<dt>Individual Map</dt>
+<dd>Map player is playing. </dd>
 <dt>Monster</dt>
-<dd>Moves towards player to fight </dd>
+<dd>Moves towards player to fight. </dd>
 <dt>Elements</dt>
 <dd>Fire, Water, Earth, Air: Each element has their own power. </dd>
 </dl>
