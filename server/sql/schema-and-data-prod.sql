@@ -56,3 +56,21 @@ create table monster(
 );
 
 
+insert into player values
+	(1, 'pagoto', 'qwe123');
+    
+insert into game values
+	(1, 1, false, 0);
+    
+insert into map values
+	(1, 1, 0, 0);
+
+insert into tile values
+	(1, 1, 'grass', 0, 0);
+
+insert into hero values
+	(1, 10, false, false, false, false, 0, 50);
+    
+insert into monster values
+	(1, 20);
+    

@@ -1,10 +1,11 @@
 package learn.roguelike.models;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Data
@@ -17,7 +18,8 @@ public class Game {
     private boolean isBlueprint;
     private int score;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "game_id")
     private List<Map> maps = new ArrayList<>();
 
 }

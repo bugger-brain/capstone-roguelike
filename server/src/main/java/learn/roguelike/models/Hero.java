@@ -12,7 +12,7 @@ public class Hero {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int heroId;
-    private int tileId;
+//    private int tileId;
     private int hp;
     private int lives;
     private boolean air;
