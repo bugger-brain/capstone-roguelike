@@ -16,9 +16,7 @@ public class Map {
     private int x;
     private int y;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Game game;
-
-    @OneToMany(mappedBy = "tile")
+//    @OneToMany(mappedBy = "tile")
+    @OneToMany
     private List<Tile> tiles = new ArrayList<>();
 }

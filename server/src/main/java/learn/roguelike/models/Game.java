@@ -15,11 +15,9 @@ public class Game {
     private int gameId;
     private Integer playerId;
     private boolean isBlueprint;
+    private int score;
 
     @OneToMany
     private List<Map> maps = new ArrayList<>();
-
-//    @ManyToOne
-//    private Player player;
 
 }

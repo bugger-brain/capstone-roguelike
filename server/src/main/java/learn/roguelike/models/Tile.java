@@ -15,10 +15,4 @@ public class Tile {
     private int x;
     private int y;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Map map;
-
-
-
-
 }

@@ -19,6 +19,4 @@ public class Player {
     @OneToMany
     private List<Game> games = new ArrayList<>();
 
-    @OneToMany
-    private List<Score> scores = new ArrayList<>();
 }

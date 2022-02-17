@@ -14,8 +14,8 @@ public class Monster {
     private int tileId;
     private int hp;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tileId")
-    private Tile tile;
+//    @OneToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "tileId")
+//    private Tile tile;
 
 }
