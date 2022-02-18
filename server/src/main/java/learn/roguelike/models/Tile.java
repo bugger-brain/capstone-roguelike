@@ -14,5 +14,6 @@ public class Tile {
     private String type;
     private int x;
     private int y;
+//    private boolean hasEntity;
 
 }
