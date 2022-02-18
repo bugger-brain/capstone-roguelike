@@ -16,7 +16,8 @@ public class Player {
     private String username;
     private String password;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "player_id")
     private List<Game> games = new ArrayList<>();
 
 }

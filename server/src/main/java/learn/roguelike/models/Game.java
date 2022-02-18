@@ -14,7 +14,6 @@ public class Game {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int gameId;
-    private Integer playerId;
     private boolean isBlueprint;
     private int score;
 
