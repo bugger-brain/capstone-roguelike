@@ -11,11 +11,10 @@ public class Monster {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int monsterId;
-    private int tileId;
     private int hp;
 
-//    @OneToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "tileId")
-//    private Tile tile;
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "tile_id")
+    private Tile tile;
 
 }

@@ -17,6 +17,15 @@ public class PlayerController {
     public PlayerController(PlayerService service){
         this.service = service;
     }
+<<<<<<< HEAD
+=======
+
+    @GetMapping
+    public List<Player> getPlayers(){
+        List<Player> players = service.findAll();
+        return players;
+    }
+>>>>>>> 01f3d5d1c2c3561fb07d2f73ed05494d9c80a690
 
     @GetMapping
     public List<Player> getPlayers(){

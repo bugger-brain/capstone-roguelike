@@ -16,7 +16,9 @@ public class Map {
     private int x;
     private int y;
 
-//    @OneToMany(mappedBy = "tile")
-    @OneToMany
+
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "map_id")
     private List<Tile> tiles = new ArrayList<>();
 }

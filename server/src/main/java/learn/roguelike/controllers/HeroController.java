@@ -28,4 +28,8 @@ public class HeroController {
     public Hero getHeroById(@PathVariable int heroId){
         return service.findByHeroId(heroId);
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 01f3d5d1c2c3561fb07d2f73ed05494d9c80a690
