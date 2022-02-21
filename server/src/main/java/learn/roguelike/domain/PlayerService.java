@@ -18,4 +18,6 @@ public class PlayerService {
     public List<Player> findAll(){
         return repository.findAll();
     }
+
+    
 }
