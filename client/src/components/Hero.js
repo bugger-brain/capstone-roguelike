@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { findAll } from "../services/hero-api";
+import { findAll, findAllHeros } from "../services/hero-api";
 
 function Hero(){
     const [heroes, setHeroes] = useState([]);
 
 
     useEffect(() => {
-        findAll()
+        findAllHeros()
         .then(json => setHeroes(json))
         .catch(console.error)
     }, []); 

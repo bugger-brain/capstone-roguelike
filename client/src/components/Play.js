@@ -1,16 +1,20 @@
 import { useEffect, useState } from "react";
-import { findAll } from "../services/player-api";
+import { findAllPlayers } from "../services/player-api";
 
 
 function Play() {
 
     const [players, setPlayers] = useState([]);
-
+    const [hero, setHero] = useState();
 
     useEffect(() => {
-        findAll()
+        findAllPlayers()
             .then(json => setPlayers(json))
             .catch(console.error)
+        
+        // findHeroByTile???
+        
+        
     }, []);
 
     return (
@@ -36,7 +40,12 @@ function Play() {
                     )}
                 </div>
             )}
+            <div>
+                
+            </div>
         </div>
+
+
     );
 }
 

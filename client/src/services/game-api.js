@@ -1,4 +1,4 @@
-const baseUrl = `http://localhost:8080/rl/game`
+const baseUrl = `http://localhost:8080/api/game`
 
 export async function findAll() {
     
@@ -10,4 +10,8 @@ export async function findAll() {
         return Promise.reject(403);
     }
     return Promise.reject("Could not fetch games. ");
+}
+
+export async function getHeroFromGame() {
+
 }
