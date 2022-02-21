@@ -72,11 +72,31 @@ insert into game values
 	(1, 1, false, 0);
     
 insert into map values
-	(1, 1, 0, 0);
+	(1, 1, 0, 0), 
+    (2, 1, 1, 0),
+    (3, 1, 0, 1),
+    (4, 1, 1, 1);
 
 insert into tile values
 	(1, 1, 'grass', 0, 0),
-    (2, 1, 'grass', 1, 0);
+    (2, 1, 'grass', 1, 0),
+    (3, 1, 'grass', 0, 1),
+    (4, 1, 'grass', 1, 1),
+    
+    (5, 2, 'grass', 0, 0),
+    (6, 2, 'grass', 1, 0),
+    (7, 2, 'grass', 0, 1),
+    (8, 2, 'grass', 1, 1),
+    
+    (9, 3, 'grass', 0, 0),
+    (10, 3, 'grass', 1, 0),
+    (11, 3, 'grass', 0, 1),
+    (12, 3, 'grass', 1, 1),
+    
+    (13, 4, 'grass', 0, 0),
+    (14, 4, 'grass', 1, 0),
+    (15, 4, 'grass', 0, 1),
+    (16, 4, 'grass', 1, 1);
 
 insert into hero values
 	(1, 1, 3, 10, false, false, false, false, 0, 50);

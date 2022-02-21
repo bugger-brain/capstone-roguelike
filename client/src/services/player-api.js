@@ -2,7 +2,7 @@ const baseUrl = `http://localhost:8080/rl/player`
 
 export async function findAll() {
     
-    // const init = { method: "GET" };
+    // const init = { method: "POST" };
     const response = await fetch(baseUrl);
     if (response.status === 200){
         return response.json();
