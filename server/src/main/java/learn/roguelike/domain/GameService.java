@@ -18,4 +18,9 @@ public class GameService {
     public List<Game> findAll() {
         return repository.findAll();
     }
+
+    public Game findById(int gameId){ return repository.findById(gameId).orElse(null);
+
+
+    }
 }
