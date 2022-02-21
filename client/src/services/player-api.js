@@ -1,8 +1,8 @@
-const baseUrl = `http://localhost:8080/rl/player`
+const baseUrl = `http://localhost:8080/api/player`
 
-export async function findAll() {
+export async function findAllPlayers() {
     
-    // const init = { method: "GET" };
+    // const init = { method: "POST" };
     const response = await fetch(baseUrl);
     if (response.status === 200){
         return response.json();

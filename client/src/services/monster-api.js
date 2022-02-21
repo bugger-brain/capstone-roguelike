@@ -1,4 +1,4 @@
-const baseUrl = `http://localhost:8080/rl/monster`
+const baseUrl = `http://localhost:8080/api/monster`
 
 export async function findAll() {
     

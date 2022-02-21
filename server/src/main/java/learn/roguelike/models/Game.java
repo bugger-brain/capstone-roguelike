@@ -21,4 +21,8 @@ public class Game {
     @JoinColumn(name = "game_id")
     private List<Map> maps = new ArrayList<>();
 
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "game_id")
+    private Hero hero;
+
 }

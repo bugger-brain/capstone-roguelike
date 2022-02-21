@@ -41,6 +41,7 @@ create table tile(
 
 create table hero(
 	hero_id int primary key auto_increment,
+    game_id int not null,
     tile_id int null,
     hp int not null,
     lives int not null,
@@ -52,7 +53,10 @@ create table hero(
     gold int not null,
     constraint fk_hero_tile_id
 		foreign key (tile_id)
-        references tile(tile_id)
+        references tile(tile_id),
+	constraint fk_hero_game_id
+		foreign key (game_id)
+		references game(game_id)		
 );
 
 create table monster(
@@ -72,14 +76,34 @@ insert into game values
 	(1, 1, false, 0);
     
 insert into map values
-	(1, 1, 0, 0);
+	(1, 1, 0, 0), 
+    (2, 1, 1, 0),
+    (3, 1, 0, 1),
+    (4, 1, 1, 1);
 
 insert into tile values
 	(1, 1, 'grass', 0, 0),
-    (2, 1, 'grass', 1, 0);
+    (2, 1, 'grass', 1, 0),
+    (3, 1, 'grass', 0, 1),
+    (4, 1, 'grass', 1, 1),
+    
+    (5, 2, 'grass', 0, 0),
+    (6, 2, 'grass', 1, 0),
+    (7, 2, 'grass', 0, 1),
+    (8, 2, 'grass', 1, 1),
+    
+    (9, 3, 'grass', 0, 0),
+    (10, 3, 'grass', 1, 0),
+    (11, 3, 'grass', 0, 1),
+    (12, 3, 'grass', 1, 1),
+    
+    (13, 4, 'grass', 0, 0),
+    (14, 4, 'grass', 1, 0),
+    (15, 4, 'grass', 0, 1),
+    (16, 4, 'grass', 1, 1);
 
 insert into hero values
-	(1, 1, 3, 10, false, false, false, false, 0, 50);
+	(1, 1, 1, 10, 3, false, false, false, false, 0, 50);
     
 insert into monster values
 	(1, 2, 20);
