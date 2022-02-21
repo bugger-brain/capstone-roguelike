@@ -6,6 +6,7 @@ function Play() {
 
     const [players, setPlayers] = useState([]);
 
+
     useEffect(() => {
         findAll()
             .then(json => setPlayers(json))
