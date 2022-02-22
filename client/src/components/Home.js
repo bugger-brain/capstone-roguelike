@@ -9,7 +9,7 @@ function Home() {
             <h1><strong><center>WELCOME TO ROGUELIKE!</center></strong></h1>
             <div>
                 <center>
-                <img src="Diagrams/website_logo.jpg" alt="Game image"></img>
+                <img src="/website_logo.jpg" alt="Game image"></img>
                 </center>
             </div>
 
