@@ -6,7 +6,7 @@ import Game from "./components/Game";
 import Hero from "./components/Hero";
 import Monster from "./components/Monster";
 import Home from "./components/Home";
-
+import LeaderBoard from "./components/LeaderBoard";
 function App() {
 
   return (
@@ -18,6 +18,7 @@ function App() {
           <Route path="/game" element ={<Game />} />
           <Route path="/hero" element ={<Hero />} />
           <Route path="/monster" element ={<Monster />} />
+          <Route path="/leaderboard" element ={<LeaderBoard />} />
         </Routes>
       </BrowserRouter>
     </div>

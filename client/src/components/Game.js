@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { findAll } from "../services/game-api";
+import { findAllGames } from "../services/game-api";
 function Game(){
 
     const [games, setGames] = useState([]);
 
 
     useEffect(() => {
-        findAll()
+        findAllGames()
         .then(json => setGames(json))
         .catch(console.error)
     }, []); 

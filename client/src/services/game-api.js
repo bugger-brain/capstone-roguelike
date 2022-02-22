@@ -1,6 +1,6 @@
 const baseUrl = `http://localhost:8080/api/game`
 
-export async function findAll() {
+export async function findAllGames() {
     
 
     const response = await fetch(baseUrl);
