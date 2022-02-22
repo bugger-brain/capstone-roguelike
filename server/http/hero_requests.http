@@ -1,4 +1,4 @@
-@url = http://localhost:8080/rl/hero
+@url = http://localhost:8080/api/hero
 
 GET {{url}} HTTP/1.1
 

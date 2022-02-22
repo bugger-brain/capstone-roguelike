@@ -21,14 +21,13 @@ function Play() {
             x: 0,
             y: 0
         }
-
     });
 
-    function checkKey(e) {
-        var event = window.event ? window.event : e;
-        // 39 = right arrow key
-        console.log(event.keyCode == 39)
-    }
+    // function checkKey(e) {
+    //     var event = window.event ? window.event : e;
+    //     // 39 = right arrow key
+    //     console.log(event.keyCode == 39)
+    // }
 
     useEffect(() => {
         findAllPlayers()

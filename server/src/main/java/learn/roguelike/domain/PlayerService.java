@@ -19,5 +19,10 @@ public class PlayerService {
         return repository.findAll();
     }
 
+    public Player findPlayerByUsername(String username) {
+        Player player = repository.findPlayerByUsername(username);
+        return player;
+    }
+
     
 }
