@@ -11,23 +11,29 @@ function Login() {
 
     const authContext = useContext(AuthContext);
 
+    const onSubmit = (event) => {
+        event.preventDefault();
+        // login(candidate);
+    }
+
+    
+    // function login(candidate) {
+    // }
 
 
     return (
         <div>
             <center>
-                <form >
+                <form onSubmit={onSubmit}>
                     <div class="mb-3">
-                        <label for="username" class="form-label">Username</label>
-                        <input type="username" class="form-control" id="username" required></input>
+                        <label for="loginUsername" class="form-label">Username</label>
+                        <input type="username" class="form-control" id="loginUsername" required></input>
                     </div>
                     <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" required></input>
+                        <label for="loginPassword" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="loginPassword" required></input>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
-                    <div id="accountHelp" class="form-text">No account? No problem! Click below to join now.</div>
-                    <button type="create" class="btn btn-sm btn-primary">Create Account</button>
                 </form>
             </center>
         </div>
