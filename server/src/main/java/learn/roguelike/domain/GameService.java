@@ -11,7 +11,7 @@ public class GameService {
 
     private final GameRepository repository;
 
-    public GameService(GameRepository repository){
+    public GameService(GameRepository repository) {
         this.repository = repository;
     }
 

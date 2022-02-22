@@ -5,17 +5,45 @@ import { findAllPlayers } from "../services/player-api";
 function Play() {
 
     const [players, setPlayers] = useState([]);
-    const [hero, setHero] = useState();
+    const [hero, setHero] = useState({
+        heroId: 1,
+        hp: 3,
+        lives: 10,
+        air: false,
+        water: false,
+        earth: false,
+        fire: false,
+        keys: 0,
+        gold: 50,
+        tile: {
+            tileId: 1,
+            type: "grass",
+            x: 0,
+            y: 0
+        }
+
+    });
+
+    function checkKey(e) {
+        var event = window.event ? window.event : e;
+        // 39 = right arrow key
+        console.log(event.keyCode == 39)
+    }
 
     useEffect(() => {
         findAllPlayers()
-            .then(json => setPlayers(json))
+            .then(json => {
+                setPlayers(json);
+                setHero(json[0].games[0].hero)
+            })
             .catch(console.error)
-        
-        // findHeroByTile???
-        
-        
+
     }, []);
+
+    useEffect(() => {
+        document.addEventListener("keydown", handleKeyDown);
+        return () => document.removeEventListener("keydown", handleKeyDown);
+      }, []);
 
     return (
         <div>
@@ -41,7 +69,15 @@ function Play() {
                 </div>
             )}
             <div>
-                
+                <h3>Unique Hero ID: {hero.heroId}</h3>
+                <p>HP: {hero.hp}</p>
+                <div>
+                    {hero.tile.tileId}
+                    {hero.tile.type}
+                    {hero.tile.x}
+                    {hero.tile.y}
+
+                </div>
             </div>
         </div>
 
