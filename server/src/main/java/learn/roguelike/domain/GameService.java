@@ -20,7 +20,5 @@ public class GameService {
     }
 
     public Game findById(int gameId){ return repository.findById(gameId).orElse(null);
-
-
     }
 }

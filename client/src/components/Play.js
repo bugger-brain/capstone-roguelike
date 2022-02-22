@@ -40,10 +40,10 @@ function Play() {
 
     }, []);
 
-    useEffect(() => {
-        document.addEventListener("keydown", handleKeyDown);
-        return () => document.removeEventListener("keydown", handleKeyDown);
-      }, []);
+    // useEffect(() => {
+    //     document.addEventListener("keydown", handleKeyDown);
+    //     return () => document.removeEventListener("keydown", handleKeyDown);
+    //   }, []);
 
     return (
         <div>

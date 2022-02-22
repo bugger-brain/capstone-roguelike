@@ -12,6 +12,7 @@ export async function findAllPlayers() {
     return Promise.reject("Could not fetch players. ");
 }
 
+
 // export async function findById(id) {
 
 // }
