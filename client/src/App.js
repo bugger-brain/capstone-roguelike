@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { BrowserRouter as Route, Redirect, Link, Routes, BrowserRouter } from "react-router-dom";
+import { Route, Redirect, Link, Routes, BrowserRouter } from "react-router-dom";
 import './App.css';
 import Play from "./components/Play";
 import Game from "./components/Game";
@@ -19,7 +19,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/dashboard" element={username ? <Dashboard /> : <Home/>} />
+            <Route path="/dashboard" element={username ? <Dashboard /> : <Home />} />
             <Route path="/play" element={<Play />} />
           </Routes>
         </BrowserRouter>

@@ -16,7 +16,7 @@ function Login() {
     return (
         <div>
             <center>
-                <form>
+                <form >
                     <div class="mb-3">
                         <label for="username" class="form-label">Username</label>
                         <input type="username" class="form-control" id="username" required></input>
