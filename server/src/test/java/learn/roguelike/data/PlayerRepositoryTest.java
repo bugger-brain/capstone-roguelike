@@ -29,10 +29,16 @@ public class PlayerRepositoryTest {
 
     }
 
+//    @Test
+//    void shouldNotFindByMonsterId(){
+//        Player player = repository.findById(0).orElse(null);
+//        assertNull(player);
+//    }
+
     @Test
-    void shouldNotFindByMonsterId(){
-        Player player = repository.findById(0).orElse(null);
-        assertNull(player);
+    void shouldFindPlayerByUsername(){
+        Player pagoto = repository.findPlayerByUsername("pagoto");
+        assertEquals("pagoto", pagoto.getUsername());
     }
 
 }
