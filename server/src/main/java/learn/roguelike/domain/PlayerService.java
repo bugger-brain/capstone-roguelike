@@ -19,8 +19,9 @@ public class PlayerService {
         return repository.findAll();
     }
 
-    public Player findByUsername(String username) {
-        return repository.findByUsername(username).or
+    public Player findPlayerByUsername(String username) {
+        Player player = repository.findPlayerByUsername(username);
+        return player;
     }
 
     

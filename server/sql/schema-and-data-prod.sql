@@ -70,7 +70,8 @@ create table monster(
 
 
 insert into player values
-	(1, 'pagoto', 'qwe123');
+	(1, 'pagoto', 'qwe123'), 
+    (2, 'steph', 'qwe123');
     
 insert into game values
 	(1, 1, false, 0);
