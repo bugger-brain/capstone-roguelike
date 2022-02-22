@@ -1,5 +1,4 @@
-import { BrowserRouter as Route, Routes, BrowserRouter } from "react-router-dom";
-
+import { Route } from "react-router-dom";
 import Login from "./Login";
 
 
