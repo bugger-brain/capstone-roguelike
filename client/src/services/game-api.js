@@ -12,6 +12,3 @@ export async function findAll() {
     return Promise.reject("Could not fetch games. ");
 }
 
-export async function getHeroFromGame() {
-
-}
