@@ -5,6 +5,7 @@ import Play from "./components/Play";
 import Home from "./components/Home";
 import AuthContext from "./contexts/AuthContext";
 import Dashboard from "./components/Dashboard";
+import Nav from "./components/Nav";
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
     <AuthContext.Provider value={{ username, setUsername }}>
       <div className="container">
         <BrowserRouter>
+        <Nav />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/dashboard" element={username ? <Dashboard /> : <Home />} />
