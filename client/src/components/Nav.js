@@ -6,7 +6,7 @@ function Nav(){
 
         <nav class="navbar navbar-expand-lg navbar-light bg-danger">
             <div class="container-fluid">
-                <a class="navbar-brand" href="/">Rogue</a>
+                <a class="navbar-brand" href="/"><img src="/website_logo.jpg" alt="Game Image" width="50" height="50"></img></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
