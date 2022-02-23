@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import AuthContext from "../contexts/AuthContext";
+import { findPlayerByUsername } from "../services/player-api";
 
 function Login() {
 
@@ -13,12 +14,25 @@ function Login() {
 
     const onSubmit = (event) => {
         event.preventDefault();
-        // login(candidate);
+        login(candidate);
     }
 
-    
-    // function login(candidate) {
-    // }
+    const onChange = (event) => {
+        const lookupCandidate = { ...candidate };
+
+        lookupCandidate[event.target.name] = event.target.value;
+        setCandidate(lookupCandidate);
+
+    }
+
+
+    function login(candidate) {
+        findPlayerByUsername(candidate.username)
+            .then(player => {
+                localStorage.setItem("player", player);
+            })
+            .catch(() => setHasError(true));
+    }
 
 
     return (
@@ -27,13 +41,18 @@ function Login() {
                 <form onSubmit={onSubmit}>
                     <div class="mb-3">
                         <label for="loginUsername" class="form-label">Username</label>
-                        <input type="username" class="form-control" id="loginUsername" required></input>
+                        <input type="username" class="form-control" id="loginUsername"
+                            onChange={onChange} value={candidate.username} required />
                     </div>
                     <div class="mb-3">
                         <label for="loginPassword" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="loginPassword" required></input>
+                        <input type="password" class="form-control" id="loginPassword"
+                            onChange={onChange} value={candidate.password} required />
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                    {hasError && <div className="alert alert-danger">Bad credentials...</div>}
                 </form>
             </center>
         </div>
