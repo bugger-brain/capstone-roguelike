@@ -1,4 +1,4 @@
-import { Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Login from "./Login";
 import Register from "./Register";
 import Play from "./Play";
@@ -10,10 +10,6 @@ function Home() {
 
     function onClickRegister() {
         hitRegisterButton = true;
-    }
-
-    function onClickPlay() {
-        return <Play />
     }
 
 
@@ -34,24 +30,19 @@ function Home() {
 
                     {hitRegisterButton ? <Register /> : <Login />}
 
-                    <br></br>
-
                     <div id="accountHelp" className="form-text">No account? No problem! Click below to join now.</div>
+                    <br></br>
                     <button type="create" onClick={onClickRegister} className="btn btn-sm btn-primary">Create Account</button>
-
-
-                    {/* {console.log(hitRegisterButton)}     */}
 
                 </center>
 
             </div>
 
             <br></br>
+
             <div>
                 <center>
-                    <button type="button" onClick={onClickPlay} class="btn btn-lrg btn-danger">
-                        Click to Play!
-                    </button>
+                    <Link to="/play" className="btn btn-danger">Click to Play!</Link>
                 </center>
             </div>
 

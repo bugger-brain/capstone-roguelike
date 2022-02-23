@@ -39,6 +39,7 @@ function Login() {
         console.log(p);
     }
 
+
     return (
         <div>
             <center>
@@ -50,7 +51,7 @@ function Login() {
                     </div>
                     <div className="w-25 p-3">
                         <label htmlFor="loginPassword" className="form-label">Password</label>
-                        <input type="text" className="form-control" name="password" id="loginPassword"
+                        <input type="password" className="form-control" name="password" id="loginPassword"
                             onChange={onChange} value={candidate.password} required />
                     </div>
                     <div>
