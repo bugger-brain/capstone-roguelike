@@ -1,5 +1,6 @@
     import { useEffect, useState } from "react";
-    import { findAllPlayers } from "../services/player-api";
+    import { findAllPlayers, findPlayerByUsername } from "../services/player-api";
+
 
     function LeaderBoard(){
         const RANK = {
@@ -20,18 +21,20 @@
         const [rankings, setRankings] = useState([RANK]);
     
 
-        useEffect(() => {
-            findAllPlayers()
-            .then(json => setPlayers(json))
-            .catch(console.error)
-
-        }, []);
+        
     
         
         
 //for some reason player is undefined here 
 //don't know where to call this
         const currentRankings = () => {
+            useEffect(() => {
+                findAllPlayers()
+                .then(json => setPlayers(json))
+                .catch(console.error)
+    
+            }, []);
+            
         for(let i = 0; i < players.length; i++){
             let high_score = 0;
             for(let g = 0; g < players.games.length; g++){
@@ -61,6 +64,12 @@
 
         const renderScoresByUser = (event) => {
             //find player by username api function
+
+            useEffect(() => {
+                findPlayerByUsername()
+                .then(json => setPlayers(json))
+    
+            }, []);
             
     
 
@@ -69,9 +78,9 @@
         
         
         
-        return(
+return(
             
-        <>  
+    <>  
         <center><h1>LeaderBoard!</h1></center>
         <table class="table table-bordered table-light">
         <thead>
@@ -119,7 +128,7 @@
             </div>
             <div>
             <button type="submit"  class="button btn-lg btn-warning">
-                        <span class="button__text">Find My Scores</span>
+                        <span class="button__text">View My Scores</span>
                     </button>
                 </div>
             </form>
