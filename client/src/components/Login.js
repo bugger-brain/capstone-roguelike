@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext } from "react";
 import AuthContext from "../contexts/AuthContext";
-import { findPlayerByUsername } from "../services/player-api";
 
 function Login() {
 
@@ -14,7 +13,7 @@ function Login() {
 
     function onSubmit (event) {
         event.preventDefault();
-        login(candidate);
+        // login(candidate);
     }
 
     function onChange (event)  {

@@ -12,9 +12,9 @@ function Home() {
         hitRegisterButton = true;
     }
 
-    // function onClick() {
-
-    // }
+    function onClickPlay() {
+        return <Play />
+    }
 
 
     return (
@@ -49,7 +49,7 @@ function Home() {
             <br></br>
             <div>
                 <center>
-                    <button type="button" onClick={() => {<Play />}} className="btn btn-lrg btn-danger">
+                    <button type="button" onClick={onClickPlay} class="btn btn-lrg btn-danger">
                         Click to Play!
                     </button>
                 </center>
