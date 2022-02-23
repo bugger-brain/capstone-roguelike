@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
 import AuthContext from "../contexts/AuthContext";
 import { findPlayerByUsername } from "../services/player-api";
 
@@ -10,7 +11,6 @@ const blankCandidate = {
 function Login() {
 
     const [candidate, setCandidate] = useState(blankCandidate);
-
     const [hasError, setHasError] = useState(false);
     const authContext = useContext(AuthContext);
 
@@ -28,8 +28,8 @@ function Login() {
     function login(candidate) {
         findPlayerByUsername(candidate.username)
             .then(player => {
-                // console.log(player)
                 localStorage.setItem("player", JSON.stringify(player));
+                <Link to="/dashboard" />
             })
             .catch(() => setHasError(true));
     }
@@ -38,6 +38,7 @@ function Login() {
         const p = JSON.parse(localStorage.getItem("player"));
         console.log(p);
     }
+
 
     return (
         <div>
@@ -50,7 +51,7 @@ function Login() {
                     </div>
                     <div className="w-25 p-3">
                         <label htmlFor="loginPassword" className="form-label">Password</label>
-                        <input type="text" className="form-control" name="password" id="loginPassword"
+                        <input type="password" className="form-control" name="password" id="loginPassword"
                             onChange={onChange} value={candidate.password} required />
                     </div>
                     <div>
