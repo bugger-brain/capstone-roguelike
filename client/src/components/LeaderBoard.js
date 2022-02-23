@@ -54,8 +54,8 @@
            
         <tr>
                 <th scope="row">1</th>
-                <td>{rankings.username}</td>
-                <td>{rankings.score}</td>
+                <td>{rankings[0].username}</td>
+                <td>{rankings[0].score}</td>
         </tr>
         {/* <tr>
                 <th scope="row">2</th>
