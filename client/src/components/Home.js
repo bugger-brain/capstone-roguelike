@@ -16,7 +16,6 @@ function Home() {
         return <Play />
     }
 
-
     return (
         <div>
 
