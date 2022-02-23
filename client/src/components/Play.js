@@ -4,7 +4,29 @@ import { useEffect, useState } from "react";
 function Play() {
 
     const game = JSON.parse(localStorage.getItem("game"));
+    const maps = game.maps;
+    const hero_tileId = game.hero.tile.tileId;
     
+    // const mapHeroIsOn = maps.array.forEach(element => {
+        
+    // });
+
+    // function loadMapHeroIdOn() {
+    //     for 
+    // }
+
+    // function displayMap() {
+
+    //     return maps.map
+    // }
+
+
+
+    return(
+        <div>
+            {console.log(hero_tileId)}
+        </div>
+    );
 
 }
 
