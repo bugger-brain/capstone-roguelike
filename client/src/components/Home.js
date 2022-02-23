@@ -1,15 +1,17 @@
 import { Route } from "react-router-dom";
 import Login from "./Login";
 import Register from "./Register";
+import Play from "./Play";
 
 
 function Home() {
 
     let hitRegisterButton = false;
 
-    function onClick() {
+    function onClickRegister() {
         hitRegisterButton = true;
     }
+
 
     return (
         <div>
@@ -21,22 +23,29 @@ function Home() {
                 </center>
             </div>
 
+            <br></br>
+
             <div>
+                <center>
 
-                {hitRegisterButton ? <Register /> : <Login />}
+                    {hitRegisterButton ? <Register /> : <Login />}
 
-                <div id="accountHelp" class="form-text">No account? No problem! Click below to join now.</div>
-                <button type="create" onClick={onClick} class="btn btn-sm btn-primary">Create Account</button>
+                    <br></br>
+
+                    <div id="accountHelp" class="form-text">No account? No problem! Click below to join now.</div>
+                    <button type="create" onClick={onClickRegister} class="btn btn-sm btn-primary">Create Account</button>
 
 
-                {console.log(hitRegisterButton)}
+                    {console.log(hitRegisterButton)}
+
+                </center>
 
             </div>
 
             <br></br>
             <div>
                 <center>
-                    <button type="button" class="btn btn-lrg btn-danger">
+                    <button type="button" onClick={<Play />} class="btn btn-lrg btn-danger">
                         Click to Play!
                     </button>
                 </center>

@@ -25,11 +25,11 @@ function Login() {
         <div>
             <center>
                 <form onSubmit={onSubmit}>
-                    <div class="mb-3">
+                    <div class="w-25 p-3">
                         <label for="loginUsername" class="form-label">Username</label>
                         <input type="username" class="form-control" id="loginUsername" required></input>
                     </div>
-                    <div class="mb-3">
+                    <div class="w-25 p-3">
                         <label for="loginPassword" class="form-label">Password</label>
                         <input type="password" class="form-control" id="loginPassword" required></input>
                     </div>
