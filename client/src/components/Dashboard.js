@@ -1,6 +1,8 @@
-
+import { useState, useEffect, useContext } from "react";
 
 function Dashboard() {
+
+    const [player, setPlayer] = useState(null);
 
     // edit profile button -> bring to form to change username / password / dob / email
 
