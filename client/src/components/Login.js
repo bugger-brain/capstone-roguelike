@@ -8,23 +8,20 @@ function Login() {
         username: "",
         password: ""
     });
-    const [hasError, setHasError] = useState(false);
 
+    const [hasError, setHasError] = useState(false);
     const authContext = useContext(AuthContext);
 
-    const onSubmit = (event) => {
+    function onSubmit (event) {
         event.preventDefault();
         login(candidate);
     }
 
-    const onChange = (event) => {
-        const lookupCandidate = { ...candidate };
-
-        lookupCandidate[event.target.name] = event.target.value;
-        setCandidate(lookupCandidate);
-
+    function onChange (event)  {
+        const next = { ...candidate };
+        next[event.target.name] = event.target.value;
+        setCandidate(next);
     }
-
 
     function login(candidate) {
         findPlayerByUsername(candidate.username)
@@ -34,23 +31,22 @@ function Login() {
             .catch(() => setHasError(true));
     }
 
-
     return (
         <div>
             <center>
                 <form onSubmit={onSubmit}>
-                    <div class="w-25 p-3">
-                        <label for="loginUsername" class="form-label">Username</label>
-                        <input type="username" class="form-control" id="loginUsername"
+                    <div className="w-25">
+                        <label htmlFor="loginUsername" className="form-label">Username</label>
+                        <input type="text" className="form-control" id="loginUsername"
                             onChange={onChange} value={candidate.username} required />
                     </div>
-                    <div class="w-25 p-3">
-                        <label for="loginPassword" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="loginPassword"
+                    <div className="w-25 p-3">
+                        <label htmlFor="loginPassword" className="form-label">Password</label>
+                        <input type="text" className="form-control" id="loginPassword"
                             onChange={onChange} value={candidate.password} required />
                     </div>
                     <div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" className="btn btn-primary">Submit</button>
                     </div>
                     {hasError && <div className="alert alert-danger">Bad credentials...</div>}
                 </form>

@@ -12,6 +12,10 @@ function Home() {
         hitRegisterButton = true;
     }
 
+    // function onClick() {
+
+    // }
+
 
     return (
         <div>
@@ -32,11 +36,11 @@ function Home() {
 
                     <br></br>
 
-                    <div id="accountHelp" class="form-text">No account? No problem! Click below to join now.</div>
-                    <button type="create" onClick={onClickRegister} class="btn btn-sm btn-primary">Create Account</button>
+                    <div id="accountHelp" className="form-text">No account? No problem! Click below to join now.</div>
+                    <button type="create" onClick={onClickRegister} className="btn btn-sm btn-primary">Create Account</button>
 
 
-                    {console.log(hitRegisterButton)}
+                    {/* {console.log(hitRegisterButton)}     */}
 
                 </center>
 
@@ -45,7 +49,7 @@ function Home() {
             <br></br>
             <div>
                 <center>
-                    <button type="button" onClick={<Play />} class="btn btn-lrg btn-danger">
+                    <button type="button" onClick={() => {<Play />}} className="btn btn-lrg btn-danger">
                         Click to Play!
                     </button>
                 </center>
