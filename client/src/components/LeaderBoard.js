@@ -48,18 +48,6 @@ function LeaderBoard() {
         rankings.sort((a, b) => { return b.score - a.score })
         console.log(rankings);
 
-<<<<<<< HEAD
-        return rankings.map(r => ( 
-            
-    <> 
-           
-        <tr>
-                <th scope="row">1</th>
-                <td>{rankings[0].username}</td>
-                <td>{rankings[0].score}</td>
-        </tr>
-        {/* <tr>
-=======
         return rankings.map(r => (
 
             <>
@@ -70,7 +58,6 @@ function LeaderBoard() {
                     <td>{rankings.score}</td>
                 </tr>
                 {/* <tr>
->>>>>>> ef81d9441b57f65dbb6bdd313b82694e5044634f
                 <th scope="row">2</th>
                 <td>{rankings[1].username}</td>
                 <td>{rankings[1].score}</td>
