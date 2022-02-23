@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext } from "react";
 import AuthContext from "../contexts/AuthContext";
-import { findPlayerByUsername } from "../services/player-api";
 
 function Login() {
 
@@ -14,45 +13,27 @@ function Login() {
 
     const onSubmit = (event) => {
         event.preventDefault();
-        login(candidate);
+        // login(candidate);
     }
 
-    const onChange = (event) => {
-        const lookupCandidate = { ...candidate };
-
-        lookupCandidate[event.target.name] = event.target.value;
-        setCandidate(lookupCandidate);
-
-    }
-
-
-    function login(candidate) {
-        findPlayerByUsername(candidate.username)
-            .then(player => {
-                localStorage.setItem("player", player);
-            })
-            .catch(() => setHasError(true));
-    }
+    
+    // function login(candidate) {
+    // }
 
 
     return (
         <div>
             <center>
                 <form onSubmit={onSubmit}>
-                    <div class="w-25 p-3">
+                    <div class="w-25">
                         <label for="loginUsername" class="form-label">Username</label>
-                        <input type="username" class="form-control" id="loginUsername"
-                            onChange={onChange} value={candidate.username} required />
+                        <input type="username" class="form-control" id="loginUsername" required></input>
                     </div>
-                    <div class="w-25 p-3">
+                    <div class="w-25">
                         <label for="loginPassword" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="loginPassword"
-                            onChange={onChange} value={candidate.password} required />
+                        <input type="password" class="form-control" id="loginPassword" required></input>
                     </div>
-                    <div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                    {hasError && <div className="alert alert-danger">Bad credentials...</div>}
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </center>
         </div>
