@@ -29,7 +29,6 @@ public class GameRepositoryTest {
     void shouldFindByGameId(){
         Game game = repository.findById(1).orElse(null);
         assertNotNull(game);
-
     }
 
     @Test
