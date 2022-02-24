@@ -12,10 +12,7 @@ Accept: application/json
 
 {
     "username": "test",
-    "password": "password",
-    "games": [
-        {}
-    ]
+    "password": "password"
     
 }
 
@@ -27,9 +24,8 @@ Accept: application/json
 {
     "playerId": "2",
     "username": "steph",
-    "password": "password1234",
-    "games": [{}]
+    "password": "password1234"
 }
 
 ###
-
+DELETE {{url}}/test HTTP/1.1
