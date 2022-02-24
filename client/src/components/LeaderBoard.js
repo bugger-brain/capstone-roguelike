@@ -105,7 +105,7 @@ function LeaderBoard() {
         <>
             <center><h1 style={{ color: 'white' }}>LeaderBoard!</h1></center>
 
-            <table class="table table-bordered table-dark">
+            <table className="table table-bordered table-dark">
                 <thead>
                     <tr>
                         <th scope="col">Rank</th>
@@ -119,8 +119,8 @@ function LeaderBoard() {
             </table>
 
             <div>
-                <button type="submit" class="button btn-lg btn-danger">
-                    <span class="button__text" >View Scores By Username</span>
+                <button type="submit" className="button btn-lg btn-danger">
+                    <span className="button__text" >View Scores By Username</span>
                 </button>
             </div>
 

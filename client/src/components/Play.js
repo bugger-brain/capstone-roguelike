@@ -7,7 +7,6 @@ function Play() {
 
     const maps = game.maps;
     const hero = game.hero;
-    console.log(game);
     let heroTileId = game.hero.tile.tileId;
     let mapHeroIsOn = loadMapHeroIsOn();
 
@@ -31,7 +30,7 @@ function Play() {
                 <p className="login-text">hero{hero.heroId}</p>
                 <p className="login-text">hp: {hero.hp}</p>
                 <p className="login-text">lives: {hero.lives}</p>
-                {/* <p class="login-text">elements: {hero. display truthy in map }</p> */}
+                {/* <p className="login-text">elements: {hero. display truthy in map }</p> */}
                 <p className="login-text">gold: {hero.gold}</p>
                 <p className="login-text">loc: {t.tileId}{t.type}{t.x}{t.y}</p>
             </>
@@ -39,7 +38,7 @@ function Play() {
     }
 
     // TODO: replace w component
-    function displayMap() {
+    function displayMapTiles() {
         return mapHeroIsOn.tiles.map(t => (
             <>
                 <p className="login-text">tile:{t.tileId}{t.type}{t.x}{t.y}</p>
@@ -58,12 +57,9 @@ function Play() {
     }
 
     function findTileOnMapByXY(map, x, y) {
-        console.log({map, x, y});
-        // debugger;
         for (let i = 0; i < map.tiles.length; i++) {
             let tile = map.tiles[i];
             if (tile.x == x && tile.y == y) {
-                console.log("found:", tile)
                 return tile;
             }
         }
@@ -116,20 +112,16 @@ function Play() {
 
     useEffect(() => {
         mapHeroIsOn = loadMapHeroIsOn();
-
         document.addEventListener('keydown', onkeydown);
         return () => document.removeEventListener("keydown", onkeydown);
     }, []);
-
-
 
     return (
         <div>
             <div>
                 {displayHero()}
                 <br /><br />
-
-                {displayMap()}
+                {displayMapTiles()}
             </div>
         </div>
     );

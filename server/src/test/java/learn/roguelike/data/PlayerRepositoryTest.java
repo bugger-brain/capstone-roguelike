@@ -17,23 +17,17 @@ public class PlayerRepositoryTest {
     PlayerRepository repository;
 
     @Test
-//    @Transactional
     void shouldPlayers() {
         var players = repository.findAll();
         assertTrue( players!= null & players.size() > 0);
     }
+
     @Test
     void shouldFindByPlayerId(){
         Player player = repository.findById(1).orElse(null);
         assertNotNull(player);
 
     }
-
-//    @Test
-//    void shouldNotFindByMonsterId(){
-//        Player player = repository.findById(0).orElse(null);
-//        assertNull(player);
-//    }
 
     @Test
     void shouldFindPlayerByUsername(){

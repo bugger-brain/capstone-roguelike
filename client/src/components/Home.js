@@ -1,19 +1,28 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Login from "./Login";
 import Register from "./Register";
 import './Home.css';
-import Play from "./Play";
 
 
 function Home() {
+
+    const navigate = useNavigate();
     let hitRegisterButton = false;
+
     function onClickRegister() {
         hitRegisterButton = true;
     }
 
+    function onClickPlayAsGuest() {
+        alert("Greetings! As a guest, you will not be able to save your game or register your high score to the leaderboard.");
+        navigate("/play");
+    }
+
+
+
     return (
-        <body class="body">
-            <div class="container">
+        <body className="body">
+            <div className="container">
                 <h1><strong><center>WELCOME TO ROGUELIKE!</center></strong></h1>
                 <div>
                     <center>
@@ -21,24 +30,16 @@ function Home() {
                     </center>
                 </div>
                 <br></br>
-
                 <div id="login">
                     <center>
                         {hitRegisterButton ? <Register /> : <Login />}
-
-                        <div id="accountHelp" className="form-text">No account? No problem! Click below to join now.</div>
+                        
+                        <div id="accountHelp" className="form-text">No account? No problem! Click below to join now or play as a guest.</div>
                         <br></br>
-                        <button type="create" onClick={onClickRegister} className="btn btn-sm btn-danger">Create Account</button>
+                        <button type="create" onClick={onClickRegister} className="btn btn-sm btn-danger">Create Account</button> <button type="create" onClick={onClickPlayAsGuest} className="btn btn-sm btn-success">Play As Guest</button>
                     </center>
                 </div>
-
                 <br></br>
-
-                <div>
-                    {/* <center>
-                        <Link to="/play" className="btn btn-danger">Click to Play!</Link>
-                    </center> */}
-                </div>
             </div>
         </body>
 
