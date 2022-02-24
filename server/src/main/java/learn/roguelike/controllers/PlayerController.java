@@ -47,7 +47,7 @@ public class PlayerController {
             return new ResponseEntity<Object>(makeResult(bindingResult), HttpStatus.BAD_REQUEST);
         }
 
-        Result<Player> result = service.addPlayer(player);
+        Result<Player> result = service.add(player);
         if (result.isSuccess()) {
 
             String url = String.format("http://%s:%s/api/player/%s",
@@ -66,8 +66,8 @@ public class PlayerController {
     public ResponseEntity<Object> put(@PathVariable String username,
                                       @RequestBody @Valid Player player,
                                       BindingResult bindingResult) {
-        //change to String validation
-        if (player == null || player.getUsername() != username) {
+
+        if (player == null || !player.getUsername().equals(username)) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 

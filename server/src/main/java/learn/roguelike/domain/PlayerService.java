@@ -4,7 +4,12 @@ import learn.roguelike.data.PlayerRepository;
 import learn.roguelike.models.Player;
 import org.springframework.stereotype.Service;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class PlayerService {
@@ -24,7 +29,7 @@ public class PlayerService {
         return player;
     }
 //just add or addPlayer
-    public Result<Player> addPlayer(Player player){
+    public Result<Player> add(Player player){
         Result<Player> result = validate(player);
         if(!result.isSuccess()){
             return result;
@@ -41,7 +46,6 @@ public class PlayerService {
         if(!result.isSuccess()){
             return result;
         }
-
         if(findPlayerByUsername(player.getUsername()) !=null){
             repository.save(player);
             return result;
@@ -60,6 +64,16 @@ public class PlayerService {
     }
     private <T> Result<T> validate(Player player){
         Result<T> result = new Result<>();
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+
+        Set<ConstraintViolation<Player>> violations = validator.validate(player);
+
+        if (!violations.isEmpty()) {
+            for (ConstraintViolation<Player> violation : violations) {
+                result.addMessage(violation.getMessage(), ResultType.INVALID);
+            }
+        }
         return result;
     }
 
