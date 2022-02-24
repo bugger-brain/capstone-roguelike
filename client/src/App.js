@@ -1,4 +1,4 @@
-import { useState} from "react";
+import { useState } from "react";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import './App.css';
 import Play from "./components/Play";
@@ -7,6 +7,7 @@ import AuthContext from "./contexts/AuthContext";
 import Dashboard from "./components/Dashboard";
 import Nav from "./components/Nav";
 import LeaderBoard from "./components/LeaderBoard";
+
 
 function App() {
 
