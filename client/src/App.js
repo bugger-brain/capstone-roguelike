@@ -7,6 +7,7 @@ import AuthContext from "./contexts/AuthContext";
 import Dashboard from "./components/Dashboard";
 import Nav from "./components/Nav";
 import LeaderBoard from "./components/LeaderBoard";
+import Register from "./components/Register";
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
             <Route path="/dashboard" element={player ? <Dashboard /> : <Home />} />
             <Route path="/play" element={<Play />} />
             <Route path ="/leaderboard" element={<LeaderBoard />} />
+            <Route path="/register" element={<Register />} />
           </Routes>
         </BrowserRouter>
       </div>

@@ -42,6 +42,22 @@ form {
   color: ivory;
 }
 
+.header-text {
+  color: ivory;
+}
+
+.register-text {
+  color: ivory;
+}
+
 .register-form {
-  display: none;
+  width: 500px;
+  height: 500px;
+  border-left: 5px #1c1c1c;
+  border-right: 5px #1c1c1c;
+  border-top: 5px #1c1c1c;
+  border-bottom: 5px #1c1c1c;
+  border-style:  inset;
+  padding: 10px 0;
+  margin: 50px auto;
 }

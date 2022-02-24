@@ -11,21 +11,21 @@ function Register() {
     return (
         <div>
             <center>
-                <form onSubmit={onSubmit}>
+                <register-form onSubmit={onSubmit}>
                     <div class="w-25 p-3">
-                        <label for="registerUsername" class="form-label">Username</label>
+                        <label for="registerUsername" class="register-text">Username</label>
                         <input type="username" class="form-control" id="registerUsername" required></input>
                     </div>
                     <div class="w-25 p-3">
-                        <label for="registerPassword" class="form-label">Password</label>
+                        <label for="registerPassword" class="register-text">Password</label>
                         <input type="password" class="form-control" id="registerPassword" required></input>
                     </div>
                     <div class="w-25 p-3">
-                        <label for="registerRepassword" class="form-label">Re-enter Password</label>
+                        <label for="registerRepassword" class="register-text">Re-enter Password</label>
                         <input type="password" class="form-control" id="registerRepassword" required></input>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
+                </register-form>
             </center>
         </div>
     )

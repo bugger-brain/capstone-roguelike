@@ -1,19 +1,14 @@
 import { Link } from "react-router-dom";
 import Login from "./Login";
-import Register from "./Register";
 import './Home.css';
-import Play from "./Play";
 
 
 function Home() {
-    let hitRegisterButton = false;
-    function onClickRegister() {
-        hitRegisterButton = true;
-    }
 
     return (
         <body class="body">
-            <div class="container">
+            <div class="header-text">
+                <br></br>
                 <h1><strong><center>WELCOME TO ROGUELIKE!</center></strong></h1>
                 <div>
                     <center>
@@ -24,15 +19,15 @@ function Home() {
 
                 <div id="login">
                     <center>
-                        {hitRegisterButton ? <Register /> : <Login />}
-
+                        <Login />
                         <div id="accountHelp" className="form-text">No account? No problem! Click below to join now.</div>
                         <br></br>
-                        <button type="create" onClick={onClickRegister} className="btn btn-sm btn-danger">Create Account</button>
+                        <Link to="/register" className="btn btn-sm btn-danger">Create Account</Link>
                     </center>
                 </div>
 
                 <br></br>
+
 
                 <div>
                     {/* <center>
