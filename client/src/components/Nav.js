@@ -3,11 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 
 function Nav(){
 
-    const [player, setPlayer] = useState(JSON.parse(localStorage.getItem("game")));
+    // const [player, setPlayer] = useState(JSON.parse(localStorage.getItem("player")));
+    const player = JSON.parse(localStorage.getItem("player"));
+    const navigate = useNavigate();
 
     function logout() {
-
-        //clear local storage
+        localStorage.clear();
+        navigate("/");
     }
 
     return (
@@ -33,10 +35,12 @@ function Nav(){
                         </li>
                     </ul>
                     <div className="justify-content-end">
-                        {player && <>
-                            <h2>{player.username}</h2>
+                        { player && player.username &&
+                        <>
+                            <h3>{player.username}</h3>
                             <button className="btn btn-dark me-2" onClick={logout}>Logout</button>
-                        </>}
+                        </> 
+                        }
                     </div>
                 </div>
             </div>

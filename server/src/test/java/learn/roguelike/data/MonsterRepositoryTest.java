@@ -19,7 +19,6 @@ public class MonsterRepositoryTest {
     MonsterRepository repository;
 
     @Test
-//    @Transactional
     void shouldFindMonsters() {
         var monsters = repository.findAll();
         assertTrue(monsters != null & monsters.size() > 0);
