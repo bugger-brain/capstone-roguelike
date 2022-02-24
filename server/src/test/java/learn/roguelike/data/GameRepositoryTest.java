@@ -19,7 +19,6 @@ public class GameRepositoryTest {
     GameRepository repository;
 
     @Test
-//    @Transactional
     void shouldFindGames(){
         var games = repository.findAll();
         assertTrue(games != null & games.size() > 0);

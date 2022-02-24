@@ -1,38 +1,51 @@
-
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 function Nav(){
 
-    return (
+    // const [player, setPlayer] = useState(JSON.parse(localStorage.getItem("player")));
+    const player = JSON.parse(localStorage.getItem("player"));
+    const navigate = useNavigate();
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-danger">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="/"><img src="/website_logo.jpg" alt="Game Image" width="50" height="50"></img></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+    function logout() {
+        localStorage.clear();
+        navigate("/");
+    }
+
+    return (
+        <nav className="navbar navbar-expand-lg navbar-light bg-danger">
+            <div className="container-fluid">
+                <a className="navbar-brand" href="/"><img src="/website_logo.jpg" alt="Game Image" width="50" height="50"></img></a>
+                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/">Home</a>
+                <div className="collapse navbar-collapse" id="navbarNav">
+                    <ul className="navbar-nav">
+                        <li className="nav-item">
+                            <a className="nav-link active" aria-current="page" href="/">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/dashboard">Dashboard</a>
+                        <li className="nav-item">
+                            <a className="nav-link" href="/dashboard">Dashboard</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/play">Play Game</a>
+                        <li className="nav-item">
+                            <a className="nav-link" href="/play">Play Game</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/leaderboard">LeaderBoard</a>
+                        <li className="nav-item">
+                            <a className="nav-link" href="/leaderboard">LeaderBoard</a>
                         </li>
                     </ul>
-
+                    <div className="justify-content-end">
+                        { player && player.username &&
+                        <>
+                            <h3>{player.username}</h3>
+                            <button className="btn btn-dark me-2" onClick={logout}>Logout</button>
+                        </> 
+                        }
+                    </div>
                 </div>
-
             </div>
         </nav>
     );
-
-
 }
 
 export default Nav;

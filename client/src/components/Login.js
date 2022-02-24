@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../contexts/AuthContext";
 import { findPlayerByUsername } from "../services/player-api";
 
@@ -10,6 +10,7 @@ const blankCandidate = {
 
 function Login() {
 
+    const navigate = useNavigate();
     const [candidate, setCandidate] = useState(blankCandidate);
     const [hasError, setHasError] = useState(false);
     const authContext = useContext(AuthContext);
@@ -17,7 +18,6 @@ function Login() {
     const onSubmit = event => {
         event.preventDefault();
         login(candidate);
-        
     };
 
     const onChange = event => {
@@ -30,8 +30,7 @@ function Login() {
         findPlayerByUsername(candidate.username)
             .then(player => {
                 localStorage.setItem("player", JSON.stringify(player));
-                // console.log("link");
-                <Link to="/play" ></Link>
+                navigate("/dashboard");
             })
             .catch(() => setHasError(true));
     }
@@ -41,12 +40,12 @@ function Login() {
             <center>
                 <form onSubmit={onSubmit}>
                     <div className="w-25 ">
-                        <label htmlFor="loginUsername" className="form-label" class="login-text">Username</label>
+                        <label htmlFor="loginUsername" className="form-label" className="login-text">Username</label>
                         <input type="text" className="form-control" name="username" id="loginUsername"
                             onChange={onChange} value={candidate.username} required />
                     </div>
                     <div className="w-25 p-3">
-                        <label htmlFor="loginPassword" className="form-label" class="login-text">Password</label>
+                        <label htmlFor="loginPassword" className="form-label" className="login-text">Password</label>
                         <input type="password" className="form-control" name="password" id="loginPassword"
                             onChange={onChange} value={candidate.password} required />
                     </div>

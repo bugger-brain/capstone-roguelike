@@ -11,21 +11,21 @@ function Register() {
     return (
         <div>
             <center>
-                <register-form onSubmit={onSubmit}>
-                    <div class="w-25 p-3">
-                        <label for="registerUsername" class="register-text">Username</label>
-                        <input type="username" class="form-control" id="registerUsername" required></input>
+                <form onSubmit={onSubmit}>
+                    <div className="w-25 p-3">
+                        <label for="registerUsername" className="form-label">Username</label>
+                        <input type="username" className="form-control" id="registerUsername" required></input>
                     </div>
-                    <div class="w-25 p-3">
-                        <label for="registerPassword" class="register-text">Password</label>
-                        <input type="password" class="form-control" id="registerPassword" required></input>
+                    <div className="w-25 p-3">
+                        <label for="registerPassword" className="form-label">Password</label>
+                        <input type="password" className="form-control" id="registerPassword" required></input>
                     </div>
-                    <div class="w-25 p-3">
-                        <label for="registerRepassword" class="register-text">Re-enter Password</label>
-                        <input type="password" class="form-control" id="registerRepassword" required></input>
+                    <div className="w-25 p-3">
+                        <label for="registerRepassword" className="form-label">Re-enter Password</label>
+                        <input type="password" className="form-control" id="registerRepassword" required></input>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </register-form>
+                    <button type="submit" className="btn btn-primary">Submit</button>
+                </form>
             </center>
         </div>
     )
