@@ -1,6 +1,7 @@
 function Play() {
 
     const game = JSON.parse(localStorage.getItem("game"));
+    const hero = game.hero;
     const maps = game.maps;
     const heroTileId = game.hero.tile.tileId;
     const mapHeroIsOn = loadMapHeroIsOn();
@@ -18,6 +19,14 @@ function Play() {
         }
     }
 
+    function displayHero() {
+        return (
+            <>
+                <p class="login-text">hero:{hero.heroId}</p>
+            </>
+        );
+    }
+
     function displayMap() {
         return mapHeroIsOn.tiles.map(t => (
             <>
@@ -26,14 +35,32 @@ function Play() {
         ));
     }
 
+    document.addEventListener('keydown', function (e) {
+        switch (e.key) {
+            case 'ArrowUp':
+                alert('up');
+                break;
+            case 'ArrowDown':
+                alert('down');
+                break;
+            case 'ArrowLeft':
+                alert('left');
+                break;
+            case 'ArrowRight':
+                alert('right');
+                break;
+
+        }
+    });
+
     return (
         <div>
             <div>
+                {displayHero()}
                 {displayMap()}
             </div>
         </div>
     );
-
 }
 
 export default Play;
