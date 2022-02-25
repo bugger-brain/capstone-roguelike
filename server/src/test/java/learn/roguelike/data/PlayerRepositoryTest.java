@@ -1,7 +1,6 @@
 package learn.roguelike.data;
 
-import learn.roguelike.models.Game;
-import learn.roguelike.models.Monster;
+
 import learn.roguelike.models.Player;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
