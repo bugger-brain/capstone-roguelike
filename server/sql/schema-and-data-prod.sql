@@ -68,10 +68,39 @@ create table monster(
         references tile(tile_id)
 );
 
+create table app_user (
+    app_user_id int primary key auto_increment,
+    username varchar(50) not null unique,
+    password_hash varchar(2048) not null,
+    disabled boolean not null default(0)
+);
 
+create table app_role (
+    app_role_id int primary key auto_increment,
+    `name` varchar(50) not null unique
+);
+
+create table app_user_role (
+    app_user_id int not null,
+    app_role_id int not null,
+    constraint pk_app_user_role
+        primary key (app_user_id, app_role_id),
+    constraint fk_app_user_role_user_id
+        foreign key (app_user_id)
+         references app_user(app_user_id),
+	constraint fk_app_user_role_role_id
+         foreign key (app_role_id)
+         references app_role(app_role_id)
+);
+
+insert into app_role (`name`) values
+    ('USER'),
+    ('ADMIN');
+
+-- qwe123
 insert into player values
-	(1, 'pagoto', 'qwe123'), 
-    (2, 'steph', 'qwe123');
+	(1, 'pagoto', '$2a$10$3hxoSGXtjbIoMKcriQmSNuGTZr3X8qyir./R3uzw3jbWn6ZMofKC2'), 
+    (2, 'steph', '$2a$10$3hxoSGXtjbIoMKcriQmSNuGTZr3X8qyir./R3uzw3jbWn6ZMofKC2');
     
 insert into game values
 	(1, 1, false, 0);

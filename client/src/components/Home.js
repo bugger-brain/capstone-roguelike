@@ -23,7 +23,7 @@ function Home() {
 
     return (
         <body className="body">
-            <div className="container">
+            <div className="header-text">
                 <h1><strong><center>WELCOME TO ROGUELIKE!</center></strong></h1>
                 <div>
                     <center>
