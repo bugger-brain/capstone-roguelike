@@ -3,6 +3,7 @@ package learn.roguelike.models;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -15,6 +16,8 @@ public class Game {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int gameId;
     private boolean isBlueprint;
+
+    @NotNull
     private int score;
 
     @OneToMany(fetch = FetchType.EAGER)

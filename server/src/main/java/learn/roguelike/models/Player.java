@@ -3,6 +3,7 @@ package learn.roguelike.models;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,12 @@ public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int playerId;
+
+    @NotBlank(message="Username is required")
+    @Column(unique = true)
     private String username;
+
+    @NotBlank(message="Password is required")
     private String password;
 
     @OneToMany(fetch = FetchType.EAGER)
