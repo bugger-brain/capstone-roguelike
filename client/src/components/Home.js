@@ -11,6 +11,7 @@ function Home() {
 
     function onClickRegister() {
         hitRegisterButton = true;
+        navigate("/register");
     }
 
     function onClickPlayAsGuest() {
