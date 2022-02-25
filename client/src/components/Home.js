@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import Login from "./Login";
 import './Home.css';
+import Register from './Register';
 
 
 function Home() {
