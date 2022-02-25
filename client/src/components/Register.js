@@ -1,10 +1,40 @@
+import { useState } from 'react';
+import { Link, useNavigate } from "react-router-dom";
+import { createUser } from '../services/user-api';
 
 function Register() {
 
 
-    const onSubmit = (event) => {
-        event.preventDefault();
-        // login(candidate);
+    const [user, setUser] = useState({
+        username: "",
+        password: "",
+        confirmPassword: ""
+    });
+    const [err, setErr] = useState();
+
+    const navigate = useNavigate();
+
+    const onChange = (evt) => {
+        const clone = { ...user };
+        clone[evt.target.name] = evt.target.value;
+        setUser(clone);
+    };
+
+    const onSubmit = (evt) => {
+        evt.preventDefault();
+        if (user.password !== user.confirmPassword) {
+            setErr("passwords do not match");
+        } else {
+            createUser(user)
+                .then(() => navigate.push("/login"))
+                .catch(err => {
+                    if (err.status === 400) {
+                        setErr(err.messages[0]);
+                    } else {
+                        navigate.push("/error", err.toString());
+                    }
+                });
+        }
     }
 
 
@@ -12,22 +42,31 @@ function Register() {
         <div>
             <center>
                 <register-form onSubmit={onSubmit}>
+                    <h2 className='register-text'>Register</h2>
                     <div className="w-25 p-3">
                         <label for="registerUsername" className="form-label" className="register-text">Username</label>
-                        <input type="username" className="form-control" id="registerUsername" required></input>
+                        <input type="username" name="username" className="form-control" id="registerUsername" required
+                            value={user.username} onChange={onChange} />
                     </div>
                     <div className="w-25 p-3">
                         <label for="registerPassword" className="form-label" className="register-text">Password</label>
-                        <input type="password" className="form-control" id="registerPassword" required></input>
+                        <input type="password" name="password" className="form-control" id="registerPassword" required
+                            value={user.password} onChange={onChange} />
                     </div>
                     <div className="w-25 p-3">
                         <label for="registerRepassword" className="form-label" className="register-text">Re-enter Password</label>
-                        <input type="password" className="form-control" id="registerRepassword" required></input>
+                        <input type="password" name="confirmPassword" className="form-control" id="registerRepassword" required
+                            value={user.confirmPassword} onChange={onChange} />
                     </div>
-                    <button type="submit" className="btn btn-primary">Submit</button>
+
+                    {err && <div className="alert alert-danger">{err}</div>}
+                    <div className="mb-2">
+                        <button type="submit" className="btn btn-primary me-1">Submit</button>
+                        <Link to="/" className="btn btn-secondary">Cancel</Link>
+                    </div>
                 </register-form>
             </center>
-        </div>
+        </div >
     )
 }
 

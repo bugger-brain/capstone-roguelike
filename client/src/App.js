@@ -14,6 +14,7 @@ function App() {
 
   const [username, setUsername] = useState();
   const player = JSON.parse(localStorage.getItem("player"));
+  
 
   return (
     <AuthContext.Provider value={{ username, setUsername }}>

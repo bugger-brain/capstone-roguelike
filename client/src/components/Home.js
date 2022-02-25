@@ -14,12 +14,13 @@ function Home() {
         navigate("/register");
     }
 
-    function onClickPlayAsGuest() {
-        alert("Greetings! As a guest, you will not be able to save your game or register your high score to the leaderboard.");
-        navigate("/play");
-    }
-
-
+    function confirmAction() {
+        let confirmAction = window.confirm("Greetings! As a guest, you will not be able to save your game or register your high score to the leaderboard. Are you sure you want to continue?");
+        if (confirmAction) {
+          navigate("/play");
+        } else {
+        }
+      }
 
     return (
         <body className="body">
@@ -37,7 +38,7 @@ function Home() {
                         
                         <div id="accountHelp" className="form-text">No account? No problem! Click below to join now or play as a guest.</div>
                         <br></br>
-                        <button type="create" onClick={onClickRegister} className="btn btn-sm btn-danger">Create Account</button> <button type="create" onClick={onClickPlayAsGuest} className="btn btn-sm btn-success">Play As Guest</button>
+                        <button type="create" onClick={onClickRegister} className="btn btn-sm btn-danger">Create Account</button> <button type="create" onClick={confirmAction} className="btn btn-sm btn-success">Play As Guest</button>
                     </center>
                 </div>
                 <br></br>
