@@ -64,9 +64,7 @@ public class PlayerServiceTest {
         player.setUsername("TEST");
         player.setPassword("test");
 
-        when(repository.update(player)).thenReturn(true);
-        Result<Player> actual = service.update(agency);
-        assertEquals(ResultType.SUCCESS, actual.getType());
+        
 
     }
 
