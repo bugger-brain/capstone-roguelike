@@ -1,17 +1,10 @@
 import { useState, useEffect } from "react";
 import "./Play.css";
 // import { Grid } from '@react-ui-org/react-ui';
-<<<<<<< HEAD
-//import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-//import { Grid } from "@material-ui/core";
-// import Placeholder from "@material-ui/core";
-//import Paper from '@material-ui/core/Paper';
-=======
 // import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 // import { Grid } from "@material-ui/core";
 // import Placeholder from "@material-ui/core";
 // import Paper from '@material-ui/core/Paper';
->>>>>>> aae6629a72371499c7c980bdfd26eaaa465c70f7
 
 
 function Play() {
