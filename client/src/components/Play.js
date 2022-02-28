@@ -16,11 +16,11 @@ function Play() {
 
     const maps = game.maps;
     const hero = game.hero;
-    let heroTileId = game.hero.tile.tileId;
-    let mapHeroIsOn = loadMapHeroIsOn();
+    let mapHeroIsOn = loadMapHeroIsOn(game.hero.tile);
     const mapgrid = document.getElementById("mapgrid");
 
-    function loadMapHeroIsOn() {
+    function loadMapHeroIsOn(heroTile) {
+        let heroTileId = heroTile.tileId;
         for (let i = 0; i < maps.length; i++) {
             const map = maps[i];
             const tiles = map.tiles;
@@ -76,7 +76,7 @@ function Play() {
         return hero.tile;
     }
 
-    function moveMap(direction) {
+    function traverseMap(direction) {
         let nextMapX = mapHeroIsOn.x;
         let nextMapY = mapHeroIsOn.y;
         switch(direction) {
@@ -106,7 +106,7 @@ function Play() {
 
     }
 
-    function moveHero(direction) {
+    function traverseTile(direction) {
         let nextX = hero.tile.x;
         let nextY = hero.tile.y;
         switch (direction) {
@@ -125,18 +125,20 @@ function Play() {
         }
 
         // Check if hero has gone off the map
+        let heroLeftTheMap = checkIfHeroLeftTheMap();
+
         let nextMap = null;
         if (nextX > mapSize) {
-            nextMap = moveMap('right');
+            nextMap = traverseMap('right');
             nextX = 0;
         } else if (nextX < 0) {
-            nextMap = moveMap('left');
+            nextMap = traverseMap('left');
             nextX = mapSize;
         } else if (nextY > mapSize) {
-            nextMap = moveMap('down');
+            nextMap = traverseMap('down');
             nextY = 0;
         } else if (nextY < 0) {
-            nextMap = moveMap('up');
+            nextMap = traverseMap('up');
             nextY = mapSize;
         }
 
@@ -156,22 +158,22 @@ function Play() {
     function onkeydown(e) {
         switch (e.key) {
             case 'ArrowUp':
-                moveHero('up');
+                traverseTile('up');
                 break;
             case 'ArrowDown':
-                moveHero('down');
+                traverseTile('down');
                 break;
             case 'ArrowLeft':
-                moveHero('left');
+                traverseTile('left');
                 break;
             case 'ArrowRight':
-                moveHero('right');
+                traverseTile('right');
                 break;
         }
     }
 
     useEffect(() => {
-        mapHeroIsOn = loadMapHeroIsOn();
+        mapHeroIsOn = loadMapHeroIsOn(hero.tile);
         document.addEventListener('keydown', onkeydown);
         return () => document.removeEventListener("keydown", onkeydown);
     }, []);
@@ -180,36 +182,6 @@ function Play() {
         <div>
             {displayHero()}
             <br /><br />
-            {/* <Grid className="mapgrid" columns="1fr 2fr" >
-                <Grid className="tilegrid">
-                    <p>1</p>
-                </Grid>
-                <Grid className="tilegrid">
-                    <p>2</p>
-                </Grid>
-                <Grid className="tilegrid">
-                    <p>3</p>
-                </Grid>
-                <Grid className="tilegrid">
-                    <p>4</p>
-                </Grid>
-            </Grid> */}
-            {/* <Grid className="mapgrid" columns="1fr 2fr" rows="auto 200px auto">
-                <p bordered>Grid item</p>
-                <p bordered>Grid item</p>
-                <p bordered>Grid item</p>
-                <p bordered>Grid item</p>
-                <p bordered>Grid item</p>
-                <p bordered>Grid item</p>
-            </Grid> */}
-            {/* <div className="text-center">
-                <div className="mapgrid justify-content-center row row-cols-2 col-md-1">
-                    <div className="tilegrid">1</div>
-                    <div className="tilegrid">2</div>
-                    <div className="tilegrid">3</div>
-                    <div className="tilegrid">4</div>
-                </div>
-            </div> */}
             <h3 className="login-text">Map {mapHeroIsOn.x}{mapHeroIsOn.y}</h3>
             {displayMapTiles()}
         </div>
