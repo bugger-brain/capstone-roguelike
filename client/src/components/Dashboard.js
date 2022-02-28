@@ -19,16 +19,6 @@ function Dashboard() {
         ));
     }
 
-    function loadNewGame(){
-        
-        addGame(newGame)
-        // if success:
-        //localStorage.setItem("game", JSON.stringify(newGame))
-        //navigate("/play")
-
-    }
-
-
     return (
         <div>
             <div>

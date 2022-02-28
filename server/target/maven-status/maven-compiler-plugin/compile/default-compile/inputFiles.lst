@@ -13,6 +13,8 @@ C:\Users\flyin\Documents\dev10\capstone-roguelike\server\src\main\java\learn\rog
 C:\Users\flyin\Documents\dev10\capstone-roguelike\server\src\main\java\learn\roguelike\models\Map.java
 C:\Users\flyin\Documents\dev10\capstone-roguelike\server\src\main\java\learn\roguelike\domain\GameService.java
 C:\Users\flyin\Documents\dev10\capstone-roguelike\server\src\main\java\learn\roguelike\data\PlayerRepository.java
+C:\Users\flyin\Documents\dev10\capstone-roguelike\server\src\main\java\learn\roguelike\data\TileRepository.java
+C:\Users\flyin\Documents\dev10\capstone-roguelike\server\src\main\java\learn\roguelike\domain\TileService.java
 C:\Users\flyin\Documents\dev10\capstone-roguelike\server\src\main\java\learn\roguelike\controllers\MonsterController.java
 C:\Users\flyin\Documents\dev10\capstone-roguelike\server\src\main\java\learn\roguelike\data\MonsterRepository.java
 C:\Users\flyin\Documents\dev10\capstone-roguelike\server\src\main\java\learn\roguelike\domain\HeroService.java
@@ -27,4 +29,5 @@ C:\Users\flyin\Documents\dev10\capstone-roguelike\server\src\main\java\learn\rog
 C:\Users\flyin\Documents\dev10\capstone-roguelike\server\src\main\java\learn\roguelike\models\Tile.java
 C:\Users\flyin\Documents\dev10\capstone-roguelike\server\src\main\java\learn\roguelike\models\Player.java
 C:\Users\flyin\Documents\dev10\capstone-roguelike\server\src\main\java\learn\roguelike\controllers\AppUserController.java
+C:\Users\flyin\Documents\dev10\capstone-roguelike\server\src\main\java\learn\roguelike\controllers\TileController.java
 C:\Users\flyin\Documents\dev10\capstone-roguelike\server\src\main\java\learn\roguelike\data\HeroRepository.java
