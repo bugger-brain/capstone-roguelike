@@ -15,7 +15,6 @@ function LeaderBoard() {
 
    
 
-    const [user, setUser] = useState([]);
 
     useEffect(() => {
         findAllPlayers()
@@ -24,11 +23,17 @@ function LeaderBoard() {
 
     }, []);
 
+    useEffect(() => {
+        currentRankings()
+    } )
+
 
 
 
 
     const currentRankings = () => {
+
+       
         let rankings = [];
 
         for (let i = 0; i < players.length; i++) {
@@ -47,7 +52,8 @@ function LeaderBoard() {
         }
         rankings.sort((a, b) => { return b.score - a.score })
         console.log(rankings);
-        let tableHtml; //'<table><tbody>';
+       
+        let tableHtml = "";
         for (let row = 0; row < rankings.length; row++) {
             tableHtml += "<tr>";
             for (let col = 0; col < 3; col++) {
@@ -62,45 +68,11 @@ function LeaderBoard() {
             tableHtml += "</tr>"
 
         }
-        //tableHtml += "</tbody></table>"
+    
         document.getElementById("board").innerHTML = tableHtml;
 
     }
-        // return rankings.map(r => (
-            
-        //     <>
-
-        //         <tr>
-        //             <th scope="row">1</th>
-        //             <td>{rankings[0].username}</td>
-        //             <td>{rankings[0].score}</td>
-        //         </tr>
-                {/* {/* <tr>
-          
-          
-                    <th scope="row">2</th>
-                <td>{rankings[1].username}</td>
-                <td>{rankings[1].score}</td>
-        </tr>
-        <tr>
-                <th scope="row">3</th>
-                <td>{rankings[2].username}</td>
-                <td>{rankings[2].score}</td>
-        </tr>
-        <tr>
-                <th scope="row">4</th>
-                <td>{rankings[3].username}</td>
-                <td>{rankings[3].score}</td>
-        </tr> </> */}
         
-            
-        
-
-
-
-
-
-
 
 
 
@@ -122,10 +94,9 @@ function LeaderBoard() {
                     </tr>
                 </thead>
                 <tbody id="board">
-                    {currentRankings()}
+                    {/* {currentRankings()} */}
                 </tbody>
             </table>
-            {/* <div id="board"></div> */}
 
             <div>
                 <button type="submit" className="button btn-lg btn-danger">

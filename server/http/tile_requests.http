@@ -12,7 +12,7 @@ Content-Type: application/json
 Accept: application/json
 
 {
-    "mapId": 2,
+    
     "type": "grass",
     "x": 15,
     "y": 15

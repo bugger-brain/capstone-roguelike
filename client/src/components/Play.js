@@ -70,7 +70,7 @@ function Play() {
                 tableHtml +=  `<td id="td${row}_${col}" style="width:25px;height:25px;border:0px solid black;background-color:#9e9b9b"></td>`;
             }
             else if(tile.type == 'grass'){
-                tableHtml +=  `<td id="td${row}_${col}"style="width:25px;height:25px;border:0px solid black;background-color:#8af036"></td>`;
+                tableHtml +=  `<td id="td${row}_${col}" class="grass"></td>`;
             }
             else if(tile.type == 'wall'){
                 tableHtml +=  `<td id="td${row}_${col}" style="width:25px;height:25px;border:0px solid black;background-color:#6e320e"></td>`;
