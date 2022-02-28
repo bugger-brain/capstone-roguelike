@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { findAllPlayers, findPlayerByUsername } from "../services/player-api";
+import { findAllPlayers} from "../services/player-api";
 
 
 function LeaderBoard() {
@@ -13,7 +13,7 @@ function LeaderBoard() {
 
     const [players, setPlayers] = useState([]);
 
-    //const [rankings, setRankings] = useState([RANK]);
+   
 
     const [user, setUser] = useState([]);
 
@@ -47,18 +47,38 @@ function LeaderBoard() {
         }
         rankings.sort((a, b) => { return b.score - a.score })
         console.log(rankings);
-        
-        return rankings.map(r => (
-            
-            <>
+        let tableHtml; //'<table><tbody>';
+        for (let row = 0; row < rankings.length; row++) {
+            tableHtml += "<tr>";
+            for (let col = 0; col < 3; col++) {
+                if(col == 1 ){
+                    tableHtml +=  `<td id="td${row}_${col}">${rankings[row].username}</td>`;
+                }else if(col ==2){
+                    tableHtml += `<td id="td${row}_${col}">${rankings[row].score}</td>`;
+                }else{
+                    tableHtml += `<td id="td${row}_${col}">${row +1}</td>`;
+                }
+            }
+            tableHtml += "</tr>"
 
-                <tr>
-                    <th scope="row">1</th>
-                    <td>{rankings[0].username}</td>
-                    <td>{rankings[0].score}</td>
-                </tr>
-                {/* <tr>
-                <th scope="row">2</th>
+        }
+        //tableHtml += "</tbody></table>"
+        document.getElementById("board").innerHTML = tableHtml;
+
+    }
+        // return rankings.map(r => (
+            
+        //     <>
+
+        //         <tr>
+        //             <th scope="row">1</th>
+        //             <td>{rankings[0].username}</td>
+        //             <td>{rankings[0].score}</td>
+        //         </tr>
+                {/* {/* <tr>
+          
+          
+                    <th scope="row">2</th>
                 <td>{rankings[1].username}</td>
                 <td>{rankings[1].score}</td>
         </tr>
@@ -71,25 +91,13 @@ function LeaderBoard() {
                 <th scope="row">4</th>
                 <td>{rankings[3].username}</td>
                 <td>{rankings[3].score}</td>
-        </tr> */}
-            </>
+        </tr> </> */}
+        
+            
+        
 
 
 
-
-        )
-        );
-
-
-
-    };
-
-
-
-
-
-    const renderScoresByUser = () => {
-    }
 
 
 
@@ -113,10 +121,11 @@ function LeaderBoard() {
                         <th scope="col">Score</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="board">
                     {currentRankings()}
                 </tbody>
             </table>
+            {/* <div id="board"></div> */}
 
             <div>
                 <button type="submit" className="button btn-lg btn-danger">

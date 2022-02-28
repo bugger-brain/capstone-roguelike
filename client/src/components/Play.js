@@ -9,7 +9,7 @@ import "./Play.css";
 
 function Play() {
 
-    const mapSize = 3;
+    const mapSize = 15;
     const gameSize = 3;
 
     const [game, setGame] = useState(JSON.parse(localStorage.getItem("game")));
@@ -49,11 +49,46 @@ function Play() {
 
     // TODO: replace w component
     function displayMapTiles() {
-        return mapHeroIsOn.tiles.map(t => (
-            <>
-                <p className="login-text">tile:{t.tileId}{t.type}{t.x}{t.y}</p>
-            </>
-        ));
+       
+        
+        let tableHtml = '<table style="border: 1px solid black;"><tbody>';
+
+        //need to change loops to be map dimensions
+    for (let row = 0; row <= mapSize; row++) {
+        tableHtml += "<tr>";
+        
+        for (let col = 0; col <= mapSize; col++) {
+            let heroTile = game.hero.tile;
+           let tile = findTileOnMapByXY(mapHeroIsOn, row, col);
+            if(heroTile.x == col && heroTile.y == row){
+                tableHtml +=  `<td id="td${row}_${col}" style="width:25px;height:25px;border:0px solid black;background-color:#8341be"></td>`;
+            }
+            else if(tile.type == 'water'){
+                tableHtml +=  `<td id="td${row}_${col}" style="width:25px;height:25px;border:0px solid black;background-color:#36eaf0"></td>`;
+            }
+            else if(tile.type == 'stone'){
+                tableHtml +=  `<td id="td${row}_${col}" style="width:25px;height:25px;border:0px solid black;background-color:#9e9b9b"></td>`;
+            }
+            else if(tile.type == 'grass'){
+                tableHtml +=  `<td id="td${row}_${col}"style="width:25px;height:25px;border:0px solid black;background-color:#8af036"></td>`;
+            }
+            else if(tile.type == 'wall'){
+                tableHtml +=  `<td id="td${row}_${col}" style="width:25px;height:25px;border:0px solid black;background-color:#6e320e"></td>`;
+            }
+            else if(tile.type == 'floor'){
+                tableHtml +=  `<td id="td${row}_${col}" style="width:25px;height:25px;border:0px solid black;background-color:#030100"></td>`;
+            }
+            else if(tile.type == 'monster'){
+                tableHtml +=  `<td id="td${row}_${col}" style="width:25px;height:25px;border:0px solid black;background-color:#f6270a"></td>`;
+            }
+            else{
+                tableHtml += `<td id="td${row}_${col}" style="width:25px;height:25px;border:0px solid black;background-color:#ffffff"></td>`;
+            }
+        }
+        tableHtml += "</tr>"
+    }
+    tableHtml += "</tbody></table>"
+    document.getElementById("grid").innerHTML = tableHtml;
     }
 
     function findMapByXY(x, y) {
@@ -180,39 +215,15 @@ function Play() {
         <div>
             {displayHero()}
             <br /><br />
-            {/* <Grid className="mapgrid" columns="1fr 2fr" >
-                <Grid className="tilegrid">
-                    <p>1</p>
-                </Grid>
-                <Grid className="tilegrid">
-                    <p>2</p>
-                </Grid>
-                <Grid className="tilegrid">
-                    <p>3</p>
-                </Grid>
-                <Grid className="tilegrid">
-                    <p>4</p>
-                </Grid>
-            </Grid> */}
-            {/* <Grid className="mapgrid" columns="1fr 2fr" rows="auto 200px auto">
-                <p bordered>Grid item</p>
-                <p bordered>Grid item</p>
-                <p bordered>Grid item</p>
-                <p bordered>Grid item</p>
-                <p bordered>Grid item</p>
-                <p bordered>Grid item</p>
-            </Grid> */}
-            {/* <div className="text-center">
-                <div className="mapgrid justify-content-center row row-cols-2 col-md-1">
-                    <div className="tilegrid">1</div>
-                    <div className="tilegrid">2</div>
-                    <div className="tilegrid">3</div>
-                    <div className="tilegrid">4</div>
-                </div>
-            </div> */}
+           
             <h3 className="login-text">Map {mapHeroIsOn.x}{mapHeroIsOn.y}</h3>
-            {displayMapTiles()}
+        <div id= "grid">
+        {displayMapTiles()}
         </div>
+        </div>
+        
+
+       
     );
 }
 
