@@ -9,7 +9,7 @@ import "./Play.css";
 
 function Play() {
 
-    const mapSize = 3;
+    const mapSize = 1;
     const gameSize = 3;
 
     const [game, setGame] = useState(JSON.parse(localStorage.getItem("game")));
@@ -17,7 +17,18 @@ function Play() {
     const maps = game.maps;
     const hero = game.hero;
     let mapHeroIsOn = loadMapHeroIsOn(game.hero.tile);
-    const mapgrid = document.getElementById("mapgrid");
+
+    const [heroState, setHeroState] = useState(hero);
+
+    useEffect(() => {
+        mapHeroIsOn = loadMapHeroIsOn(hero.tile);
+        document.addEventListener('keydown', onkeydown);
+        return () => document.removeEventListener("keydown", onkeydown);
+    }, []);
+
+    useEffect(() => {
+        displayMapTiles();
+    }, [heroState]);
 
     function loadMapHeroIsOn(heroTile) {
         let heroTileId = heroTile.tileId;
@@ -49,11 +60,45 @@ function Play() {
 
     // TODO: replace w component
     function displayMapTiles() {
-        return mapHeroIsOn.tiles.map(t => (
-            <>
-                <p className="login-text">tile:{t.tileId}{t.type}{t.x}{t.y}</p>
-            </>
-        ));
+
+        let tableHtml = '<table style="border: 1px solid black;"><tbody>';
+
+        //need to change loops to be map dimensions
+        for (let row = 0; row <= mapSize; row++) {
+            tableHtml += "<tr>";
+
+            for (let col = 0; col <= mapSize; col++) {
+                let heroTile = game.hero.tile;
+                let tile = findTileOnMapByXY(mapHeroIsOn, row, col);
+                if (heroTile.x == col && heroTile.y == row) {
+                    tableHtml += `<td id="td${row}_${col}" style="width:25px;height:25px;border:0px solid black;background-color:#8341be"></td>`;
+                }
+                else if (tile.type == 'water') {
+                    tableHtml += `<td id="td${row}_${col}" style="width:25px;height:25px;border:0px solid black;background-color:#36eaf0"></td>`;
+                }
+                else if (tile.type == 'stone') {
+                    tableHtml += `<td id="td${row}_${col}" style="width:25px;height:25px;border:0px solid black;background-color:#9e9b9b"></td>`;
+                }
+                else if (tile.type == 'grass') {
+                    tableHtml += `<td id="td${row}_${col}"style="width:25px;height:25px;border:0px solid black;background-color:#8af036"></td>`;
+                }
+                else if (tile.type == 'wall') {
+                    tableHtml += `<td id="td${row}_${col}" style="width:25px;height:25px;border:0px solid black;background-color:#6e320e"></td>`;
+                }
+                else if (tile.type == 'floor') {
+                    tableHtml += `<td id="td${row}_${col}" style="width:25px;height:25px;border:0px solid black;background-color:#030100"></td>`;
+                }
+                else if (tile.type == 'monster') {
+                    tableHtml += `<td id="td${row}_${col}" style="width:25px;height:25px;border:0px solid black;background-color:#f6270a"></td>`;
+                }
+                else {
+                    tableHtml += `<td id="td${row}_${col}" style="width:25px;height:25px;border:0px solid black;background-color:#ffffff"></td>`;
+                }
+            }
+            tableHtml += "</tr>"
+        }
+        tableHtml += "</tbody></table>"
+        document.getElementById("grid").innerHTML = tableHtml;
     }
 
     function findMapByXY(x, y) {
@@ -77,9 +122,12 @@ function Play() {
     }
 
     function traverseMap(direction) {
+
+        // call setCurMap update curMap which will trigger rerender display
+
         let nextMapX = mapHeroIsOn.x;
         let nextMapY = mapHeroIsOn.y;
-        switch(direction) {
+        switch (direction) {
             case 'up':
                 nextMapY--;
                 break;
@@ -103,12 +151,26 @@ function Play() {
         }
 
         return findMapByXY(nextMapX, nextMapY);
-
     }
 
-    function traverseTile(direction) {
-        let nextX = hero.tile.x;
-        let nextY = hero.tile.y;
+    function traverseTile(nextX, nextY) {
+
+        const nextTile = findTileOnMapByXY(mapHeroIsOn, nextX, nextY);
+        hero.tile = nextTile;
+
+        console.log(hero);
+
+        const clone = { ...game };
+        clone.hero = hero;
+        setHeroState({ ...hero });
+
+        localStorage.setItem("game", JSON.stringify(clone));
+        setGame(clone);
+    }
+
+    function nextCords(direction, obj) {
+        let nextX = obj.x;
+        let nextY = obj.y;
         switch (direction) {
             case 'up':
                 nextY--;
@@ -124,76 +186,74 @@ function Play() {
                 break;
         }
 
-        // Check if hero has gone off the map
-        let heroLeftTheMap = checkIfHeroLeftTheMap(nextX, nextY);
-
-    
-        if (nextMap) {
-            mapHeroIsOn = nextMap;
-        }
-
-        const nextTile = findTileOnMapByXY(mapHeroIsOn, nextX, nextY);
-        hero.tile = nextTile;
-
-        const clone = { ...game };
-        clone.hero = hero;
-        localStorage.setItem("game", JSON.stringify(clone));
-        setGame(clone);
+        return { nextX, nextY };
     }
 
-    function findTileOnMapByXY(x, y) {
-        let nextMap = null;
-        if (x > mapSize) {
-            nextMap = traverseMap('right');
-            x = 0;
+    function hitWhichEdgeOf(size, x, y) {
+        if (x > size) {
+            return 'right';
+            // x = 0;
         } else if (x < 0) {
-            nextMap = traverseMap('left');
-            x = mapSize;
-        } else if (nextY > mapSize) {
-            nextMap = traverseMap('down');
-            y = 0;
+            return 'left';
+            // x = size;
+        } else if (y > size) {
+            return 'down';
+            // y = 0;
         } else if (y < 0) {
-            nextMap = traverseMap('up');
-            y = mapSize;
+            return 'up';
+            // y = size;
+        } else {
+            return '';
         }
     }
 
-    function decideMovement() {
-        // check to see if hero stayed on the map
-        
+    function decideMovement(direction) {
+        let { nextX, nextY } = nextCords(direction, hero.tile);
+        let mapEdge = hitWhichEdgeOf(mapSize, nextX, nextY);
 
+        if (mapEdge === '') {
+            // let  = analyseTile()
+            traverseTile(nextX, nextY);
+        } else {
+            let { nextMapX, nextMapY } = nextCords(direction, mapHeroIsOn);
+            let gameEdge = hitWhichEdgeOf(gameSize, nextMapX, nextMapY);
+            if (gameEdge === '') {
+
+            }
+
+        }
     }
 
     function onkeydown(e) {
         switch (e.key) {
             case 'ArrowUp':
-                traverseTile('up');
+                decideMovement('up');
                 break;
             case 'ArrowDown':
-                traverseTile('down');
+                decideMovement('down');
                 break;
             case 'ArrowLeft':
-                traverseTile('left');
+                decideMovement('left');
                 break;
             case 'ArrowRight':
-                traverseTile('right');
+                decideMovement('right');
                 break;
         }
     }
-
-    useEffect(() => {
-        mapHeroIsOn = loadMapHeroIsOn(hero.tile);
-        document.addEventListener('keydown', onkeydown);
-        return () => document.removeEventListener("keydown", onkeydown);
-    }, []);
 
     return (
         <div>
             {displayHero()}
             <br /><br />
+
             <h3 className="login-text">Map {mapHeroIsOn.x}{mapHeroIsOn.y}</h3>
-            {displayMapTiles()}
+            <div id="grid">
+                {/* {displayMapTiles()} */}
+            </div>
         </div>
+
+
+
     );
 }
 
