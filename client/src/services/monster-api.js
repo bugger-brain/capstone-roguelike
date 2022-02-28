@@ -1,4 +1,4 @@
-const baseUrl = `http://localhost:8080/api/monster`
+const baseUrl = `${window.API_URL}/api/monster`
 
 export async function findAll() {
     

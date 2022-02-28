@@ -2,16 +2,17 @@ import { useNavigate } from "react-router-dom";
 import Login from "./Login";
 import './Home.css';
 import Register from './Register';
+import { useState } from "react";
 
 
 function Home() {
 
     const navigate = useNavigate();
-    let hitRegisterButton = false;
+    const [hitRegisterButton, setHitRegisterButton] = useState(false);
 
     function onClickRegister() {
-        hitRegisterButton = true;
-        navigate("/register");
+        setHitRegisterButton(true);
+        // navigate("/register");
     }
 
     function confirmAction() {

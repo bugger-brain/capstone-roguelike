@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin("http://localhost:3000")
-@RequestMapping("/hc")
+//@RequestMapping("/health_check")
 public class HealthCheckController {
 
     @GetMapping

@@ -1,4 +1,4 @@
-const baseUrl = `http://localhost:8080/api/hero`
+const baseUrl = `${window.API_URL}/api/hero`
 
 export async function findAllHeros() {
     

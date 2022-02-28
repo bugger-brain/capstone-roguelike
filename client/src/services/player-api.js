@@ -1,4 +1,5 @@
-const baseUrl = `http://localhost:8080/api/player`
+const baseUrl = `${window.API_URL}/api/player`
+// const baseUrl = `http://localhost:8080/api/player`
 
 export async function findAllPlayers() {
     

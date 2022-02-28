@@ -1,0 +1,8 @@
+version: "3"
+services:
+  ui:
+    image: corbos/quote-ui:1.0
+    ports:
+      - 80:80
+    environment:
+      - API_URL=http://corbosquotesapi-env.eba-4pcdxf9v.us-east-2.elasticbeanstalk.com:8080

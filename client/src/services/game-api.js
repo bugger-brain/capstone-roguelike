@@ -1,4 +1,4 @@
-const baseUrl = `http://localhost:8080/api/game`
+const baseUrl = `${window.API_URL}/api/game`
 
 export async function findAllGames() {
     
