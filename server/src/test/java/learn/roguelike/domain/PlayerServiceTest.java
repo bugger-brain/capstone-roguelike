@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
@@ -25,6 +25,13 @@ public class PlayerServiceTest {
         when(repository.findPlayerByUsername("pogoto")).thenReturn(expected);
         Player actual = service.findPlayerByUsername("pogoto");
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldNotFind(){
+        Player player = repository.findPlayerByUsername("");
+        assertNull(player);
+
     }
 
     @Test
@@ -57,6 +64,8 @@ public class PlayerServiceTest {
         assertEquals(ResultType.INVALID, result.getType());
     }
 
+
+
     @Test
     void shouldUpdate(){
         Player player = new Player();
@@ -64,7 +73,7 @@ public class PlayerServiceTest {
         player.setUsername("TEST");
         player.setPassword("test");
 
-        
+
 
     }
 
