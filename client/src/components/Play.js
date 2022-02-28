@@ -125,23 +125,9 @@ function Play() {
         }
 
         // Check if hero has gone off the map
-        let heroLeftTheMap = checkIfHeroLeftTheMap();
+        let heroLeftTheMap = checkIfHeroLeftTheMap(nextX, nextY);
 
-        let nextMap = null;
-        if (nextX > mapSize) {
-            nextMap = traverseMap('right');
-            nextX = 0;
-        } else if (nextX < 0) {
-            nextMap = traverseMap('left');
-            nextX = mapSize;
-        } else if (nextY > mapSize) {
-            nextMap = traverseMap('down');
-            nextY = 0;
-        } else if (nextY < 0) {
-            nextMap = traverseMap('up');
-            nextY = mapSize;
-        }
-
+    
         if (nextMap) {
             mapHeroIsOn = nextMap;
         }
@@ -153,6 +139,29 @@ function Play() {
         clone.hero = hero;
         localStorage.setItem("game", JSON.stringify(clone));
         setGame(clone);
+    }
+
+    function findTileOnMapByXY(x, y) {
+        let nextMap = null;
+        if (x > mapSize) {
+            nextMap = traverseMap('right');
+            x = 0;
+        } else if (x < 0) {
+            nextMap = traverseMap('left');
+            x = mapSize;
+        } else if (nextY > mapSize) {
+            nextMap = traverseMap('down');
+            y = 0;
+        } else if (y < 0) {
+            nextMap = traverseMap('up');
+            y = mapSize;
+        }
+    }
+
+    function decideMovement() {
+        // check to see if hero stayed on the map
+        
+
     }
 
     function onkeydown(e) {
