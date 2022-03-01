@@ -11,15 +11,21 @@ Content-Type: application/json
 Accept: application/json
 
 {
-    "hp": 100,
-    "gameId": 2,
+    "gameId": 1,
+    "hp": 78,
     "lives": 3,
     "air": "false",
     "water": "false",
     "earth": "false",
     "fire": "false",
-    "gold": 50,
-    "tileId": 3
+    "gold": 20,
+    "tile": {
+        "tileId": 1,
+        "type": "grass",
+        "x": 0,
+        "y": 0
+    }
+    
 }
 
 //You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'keys, lives, tile_id, water) values (0, 0, 0, 50, 100, 0, 3, 4, 0)' at line 1
@@ -43,4 +49,4 @@ Accept: application/json
 }
 //this is also failing for the same reasons
 ###
-DELETE {{url}}/2 HTTP/1.1
+DELETE {{url}}/4 HTTP/1.1

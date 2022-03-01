@@ -18,11 +18,14 @@ public class Hero {
     private boolean water;
     private boolean earth;
     private boolean fire;
+    @Column(name="`keys`")
     private int keys;
     private int gold;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "tile_id")
     private Tile tile;
+
+    private int gameId;
 
 }
