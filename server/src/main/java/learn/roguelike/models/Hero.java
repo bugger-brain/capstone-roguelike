@@ -26,6 +26,7 @@ public class Hero {
     @JoinColumn(name = "tile_id")
     private Tile tile;
 
+
     private int gameId;
 
 }
