@@ -19,10 +19,9 @@ public class AppUserRepository {
 
     private final RowMapper<AppUser> mapper = (rs, i) -> {
         AppUser appUser = new AppUser();
-        appUser.setId(rs.getInt("app_user_id"));
+        appUser.setId(rs.getInt("player_id"));
         appUser.setUsername(rs.getString("username"));
         appUser.setPassword(rs.getString("password_hash"));
-        appUser.setDisabled(rs.getBoolean("disabled"));
         return appUser;
     };
 
@@ -31,8 +30,8 @@ public class AppUserRepository {
     }
 
     public List<AppUser> findAll() {
-        return jdbcTemplate.query("select app_user_id, username, '' password_hash, "
-                + "disabled from app_user;", mapper);
+        return jdbcTemplate.query("select player_id, username, password_hash "
+                + "from player;", mapper);
     }
 
     public List<String> findAllRoles() {
@@ -43,7 +42,7 @@ public class AppUserRepository {
     @Transactional
     public AppUser findByUsername(String username) {
         AppUser user = jdbcTemplate.query(
-                        "select * from app_user where username = ?;",
+                        "select * from player where username = ?;",
                         mapper,
                         username).stream()
                 .findFirst()
@@ -60,7 +59,7 @@ public class AppUserRepository {
     @Transactional
     public AppUser findByAppUserId(int id) {
         AppUser user = jdbcTemplate.query(
-                        "select * from app_user where app_user_id = ?;",
+                        "select * from player where player_id = ?;",
                         mapper,
                         id).stream()
                 .findFirst()
@@ -76,7 +75,7 @@ public class AppUserRepository {
 
     public AppUser add(AppUser user) {
 
-        final String sql = "insert into app_user (username, password_hash) values (?,?);";
+        final String sql = "insert into player (username, password_hash) values (?,?);";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(conn -> {
@@ -98,10 +97,9 @@ public class AppUserRepository {
     @Transactional
     public boolean update(AppUser user) {
 
-        String sql = "update app_user set "
+        String sql = "update player set "
                 + "username = ?, "
-                + "disabled = ? "
-                + "where app_user_id = ?;";
+                + "where player_id = ?;";
 
         int rowsAffected = jdbcTemplate.update(sql,
                 user.getUsername(),
@@ -118,9 +116,9 @@ public class AppUserRepository {
 
     public boolean changePassword(AppUser user) {
 
-        String sql = "update app_user set "
+        String sql = "update player set "
                 + "password_hash = ? "
-                + "where app_user_id = ?;";
+                + "where player_id = ?;";
 
         int rowsAffected = jdbcTemplate.update(sql,
                 user.getPassword(),
@@ -131,11 +129,11 @@ public class AppUserRepository {
 
     private void setAuthorities(AppUser user) {
 
-        jdbcTemplate.update("delete from app_user_role where app_user_id = ?;", user.getId());
+        jdbcTemplate.update("delete from player_role where player_id = ?;", user.getId());
 
         for (var name : user.getAuthorityNames()) {
-            String sql = "insert into app_user_role (app_user_id, app_role_id) "
-                    + "values (?, (select app_role_id from app_role where name = ?));";
+            String sql = "insert into player_role (player_id, app_role_id) "
+                    + "values (?, (select player_id from app_role where name = ?));";
             jdbcTemplate.update(sql, user.getId(), name);
         }
     }
@@ -143,9 +141,9 @@ public class AppUserRepository {
     private List<String> getAuthorities(int appUserId) {
 
         String sql = "select r.app_role_id, r.name "
-                + "from app_user_role aur "
+                + "from player_role aur "
                 + "inner join app_role r on aur.app_role_id = r.app_role_id "
-                + "where aur.app_user_id = ?";
+                + "where aur.player_id = ?";
 
         return jdbcTemplate.query(sql,
                 (rs, i) -> rs.getString("name"),
