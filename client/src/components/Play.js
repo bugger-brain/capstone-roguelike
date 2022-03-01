@@ -132,10 +132,6 @@ function Play() {
                 x = 0;
                 break;
         }
-        // let rtn = {
-        //     x: x,
-        //     y: y
-        // }
         traverseTile(x, y);
     }
 
@@ -168,8 +164,7 @@ function Play() {
         let nextX = tileCords.x;
         let nextY = tileCords.y;
         let mapEdge = hitWhichEdgeOf(mapSize, nextX, nextY);
-
-        if (mapEdge === '') {
+        if (mapEdge === '' || mapEdge === "") {
             // let  = analyseTile();
             traverseTile(nextX, nextY);
         } else {
@@ -177,12 +172,14 @@ function Play() {
             let nextMapX = mapCords.x;
             let nextMapY = mapCords.y;
             let gameEdge = hitWhichEdgeOf(gameSize, nextMapX, nextMapY);
-
-            if (gameEdge === '') {
+            debugger;
+            if (gameEdge === '' || gameEdge == "") {
                 traverseMap(nextMapX, nextMapY);
                 adjustHero(direction, nextX, nextY);
+            } else {
+                // do nothing
+                console.log("hit game edge");
             }
-
         }
     }
 
@@ -215,16 +212,12 @@ function Play() {
     function hitWhichEdgeOf(size, x, y) {
         if (x > size) {
             return 'right';
-            // x = 0;
         } else if (x < 0) {
             return 'left';
-            // x = size;
         } else if (y > size) {
             return 'down';
-            // y = 0;
         } else if (y < 0) {
             return 'up';
-            // y = size;
         } else {
             return '';
         }

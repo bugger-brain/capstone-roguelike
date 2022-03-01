@@ -11,19 +11,24 @@ Content-Type: application/json
 Accept: application/json
 
 {
-    "hp": 100,
-    "gameId": 2,
+    "hp": 10,
     "lives": 3,
-    "air": "false",
-    "water": "false",
-    "earth": "false",
-    "fire": "false",
+    "air": false,
+    "water": false,
+    "earth": false,
+    "fire": false,
+    "keys": 0,
     "gold": 50,
-    "tileId": 3
-}
+    "tile": {
+      "tileId": 1,
+      "type": "grass",
+      "x": 0,
+      "y": 0
+    }
+  }
 
 //You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'keys, lives, tile_id, water) values (0, 0, 0, 50, 100, 0, 3, 4, 0)' at line 1
-
+// "tile": "{tileId: 1, type: 'grass', x: 0, y: 0}"
 ###
 PUT {{url}}/edit/1 HTTP/1.1
 Content-Type: application/json

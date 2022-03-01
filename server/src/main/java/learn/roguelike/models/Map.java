@@ -18,8 +18,6 @@ public class Map {
     private int x;
     private int y;
 
-
-
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "map_id")
     private List<Tile> tiles = new ArrayList<>();
