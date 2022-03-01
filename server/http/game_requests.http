@@ -1,4 +1,4 @@
-# @jwt = a7960f6c-a632-47e9-9e40-e0dc2f54b493
+@jwt = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJyb2d1ZWxpa2UiLCJzdWIiOiJzdGVwaCIsImlkIjoyLCJhdXRob3JpdGllcyI6IiIsImV4cCI6MTY0NjE3Mjg2N30.TqwxC0yii4GmRzXjdpKDy8ZMudoxU9xkR_LHfheSFfI
 @url = http://localhost:8080/api/game
 @host = http://localhost:8080
 
@@ -7,6 +7,7 @@ GET {{url}} HTTP/1.1
 ###
 
 GET {{url}}/1 HTTP/1.1
+Authorization: Bearer {{jwt}}
 
 ###
 
@@ -26,6 +27,8 @@ Accept: application/json
 PUT {{url}}/edit/4 HTTP/1.1
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer {{jwt}}
+
 
 {
     "gameId": 4,
@@ -35,4 +38,5 @@ Accept: application/json
 
 ###
 DELETE {{url}}/4 HTTP/1.1
+Authorization: Bearer {{jwt}}
 
