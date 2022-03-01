@@ -5,6 +5,7 @@ import learn.roguelike.models.Game;
 import learn.roguelike.models.Player;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;

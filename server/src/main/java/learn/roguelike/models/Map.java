@@ -17,8 +17,8 @@ public class Map {
 
     private int x;
     private int y;
-
-
+    @Column(name="game_id")
+    private int gameId;
 
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "map_id")

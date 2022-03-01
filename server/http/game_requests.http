@@ -35,13 +35,3 @@ Accept: application/json
 ###
 DELETE {{url}}/4 HTTP/1.1
 
-###
-
-POST {{host}}/authenticate HTTP/1.1
-Content-Type: application/json
-Accept: application/json
-
-{
-    "username": "shred",
-    "password": "$2a$10$3hxoSGXtjbIoMKcriQmSNuGTZr3X8qyir./R3uzw3jbWn6ZMofKC2"
-}
