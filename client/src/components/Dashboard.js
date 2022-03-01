@@ -30,7 +30,7 @@ function Dashboard() {
                 </div>
                 <div>
                     <center>
-                        <button type="button" className="btn btn-lrg btn-info" onClick ={() => loadNewGame()}>
+                        <button type="button" className="btn btn-lrg btn-info">
                             Start a New Game!
                         </button></center>
                 </div>

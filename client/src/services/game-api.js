@@ -34,6 +34,31 @@ export async function addGame(game) {
     return Promise.reject({ status: response.status });
 }
 
+async function updateGame(game) {
+    const init = {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify(game)
+    };
+    const response = await fetch(`${baseUrl}/${game.id}`, init);
+    if (response.status === 204) {
+        return Promise.resolve();
+    } else if (response.status === 403) {
+        return Promise.reject(403);
+    }
+    return Promise.reject("Could not save game.");
+}
+
+
+
+export async function saveGame(game) {
+    return game.id > 0 ? updateGame(game) : addGame(game);
+}
+
+
 export async function deleteGameById(id) {
     const init = { 
         method: "DELETE"}

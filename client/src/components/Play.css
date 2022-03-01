@@ -37,5 +37,65 @@
   border-style: solid;
   background-color: #8af036
 
+}
 
+.monster {
+  width: 25px;
+  height: 25px;
+  border-width: 0px;
+  border-color: black;
+  border-style: solid;
+  background-color: #f6270a
+}
+
+.water {
+  width: 25px;
+  height: 25px;
+  border-width: 0px;
+  border-color: black;
+  border-style: solid;
+  background-color: #36eaf0
+}
+.hero {
+  width: 25px;
+  height: 25px;
+  border-width: 0px;
+  border-color: black;
+  border-style: solid;
+  background-color: #8341be
+}
+.stone {
+  width: 25px;
+  height: 25px;
+  border-width: 0px;
+  border-color: black;
+  border-style: solid;
+  background-color: #9e9b9b
+}
+
+.floor {
+  width: 25px;
+  height: 25px;
+  border-width: 0px;
+  border-color: black;
+  border-style: solid;
+  background-color: #030100
+}
+
+.wall {
+  width: 25px;
+  height: 25px;
+  border-width: 0px;
+  border-color: black;
+  border-style: solid;
+  background-color: #6e320e
+}
+
+.blank {
+  width: 25px;
+  height: 25px;
+  border-width: 0px;
+  border-color: black;
+  border-style: solid;
+  background-color: #ffffff
 }
