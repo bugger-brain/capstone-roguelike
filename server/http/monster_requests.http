@@ -21,12 +21,12 @@ Accept: application/json
 }
 
 ###
-PUT {{url}}/edit/4 HTTP/1.1
+PUT {{url}}/edit/3 HTTP/1.1
 Content-Type: application/json
 Accept: application/json
 
 {
-    "monsterId": 4,
+    "monsterId": 3,
     "hp": 100,
     "tile": {
         "tileId": 5,
@@ -39,4 +39,4 @@ Accept: application/json
 
 ###
 
-DELETE {{url}}/4 HTTP/1.1
+DELETE {{url}}/3 HTTP/1.1

@@ -1,13 +1,17 @@
 import { useState, useEffect, useContext  } from "react";
 import { useNavigate } from "react-router-dom";
 import GameLoadCard from "./GameLoadCard";
-
+import { addGame } from "../services/game-api";
 
 function Dashboard() {
 
     const navigate = useNavigate();
     const player = JSON.parse(localStorage.getItem("player"));
     const games = player.games;
+    const newGame = {
+        score: 0,
+        isBlueprint: "true" //does this need the quotes or not
+    }
 
     function displayGames() {
         return games.map(g => (
@@ -22,7 +26,7 @@ function Dashboard() {
                     <center>
                         <button type="button" className="btn p-3 btn-lrg btn-danger">
                             Edit Profile
-                        </button></center>
+                        </button> </center>
                 </div>
                 <div>
                     <center>

@@ -65,30 +65,30 @@ function Play() {
 
             for (let col = 0; col <= mapSize; col++) {
                 let heroTile = game.hero.tile;
-                let tile = findTileOnMapByXY(mapHeroIsOn, row, col);
+                let tile = findTileOnMapByXY(mapHeroIsOn, col, row);
                 if (heroTile.x == col && heroTile.y == row) {
-                    tableHtml += `<td id="td${row}_${col}" style="width:25px;height:25px;border:0px solid black;background-color:#8341be"></td>`;
+                    tableHtml += `<td id="td${col}_${row}" class="hero"></td>`;
                 }
                 else if (tile.type == 'water') {
-                    tableHtml += `<td id="td${row}_${col}" style="width:25px;height:25px;border:0px solid black;background-color:#36eaf0"></td>`;
+                    tableHtml += `<td id="td${col}_${row}" class="water"></td>`;
                 }
                 else if (tile.type == 'stone') {
-                    tableHtml += `<td id="td${row}_${col}" style="width:25px;height:25px;border:0px solid black;background-color:#9e9b9b"></td>`;
+                    tableHtml += `<td id="td${col}_${row}" class="stone"></td>`;
                 }
                 else if (tile.type == 'grass') {
-                    tableHtml += `<td id="td${row}_${col}"style="width:25px;height:25px;border:0px solid black;background-color:#8af036"></td>`;
+                    tableHtml += `<td id="td${col}_${row}" class="grass"></td>`;
                 }
                 else if (tile.type == 'wall') {
-                    tableHtml += `<td id="td${row}_${col}" style="width:25px;height:25px;border:0px solid black;background-color:#6e320e"></td>`;
+                    tableHtml += `<td id="td${col}_${row}" class="wall"></td>`;
                 }
                 else if (tile.type == 'floor') {
-                    tableHtml += `<td id="td${row}_${col}" style="width:25px;height:25px;border:0px solid black;background-color:#030100"></td>`;
+                    tableHtml += `<td id="td${col}_${row}" class="floor"></td>`;
                 }
                 else if (tile.type == 'monster') {
-                    tableHtml += `<td id="td${row}_${col}" style="width:25px;height:25px;border:0px solid black;background-color:#f6270a"></td>`;
+                    tableHtml += `<td id="td${col}_${row}" class="monster"></td>`;
                 }
                 else {
-                    tableHtml += `<td id="td${row}_${col}" style="width:25px;height:25px;border:0px solid black;background-color:#ffffff"></td>`;
+                    tableHtml += `<td id="td${col}_${row}" class="blank"></td>`;
                 }
             }
             tableHtml += "</tr>"
@@ -254,7 +254,6 @@ function Play() {
 
             <h3 className="login-text">Map {mapHeroIsOn.x}{mapHeroIsOn.y}</h3>
             <div id="grid">
-                {/* {displayMapTiles()} */}
             </div>
         </div>
 
