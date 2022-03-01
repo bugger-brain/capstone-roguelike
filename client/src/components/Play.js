@@ -1,10 +1,6 @@
 import { useState, useEffect } from "react";
 import "./Play.css";
-// import { Grid } from '@react-ui-org/react-ui';
-// import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-// import { Grid } from "@material-ui/core";
-// import Placeholder from "@material-ui/core";
-// import Paper from '@material-ui/core/Paper';
+
 
 
 function Play() {
@@ -121,44 +117,31 @@ function Play() {
         return hero.tile;
     }
 
-    function traverseMap(direction) {
-
-        // call setCurMap update curMap which will trigger rerender display
-
-        let nextMapX = mapHeroIsOn.x;
-        let nextMapY = mapHeroIsOn.y;
+    function adjustHero(direction, x, y) {
         switch (direction) {
             case 'up':
-                nextMapY--;
+                y = mapSize;
                 break;
             case 'down':
-                nextMapY++;
+                y = 0;
                 break;
             case 'left':
-                nextMapX--;
+                x = mapSize;
                 break;
             case 'right':
-                nextMapX++;
+                x = 0;
                 break;
         }
-
-        // Check if Hero has hit the edge of the game
-        if (nextMapX < 0
-            || nextMapX > gameSize
-            || nextMapY < 0
-            || nextMapY > gameSize) {
-            return mapHeroIsOn;
-        }
-
-        return findMapByXY(nextMapX, nextMapY);
+        // let rtn = {
+        //     x: x,
+        //     y: y
+        // }
+        traverseTile(x, y);
     }
 
-    function traverseTile(nextX, nextY) {
-
-        const nextTile = findTileOnMapByXY(mapHeroIsOn, nextX, nextY);
-        hero.tile = nextTile;
-
-        console.log(hero);
+    function traverseMap(x, y) {
+        const nextMap = findMapByXY(x, y);
+        mapHeroIsOn = nextMap;
 
         const clone = { ...game };
         clone.hero = hero;
@@ -166,6 +149,41 @@ function Play() {
 
         localStorage.setItem("game", JSON.stringify(clone));
         setGame(clone);
+    }
+
+    function traverseTile(x, y) {
+        const nextTile = findTileOnMapByXY(mapHeroIsOn, x, y);
+        hero.tile = nextTile;
+
+        const clone = { ...game };
+        clone.hero = hero;
+        setHeroState({ ...hero });
+
+        localStorage.setItem("game", JSON.stringify(clone));
+        setGame(clone);
+    }
+
+    function decideMovement(direction) {
+        let tileCords = nextCords(direction, hero.tile);
+        let nextX = tileCords.x;
+        let nextY = tileCords.y;
+        let mapEdge = hitWhichEdgeOf(mapSize, nextX, nextY);
+
+        if (mapEdge === '') {
+            // let  = analyseTile();
+            traverseTile(nextX, nextY);
+        } else {
+            let mapCords = nextCords(direction, mapHeroIsOn);
+            let nextMapX = mapCords.x;
+            let nextMapY = mapCords.y;
+            let gameEdge = hitWhichEdgeOf(gameSize, nextMapX, nextMapY);
+
+            if (gameEdge === '') {
+                traverseMap(nextMapX, nextMapY);
+                adjustHero(direction, nextX, nextY);
+            }
+
+        }
     }
 
     function nextCords(direction, obj) {
@@ -186,7 +204,12 @@ function Play() {
                 break;
         }
 
-        return { nextX, nextY };
+        let rtn = {
+            x: nextX,
+            y: nextY
+        };
+        return rtn;
+
     }
 
     function hitWhichEdgeOf(size, x, y) {
@@ -204,23 +227,6 @@ function Play() {
             // y = size;
         } else {
             return '';
-        }
-    }
-
-    function decideMovement(direction) {
-        let { nextX, nextY } = nextCords(direction, hero.tile);
-        let mapEdge = hitWhichEdgeOf(mapSize, nextX, nextY);
-
-        if (mapEdge === '') {
-            // let  = analyseTile()
-            traverseTile(nextX, nextY);
-        } else {
-            let { nextMapX, nextMapY } = nextCords(direction, mapHeroIsOn);
-            let gameEdge = hitWhichEdgeOf(gameSize, nextMapX, nextMapY);
-            if (gameEdge === '') {
-
-            }
-
         }
     }
 
