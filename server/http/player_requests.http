@@ -1,3 +1,4 @@
+# @jwt = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJyb2d1ZWxpa2UiLCJzdWIiOiJzdGVwaCIsImlkIjoyLCJhdXRob3JpdGllcyI6IiIsImV4cCI6MTY0NjE2OTM0NX0.BPSYL_Ls10EI4yWnYTV6SRMtrBx5h3JDiG-svRs6l7M
 @url = http://localhost:8080/api/player
 @authurl = http://localhost:8080
 
