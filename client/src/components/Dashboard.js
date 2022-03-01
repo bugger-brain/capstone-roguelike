@@ -8,9 +8,13 @@ function Dashboard() {
     const navigate = useNavigate();
     const player = JSON.parse(localStorage.getItem("player"));
     const games = player.games;
-    const newGame = {
-        score: 0,
-        isBlueprint: "true" //does this need the quotes or not
+    // const newGame = {
+    //     score: 0,
+    //     isBlueprint: "true" 
+    // }
+
+    function newGame() {
+        
     }
 
     function displayGames() {
@@ -30,7 +34,7 @@ function Dashboard() {
                 </div>
                 <div>
                     <center>
-                        <button type="button" className="btn btn-lrg btn-info">
+                        <button type="button" className="btn btn-lrg btn-info" onClick={()=> {newGame()}} >
                             Start a New Game!
                         </button></center>
                 </div>
