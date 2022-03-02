@@ -25,10 +25,10 @@ Content-Type: application/json
 Accept: application/json
 
 {
-    "mapId": 1,
     "type": "water",
-    "x":0,
-    "y":0
+    "mapId": 1,
+    "x": 0,
+    "y": 0
 }
 
 ###
