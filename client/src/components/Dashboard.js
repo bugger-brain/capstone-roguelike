@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext  } from "react";
 import { useNavigate } from "react-router-dom";
 import GameLoadCard from "./GameLoadCard";
-import { addGame } from "../services/game-api";
+import { addGame, findGameById, findAllGames } from "../services/game-api";
 
 function Dashboard() {
 
@@ -13,8 +13,24 @@ function Dashboard() {
     //     isBlueprint: "true" 
     // }
 
+    
     function newGame() {
+       const game = findGameById(1);
+    //    const allGames = findAllGames();
+    //    let gameBlueprint = allGames[0];
         
+       //localStorage.setItem("game", JSON.stringify(game));
+     
+        
+        addGame(game);
+        navigate("/play");
+    
+        
+
+    }
+
+    function saveGame(){
+
     }
 
     function displayGames() {

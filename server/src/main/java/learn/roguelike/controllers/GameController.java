@@ -29,7 +29,8 @@ public class GameController {
 
     @GetMapping
     public List<Game> getGames(){
-        return service.findAll();
+        List<Game> games = service.findAll();
+        return games;
     }
 
     @GetMapping("/{gameId}")

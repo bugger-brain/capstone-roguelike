@@ -5,13 +5,24 @@ export async function findAllGames() {
 
     const response = await fetch(baseUrl);
     if (response.status === 200){
-        return response.json();
+        let j = response.json();
+        return j;
     } else if (response.status === 403) {
         return Promise.reject(403);
     }
     return Promise.reject("Could not fetch games. ");
 }
 
+
+export async function findGameById(id) {
+    const response = await fetch(`${baseUrl}/${id}`);
+    if (response.status === 200){
+        return response.json();
+    } else if (response.status === 404) {
+        return Promise.reject(404);
+    }
+    return Promise.reject("Game not found");
+}
 
 export async function addGame(game) {
     const init = {
