@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext  } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import GameLoadCard from "./GameLoadCard";
 import { addGame, findGameById } from "../services/game-api";
@@ -11,74 +11,83 @@ function Dashboard() {
     const navigate = useNavigate();
     const player = JSON.parse(localStorage.getItem("player"));
     const games = player.games;
+
+    //game fetched from blueprint
     const [defaultGame, setDefaultGame] = useState({
         score: 0,
         blueprint: "true"
     });
+
     const [game, setGame] = useState({});
-    const newGame ={
+
+    // game to be posted
+    const newGame = {
         score: 0,
         isBlueprint: false
     }
+
     const [maps, setMaps] = useState([]);
 
-    useEffect(() => {
-        findGameById(1)
-           .then(json => setDefaultGame(json))
-           .catch(console.error)
-    }, []); 
+    // useEffect(() => {
+    //     findGameById(1)
+    //         .then(json => setDefaultGame(json))
+    //         .catch(console.error)
+    // }, []);
 
-    useEffect(() => {
-        addGame(newGame)
-           .then(json => setGame(json))
-           .catch(console.error)
-    }, []); 
+    // useEffect(() => {
+    //     addGame(newGame)
+    //        .then(json => setGame(json))
+    //        .catch(console.error)
+    // }, []); 
 
-    function postMap(postingMap){
-        addMap(postingMap)
-            .then(json => setMaps([...maps, json]))
-            .catch(console.error)
     
+    function createNewGame() {
 
-       
+        findGameById(1)
+            .then(json => setDefaultGame(json))
+            .catch(console.error)
+
+        console.log(defaultGame);
+        
+        // addGame(newGame)
+        // .then(json => setGame(json))
+        // .catch(console.error)
 
     }
-    function createNewGame() {
-        
-        //map post 
-        console.log(defaultGame);
-        //console.log(game);
-        //changing gameIds in Maps
-        // let newMaps = [];
-        // for(let i=0; i<defaultGame.maps.length; i++){
-        //     const newMap = {
-        //         gameId: game.gameId,
-        //         x: defaultGame.maps[i].x,
-        //         y: defaultGame.maps[i].y
-        //     }
-        
-        //     newMaps.push(addMap(newMap)) 
-        //     console.log(newMaps);
-        // }
+    //map post 
+    // console.log(defaultGame);
+    //console.log(game);
+    //changing gameIds in Maps
+    // let newMaps = [];
+    // for(let i=0; i<defaultGame.maps.length; i++){
+    //     const newMap = {
+    //         gameId: game.gameId,
+    //         x: defaultGame.maps[i].x,
+    //         y: defaultGame.maps[i].y
+    //     }
 
-        
+    //     newMaps.push(addMap(newMap)) 
+    //     console.log(newMaps);
+    // }
 
-        //changing mapIds in tiles
-        // let newTiles = [];
-        // for(let i=0; i<defaultGame.maps; i++){
-        //     for(let k = 0; k<defaultGame.maps[i].tiles.length; k++){
-        //         const newTile = {
-        //             type: defaultGame.maps[i].tiles[k].type,
-        //             mapId: newMaps[i].mapId,
-        //             x: defaultGame.maps[i].tiles[k].x,
-        //             y: defaultGame.maps[i].tiles[k].y
-        //         }
-        //         newTiles.push(addTile(newTile)) 
-        //     }
-  
-        // }
 
-        // console.log(newTiles)
+
+    //changing mapIds in tiles
+    // let newTiles = [];
+    // for(let i=0; i<defaultGame.maps; i++){
+    //     for(let k = 0; k<defaultGame.maps[i].tiles.length; k++){
+    //         const newTile = {
+    //             type: defaultGame.maps[i].tiles[k].type,
+    //             mapId: newMaps[i].mapId,
+    //             x: defaultGame.maps[i].tiles[k].x,
+    //             y: defaultGame.maps[i].tiles[k].y
+    //         }
+    //         newTiles.push(addTile(newTile)) 
+    //     }
+
+    // }
+
+    // console.log(newTiles)
 
     //    const newHero = {
     //        gameId: game.gameId,
@@ -94,16 +103,16 @@ function Dashboard() {
     //    let hero = addHero(newHero); 
     //    let heroId = hero.heroId;
     //    console.log(findGameById(game.gameId))
-     
-      
-       
-    
-        
+
+
+
+
+
 
     // } 
-    }
+    // }
 
-    function saveGame(){
+    function saveGame() {
 
     }
 
@@ -125,7 +134,7 @@ function Dashboard() {
                 </div>
                 <div>
                     <center>
-                        <button type="button" className="btn btn-lrg btn-info" onClick={()=> {createNewGame()}} >
+                        <button type="button" className="btn btn-lrg btn-info" onClick={() => { createNewGame() }} >
                             Start a New Game!
                         </button></center>
                 </div>

@@ -26,7 +26,9 @@ public class GameService {
         return repository.findAll();
     }
 
-    public Game findById(int gameId){ return repository.findById(gameId).orElse(null);
+    public Game findById(int gameId){
+        Game game = repository.findById(gameId).orElse(null);
+        return game;
     }
 
     public Result<Game> add(Game game){

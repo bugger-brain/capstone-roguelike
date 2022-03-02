@@ -7,7 +7,7 @@ function Register() {
 
     const [user, setUser] = useState({
         username: "",
-        password: "",
+        passwordHash: "",
         confirmPassword: ""
     });
     const [err, setErr] = useState();
@@ -22,7 +22,7 @@ function Register() {
 
     const onSubmit = (evt) => {
         evt.preventDefault();
-        if (user.password !== user.confirmPassword) {
+        if (user.passwordHash !== user.confirmPassword) {
             setErr("passwords do not match");
         } else {
             createUser(user)
@@ -41,7 +41,7 @@ function Register() {
     return (
         <div>
             <center>
-                <register-form onSubmit={onSubmit}>
+                <form onSubmit={onSubmit}>
                     <h2 className='register-text'>Register</h2>
                     <div className="w-25 p-3">
                         <label for="registerUsername" className="form-label" className="register-text">Username</label>
@@ -50,8 +50,8 @@ function Register() {
                     </div>
                     <div className="w-25 p-3">
                         <label for="registerPassword" className="form-label" className="register-text">Password</label>
-                        <input type="password" name="password" className="form-control" id="registerPassword" required
-                            value={user.password} onChange={onChange} />
+                        <input type="password" name="passwordHash" className="form-control" id="registerPassword" required
+                            value={user.passwordHash} onChange={onChange} />
                     </div>
                     <div className="w-25 p-3">
                         <label for="registerRepassword" className="form-label" className="register-text">Re-enter Password</label>
