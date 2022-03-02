@@ -18,8 +18,6 @@ function GameLoadCard({ game }) {
         return "under construction";
     }
 
-
-
     return (
         <div className="card bg-info w-25 p-3">
             {/* <p><b>Game Id: {game.gameId}</b></p> */}
