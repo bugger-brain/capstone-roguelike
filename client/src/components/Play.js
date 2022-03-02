@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
+import { updateGame} from "../services/game-api";
 import "./Play.css";
-import {saveGame} from "../services/game-api";
+
 
 
 function Play() {
@@ -26,6 +27,10 @@ function Play() {
         displayMapTiles();
     }, [heroState]);
 
+
+    function saveGame(game) {
+        updateGame(game);
+    }
     function loadMapHeroIsOn(heroTile) {
         let heroTileId = heroTile.tileId;
         for (let i = 0; i < maps.length; i++) {

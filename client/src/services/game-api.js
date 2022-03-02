@@ -24,19 +24,20 @@ export async function findGameById(id) {
     return Promise.reject("Game not found");
 }
 
-export async function addGame(game) {
+export async function addGame(game) {   //"Authorization": `Bearer ${localStorage.getItem("BG_TOKEN")}`
     const init = {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "Accept": "application/json"
+            "Accept": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("BG_TOKEN")}`
         },
         body: JSON.stringify(game)
     }
 
     const response = await fetch(`${baseUrl}`, init);
     if (response.status === 201) {
-        return Promise.resolve();
+        return response.json();
     } else if (response.status === 400) {
         const messages = await response.json();
         return Promise.reject({ status: response.status, messages });
@@ -45,16 +46,17 @@ export async function addGame(game) {
     return Promise.reject({ status: response.status });
 }
 
-async function updateGame(game) {
+export async function updateGame(game) {
     const init = {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
-            "Accept": "application/json"
+            "Accept": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("BG_TOKEN")}`
         },
         body: JSON.stringify(game)
     };
-    const response = await fetch(`${baseUrl}/${game.id}`, init);
+    const response = await fetch(`${baseUrl}/${game.gameId}`, init);
     if (response.status === 204) {
         return Promise.resolve();
     } else if (response.status === 403) {
@@ -65,14 +67,11 @@ async function updateGame(game) {
 
 
 
-export async function saveGame(game) {
-    return game.id > 0 ? updateGame(game) : addGame(game);
-}
-
 
 export async function deleteGameById(id) {
-    const init = { 
-        method: "DELETE"}
+    const init = { method: "DELETE", headers: { 
+        "Authorization": `Bearer ${localStorage.getItem("BG_TOKEN")}` 
+    } };
     const response = await fetch(`${baseUrl}/${id}`, init);
     if (response.status === 204) {
         return Promise.resolve();

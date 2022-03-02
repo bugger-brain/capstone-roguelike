@@ -29,6 +29,9 @@ function Nav(){
                             <a className="nav-link active" aria-current="page" href="/">Home</a>
                         </li>
                         <li className="nav-item">
+                            <a className="nav-link" href="/about">About Game</a>
+                        </li>
+                        <li className="nav-item">
                             <a className="nav-link" href="/dashboard">Dashboard</a>
                         </li>
                         {/* <li className="nav-item">
@@ -37,6 +40,7 @@ function Nav(){
                         <li className="nav-item">
                             <a className="nav-link" href="/leaderboard">LeaderBoard</a>
                         </li>
+                        
                     </ul>
                     <div className="justify-content-end">
                         {credentials && credentials.hasAuthority("USER", "ADMIN") &&
