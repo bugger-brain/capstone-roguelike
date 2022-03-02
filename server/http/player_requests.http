@@ -15,9 +15,9 @@ Content-Type: application/json
 Accept: application/json
 
 {
-    "username": "test",
-    "password": "password",
-    "confirmPassword": "password"
+    "username": "abc",
+    "passwordHash": "password",
+    "auth": "USER"
     
 }
 
