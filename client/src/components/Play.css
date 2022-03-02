@@ -4,7 +4,7 @@
   border-width: 0px;
   border-color: black;
   border-style: solid;
-  background-color: #8af036
+  background-color: #8bc34a
 
 }
 
@@ -23,7 +23,7 @@
   border-width: 0px;
   border-color: black;
   border-style: solid;
-  background-color: #36eaf0
+  background-color: #03a8f4
 }
 .hero {
   width: 25px;
@@ -33,7 +33,17 @@
   border-style: solid;
   background-color: #8341be
 }
+
 .stone {
+  width: 25px;
+  height: 25px;
+  border-width: 0px;
+  border-color: black;
+  border-style: solid;
+  background-color: #7a787a
+}
+
+.rubble {
   width: 25px;
   height: 25px;
   border-width: 0px;
@@ -48,7 +58,7 @@
   border-width: 0px;
   border-color: black;
   border-style: solid;
-  background-color: #030100
+  background-color: #a0614c
 }
 
 .wall {
@@ -57,7 +67,49 @@
   border-width: 0px;
   border-color: black;
   border-style: solid;
-  background-color: #6e320e
+  background-color: #795448
+}
+
+.fire {
+  width: 25px;
+  height: 25px;
+  border-width: 0px;
+  border-color: black;
+  border-style: solid;
+  background-color: #ff5623
+}
+
+.elementWater {
+  width: 25px;
+  height: 25px;
+  border-width: 0px;
+  border-color: black;
+  border-style: solid;
+  background-color: #3f51b5
+}
+.elementEarth {
+  width: 25px;
+  height: 25px;
+  border-width: 0px;
+  border-color: black;
+  border-style: solid;
+  background-color: #194f11
+}
+.elementAir {
+  width: 25px;
+  height: 25px;
+  border-width: 0px;
+  border-color: black;
+  border-style: solid;
+  background-color: #feebee
+}
+.elementFire {
+  width: 25px;
+  height: 25px;
+  border-width: 0px;
+  border-color: black;
+  border-style: solid;
+  background-color: #ff9901
 }
 
 .blank {
