@@ -66,7 +66,7 @@ public class GameController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Object> postNewGame (@RequestBody Game game, BindingResult bindingResult,
+    public ResponseEntity<Object> postNew (@RequestBody Game game, BindingResult bindingResult,
                                        ServletRequest request){
 
         if (bindingResult.hasErrors()) {
@@ -76,7 +76,7 @@ public class GameController {
         Result<Game> result = service.createNewGame(game);
         if (result.isSuccess()) {
 
-            String url = String.format("http://%s:%s/api/game/%s",
+            String url = String.format("http://%s:%s/api/game/create/%s",
                     request.getServerName(),
                     request.getServerPort(),
                     game.getGameId());
