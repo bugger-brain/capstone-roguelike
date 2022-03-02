@@ -1,4 +1,4 @@
-@jwt = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJyb2d1ZWxpa2UiLCJzdWIiOiJzdGVwaCIsImlkIjoyLCJhdXRob3JpdGllcyI6IiIsImV4cCI6MTY0NjE3Mjg2N30.TqwxC0yii4GmRzXjdpKDy8ZMudoxU9xkR_LHfheSFfI
+@jwt = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJyb2d1ZWxpa2UiLCJzdWIiOiJwYWdvdG8iLCJpZCI6MSwiYXV0aG9yaXRpZXMiOiJBRE1JTiIsImV4cCI6MTY0NjIzNDcyOH0.ds7FAKI_IL6eMqllHyZSv2myOwTjcMQas_zorlxIcEo
 @url = http://localhost:8080/api/player
 @authurl = http://localhost:8080
 
@@ -16,7 +16,8 @@ Accept: application/json
 
 {
     "username": "test",
-    "password": "password"
+    "password": "password",
+    "confirmPassword": "password"
     
 }
 
@@ -41,6 +42,6 @@ POST {{authurl}}/authenticate HTTP/1.1
 Content-Type: application/json
 
 {
-    "username": "steph",
+    "username": "pagoto",
     "password": "qwe123"
 }

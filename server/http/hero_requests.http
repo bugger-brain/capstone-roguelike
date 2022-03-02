@@ -37,6 +37,7 @@ Accept: application/json
 
 {
     "heroId": 1,
+    "gameId": 1,
     "hp": 11,
     "lives": 3,
     "air": "false",

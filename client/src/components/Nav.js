@@ -1,11 +1,15 @@
-import { useState, useEffect } from "react";
+import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import AuthContext from "../contexts/AuthContext";
 
 function Nav(){
 
     // const [player, setPlayer] = useState(JSON.parse(localStorage.getItem("player")));
     const player = JSON.parse(localStorage.getItem("player"));
     const navigate = useNavigate();
+
+    const auth = useContext(AuthContext);
+    const { credentials } = auth;
 
     function logout() {
         localStorage.clear();
@@ -27,15 +31,16 @@ function Nav(){
                         <li className="nav-item">
                             <a className="nav-link" href="/dashboard">Dashboard</a>
                         </li>
-                        <li className="nav-item">
+                        {/* <li className="nav-item">
                             <a className="nav-link" href="/play">Play Game</a>
-                        </li>
+                        </li> */}
                         <li className="nav-item">
                             <a className="nav-link" href="/leaderboard">LeaderBoard</a>
                         </li>
                     </ul>
                     <div className="justify-content-end">
-                        { player && player.username &&
+                        {credentials && credentials.hasAuthority("USER", "ADMIN") &&
+                        //{ player && player.username &&
                         <>
                             <h3>{player.username}</h3>
                             <button className="btn btn-dark me-2" onClick={logout}>Logout</button>
