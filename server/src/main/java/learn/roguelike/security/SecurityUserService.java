@@ -1,26 +1,26 @@
 package learn.roguelike.security;
 
-import learn.roguelike.data.AppUserRepository;
+import learn.roguelike.data.PlayerRepository;
+import learn.roguelike.models.Player;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SecurityUserService implements UserDetailsService {
+public class SecurityUserService  {
 
-    private final AppUserRepository userRepository;
+    private final PlayerRepository playerRepository;
 
-    public SecurityUserService(AppUserRepository userRepository) {
-        this.userRepository = userRepository;
+    public SecurityUserService(PlayerRepository userRepository) {
+        this.playerRepository = userRepository;
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public Player loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        var user = userRepository.findByUsername(username);
+        var user = playerRepository.findPlayerByUsername(username);
 
-        if (user == null || !user.isEnabled()) {
+        if (user == null) {
             throw new UsernameNotFoundException("username " + username + " not found.");
         }
 

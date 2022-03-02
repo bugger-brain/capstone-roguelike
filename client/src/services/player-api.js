@@ -23,7 +23,39 @@ export async function findPlayerByUsername(username) {
     return Promise.reject("Invalid username.");
 }
 
+export async function createPlayer(player) {
+    const init = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify(player)
+    }
 
-// export async function findById(id) {
+    const response = await fetch(`${baseUrl}/create`, init);
+    if (response.status === 201) {
+        return Promise.resolve();
+    } else if (response.status === 400) {
+        const messages = await response.json();
+        return Promise.reject({ status: response.status, messages });
+    }
 
-// }
+    return Promise.reject({ status: response.status });
+}
+
+export async function findRoles() {
+    const init = {
+        method: "GET",
+        headers: {
+            "Accept": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("TOKEN")}`
+        }
+    }
+    const response = await fetch(`${baseUrl}/role`, init);
+    if (response.status === 200) {
+        return await response.json();
+    } else {
+        return Promise.reject(response.status);
+    }
+}

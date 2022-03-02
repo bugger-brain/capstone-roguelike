@@ -1,6 +1,6 @@
 package learn.roguelike.security;
 
-import learn.roguelike.models.AppUser;
+import learn.roguelike.models.Player;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,12 +29,12 @@ public class JwtRequestFilter extends BasicAuthenticationFilter {
         String authorization = request.getHeader("Authorization");
         if (authorization != null && authorization.startsWith("Bearer ")) {
 
-            AppUser user = converter.getUserFromToken(authorization.substring(7));
-            if (user == null) {
+            Player player = converter.getUserFromToken(authorization.substring(7));
+            if (player == null) {
                 response.setStatus(403); // Forbidden
             } else {
                 var token = new UsernamePasswordAuthenticationToken(
-                        user, null, user.getAuthorities());
+                        player, player.getAuth());
                 SecurityContextHolder.getContext().setAuthentication(token);
             }
         }

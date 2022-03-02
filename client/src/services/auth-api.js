@@ -11,7 +11,7 @@ function hasAuthority(...authorities) {
 
 function makeCredentials(body) {
     const jwt = body.jwt;
-    localStorage.setItem("BG_TOKEN", jwt);
+    localStorage.setItem("TOKEN", jwt);
     const sections = jwt.split(".");
     const envelope = JSON.parse(atob(sections[1]));
     const credentials = {
@@ -44,12 +44,12 @@ export async function login(credentials) {
 }
 
 export async function logout() {
-    localStorage.removeItem("BG_TOKEN");
+    localStorage.removeItem("TOKEN");
     return Promise.resolve();
 }
 
 export async function refresh() {
-    const jwt = localStorage.getItem("BG_TOKEN");
+    const jwt = localStorage.getItem("TOKEN");
     if (!jwt) {
         return Promise.reject("bad credentials");
     }
@@ -70,14 +70,3 @@ export async function refresh() {
 
     return Promise.reject("bad credentials");
 }
-
-// export async function login(credentials) {
-//     const init = {
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/json",
-//             "Accept": "application/json"
-//         },
-//         body: JSON.stringify(credentials)
-//     };
-// }

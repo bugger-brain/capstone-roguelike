@@ -46,6 +46,7 @@ function Login() {
         <div>
             <center>
                 <form onSubmit={onSubmit}>
+                <h4 className='register-text'>Login</h4>
                     <div className="w-25 ">
                         <label htmlFor="loginUsername" className="form-label" className="login-text">Username</label>
                         <input type="text" className="form-control" name="username" id="loginUsername"
