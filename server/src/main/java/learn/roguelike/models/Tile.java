@@ -20,5 +20,7 @@ public class Tile {
     @NotNull
     private int y;
 //    private boolean hasEntity;
+    @Column(name="map_id")
+    private int mapId;
 
 }

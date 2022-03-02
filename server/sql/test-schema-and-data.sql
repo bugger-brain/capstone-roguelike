@@ -9,7 +9,7 @@ create table player(
 );
 
 create table game(
-	game_id int primary key,
+	game_id int primary key auto_increment,
     player_id int null,
 	is_blueprint boolean,
     score int not null,

@@ -1,12 +1,14 @@
 package learn.roguelike.data;
 
 import learn.roguelike.models.Game;
+import learn.roguelike.models.Map;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.transaction.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -35,7 +37,14 @@ public class GameRepositoryTest {
         Game game = repository.findById(0).orElse(null);
         assertNull(game);
     }
-
+    @Test
+    public void whenParentSavedThenChildSaved() {
+//        Game game = new Game();
+//        Map map = new Map();
+//        List<Map> maps;
+//        maps.
+//        game.setMaps()
+    }
 
 
 }

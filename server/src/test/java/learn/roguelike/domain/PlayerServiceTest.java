@@ -39,12 +39,12 @@ public class PlayerServiceTest {
         Player player = new Player();
         player.setPlayerId(0);
         player.setUsername("TEST");
-        player.setPassword("test");
+        player.setPasswordHash("test");
 
         Player mockOut = new Player();
         mockOut.setPlayerId(5);
         mockOut.setUsername("TEST");
-        mockOut.setPassword("test");
+        mockOut.setPasswordHash("test");
 
         when(repository.save(player)).thenReturn(mockOut);
 
@@ -71,7 +71,7 @@ public class PlayerServiceTest {
         Player player = new Player();
         player.setPlayerId(5);
         player.setUsername("TEST");
-        player.setPassword("test");
+        player.setPasswordHash("test");
 
 
 
@@ -82,7 +82,7 @@ public class PlayerServiceTest {
         Player player = new Player();
         player.setPlayerId(1);
         player.setUsername("pagoto");
-        player.setPassword("qwe123");
+        player.setPasswordHash("qwe123");
 
         return player;
     }

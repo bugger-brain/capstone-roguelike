@@ -1,9 +1,9 @@
 package learn.roguelike.controllers;
 
-import learn.roguelike.domain.HeroService;
+import learn.roguelike.domain.MapService;
 import learn.roguelike.domain.Result;
 import learn.roguelike.domain.ResultType;
-import learn.roguelike.models.Hero;
+import learn.roguelike.models.Map;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -16,54 +16,59 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/hero")
-public class HeroController {
+@RequestMapping("/api/map")
+public class MapController {
 
-    private final HeroService service;
+    private final MapService service;
 
-    public HeroController(HeroService service){
+    public MapController(MapService service) {
         this.service = service;
     }
 
     @GetMapping
-    public List<Hero> getHeroes() {
-        return service.findAll();
+    public List<Map> getMaps() {
+        List<Map> maps = service.findAll();
+        return maps;
     }
 
-    @GetMapping("/{heroId}")
-    public Hero getHeroById(@PathVariable int heroId){
-        return service.findByHeroId(heroId);
+    @GetMapping("/{mapId}")
+    public ResponseEntity<Map> getMapById(@PathVariable int mapId) {
+        Map map = service.findByMapId(mapId);
+        if (map == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return ResponseEntity.ok(map);
     }
 
     @PostMapping
-    public ResponseEntity<Object> post(@RequestBody Hero hero, BindingResult bindingResult,
-                                       ServletRequest request){
+    public ResponseEntity<Object> post(@RequestBody Map map, BindingResult bindingResult,
+                                       ServletRequest request) {
 
         if (bindingResult.hasErrors()) {
             return new ResponseEntity<Object>(makeResult(bindingResult), HttpStatus.BAD_REQUEST);
         }
 
-        Result<Hero> result = service.add(hero);
+        Result<Map> result = service.add(map);
         if (result.isSuccess()) {
 
-            String url = String.format("http://%s:%s/api/hero/%s",
+            String url = String.format("http://%s:%s/api/map/%s",
                     request.getServerName(),
                     request.getServerPort(),
-                    hero.getHeroId());
+                    map.getMapId());
 
             return ResponseEntity.created(URI.create(url))
-                    .body(hero);
+                    .body(map);
         }
         return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
 
     }
 
-    @PutMapping("/edit/{heroId}")
-    public ResponseEntity<Object> put(@PathVariable int heroId,
-                                      @RequestBody @Valid Hero hero,
+    @PutMapping("/edit/{mapId}")
+    public ResponseEntity<Object> put(@PathVariable int mapId,
+                                      @RequestBody @Valid Map map,
                                       BindingResult bindingResult) {
 
-        if (hero == null || hero.getHeroId() != heroId) {
+        if (map == null || map.getMapId() != mapId) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
@@ -71,7 +76,7 @@ public class HeroController {
             return new ResponseEntity<Object>(makeResult(bindingResult), HttpStatus.BAD_REQUEST);
         }
 
-        Result<Void> result = service.update(hero);
+        Result<Void> result = service.update(map);
         switch (result.getType()) {
             case SUCCESS:
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -82,9 +87,9 @@ public class HeroController {
         }
     }
 
-    @DeleteMapping("/{heroId}")
-    public ResponseEntity<Void> delete(@PathVariable int heroId) {
-        boolean success = service.deleteById(heroId);
+    @DeleteMapping("/{mapId}")
+    public ResponseEntity<Void> delete(@PathVariable int mapId) {
+        boolean success = service.deleteById(mapId);
         if (success) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
@@ -98,5 +103,5 @@ public class HeroController {
         }
         return result;
     }
-}
 
+}

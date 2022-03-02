@@ -11,6 +11,7 @@ Content-Type: application/json
 Accept: application/json
 
 {
+<<<<<<< HEAD
     "hp": 10,
     "lives": 3,
     "air": false,
@@ -26,6 +27,24 @@ Accept: application/json
       "y": 0
     }
   }
+=======
+    "gameId": 1,
+    "hp": 78,
+    "lives": 3,
+    "air": "false",
+    "water": "false",
+    "earth": "false",
+    "fire": "false",
+    "gold": 20,
+    "tile": {
+        "tileId": 1,
+        "type": "grass",
+        "x": 0,
+        "y": 0
+    }
+    
+}
+>>>>>>> bcedbc1313d0d2109e8819680b91a280c811f885
 
 //You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'keys, lives, tile_id, water) values (0, 0, 0, 50, 100, 0, 3, 4, 0)' at line 1
 // "tile": "{tileId: 1, type: 'grass', x: 0, y: 0}"
@@ -48,4 +67,4 @@ Accept: application/json
 }
 //this is also failing for the same reasons
 ###
-DELETE {{url}}/2 HTTP/1.1
+DELETE {{url}}/4 HTTP/1.1

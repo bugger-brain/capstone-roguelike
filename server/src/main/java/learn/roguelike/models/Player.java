@@ -20,7 +20,7 @@ public class Player {
     private String username;
 
     @NotBlank(message="Password is required")
-    private String password;
+    private String passwordHash;
 
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "player_id")

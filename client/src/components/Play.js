@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./Play.css";
-
+import {saveGame} from "../services/game-api";
 
 
 function Play() {
@@ -254,8 +254,12 @@ function Play() {
             {displayHero()}
             <br /><br />
             <h3 className="login-text">Map {mapHeroIsOn.x}{mapHeroIsOn.y}</h3>
-            <div id="grid">
-            </div>
+            <div id="grid"></div>
+            <div>
+                <center>
+            <button type="button" className="btn w-25 btn-success" onClick={() => saveGame(game)}>Save Game Dont use this yet</button>
+                </center>
+             </div>
         </div>
 
 
