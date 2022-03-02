@@ -176,6 +176,31 @@ function Play() {
         setGame(clone);
     }
 
+    function updateTileType(tile, type) {
+        tile.type = type;
+    }
+
+    function updateHeroHp(n) {
+        hero.hp += n;
+    }
+
+    function updateElement(element) {
+        switch (element) {
+            case 'water':
+                hero.water = true;
+                break;
+            case 'earth':
+                hero.earth = true;
+                break;
+            case 'air':
+                hero.air = true;
+                break;
+            case 'fire':
+                hero.fire = true;
+                break;
+        }
+    }
+
     function decideMovement(direction) {
         let tileCords = nextCords(direction, hero.tile);
         let nextX = tileCords.x;
@@ -260,36 +285,9 @@ function Play() {
                 updateHeroHp(20);
                 return '';
         }
-        // return '';
     }
 
-    function updateTileType(tile, type) {
-        tile.type = type;
-    }
-
-    function updateHeroHp(n) {
-        hero.hp += n;
-    }
-
-
-    function updateElement(element) {
-        switch (element) {
-            case 'water':
-                hero.water = true;
-                break;
-            case 'earth':
-                hero.earth = true;
-                break;
-            case 'air':
-                hero.air = true;
-                break;
-            case 'fire':
-                hero.fire = true;
-                break;
-
-        }
-
-    }
+    
 
 
 
