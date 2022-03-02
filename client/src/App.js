@@ -10,7 +10,7 @@ import LeaderBoard from "./components/LeaderBoard";
 import Register from "./components/Register";
 import { logout, refresh } from "./services/auth-api";
 import Login from "./components/Login";
-
+import Rules from "./components/Rules";
 
 function App() {
 
@@ -60,6 +60,8 @@ function App() {
             <Route path="/play" element={<Play />} />
                
             <Route path ="/leaderboard" element={<LeaderBoard />} />
+
+            <Route path ="/about" element={<Rules />} />
                
             <Route path="/register" element={<Register />} />
           </Routes>

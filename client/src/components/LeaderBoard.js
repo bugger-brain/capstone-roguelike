@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
-import { findAllPlayers} from "../services/player-api";
+import { findAllPlayers, findPlayerByUsername} from "../services/player-api";
 
 
 function LeaderBoard() {
-    const RANK = {
-        username: "",
-        score: 0
-    }
+    
 
 
 
-
+    // const player = JSON.parse(localStorage.getItem("player"));
     const [players, setPlayers] = useState([]);
+
+    
 
    
 
@@ -28,8 +27,37 @@ function LeaderBoard() {
     } )
 
 
+    // useEffect(() => {
+    //     findPlayerByUsername(player.username)
+    //     .then(json => setPlayer(json))
+    //     .catch(console.error)
+    // }, [])
 
+    // function playerRankings(){
+    //     let playerGames= player.games;
+    //     let scores = [];
+    //     for (let i = 0; i< playerGames; i++){
+    //         scores.push(playerGames[i].score)
+    //     }
+        
+    //     scores.sort((a, b) => { return b.score - a.score });
+    //     let tableHtml = "";
+    //     for (let row = 0; row < scores.length; row++) {
+    //         tableHtml += "<tr>";
+    //         for (let col = 0; col < 2; col++) {
+    //             if(col == 1 ){
+    //                 tableHtml +=  `<td id="td${row}_${col}">${scores[row]}</td>`;
+    //             }else{
+    //                 tableHtml += `<td id="td${row}_${col}">${row +1}</td>`;
+    //             }
+    //         }
+    //         tableHtml += "</tr>"
 
+    //     }
+    
+    //     document.getElementById("playerBoard").innerHTML = tableHtml;
+       
+    // }
 
     const currentRankings = () => {
 
@@ -51,7 +79,6 @@ function LeaderBoard() {
             rankings.push(newRanking);
         }
         rankings.sort((a, b) => { return b.score - a.score })
-        console.log(rankings);
        
         let tableHtml = "";
         for (let row = 0; row < rankings.length; row++) {
@@ -98,12 +125,22 @@ function LeaderBoard() {
                 </tbody>
             </table>
 
-            <div>
+            {/* <div>
                 <button type="submit" className="button btn-lg btn-danger">
-                    <span className="button__text" >View Scores By Username</span>
+                    <span className="button__text" >View My Scores</span>
                 </button>
             </div>
-
+            <table className="table table-bordered table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">Rank</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Score</th>
+                    </tr>
+                </thead>
+                <tbody id="playerBoard">
+                </tbody>
+            </table> */}
 
         </>
     )

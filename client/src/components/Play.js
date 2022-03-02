@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
+import { updateGame} from "../services/game-api";
 import "./Play.css";
-import {saveGame} from "../services/game-api";
+import { saveGame } from "../services/game-api";
 
 
 function Play() {
@@ -26,6 +27,10 @@ function Play() {
         displayMapTiles();
     }, [heroState]);
 
+
+    function saveGame(game) {
+        updateGame(game);
+    }
     function loadMapHeroIsOn(heroTile) {
         let heroTileId = heroTile.tileId;
         for (let i = 0; i < maps.length; i++) {
@@ -75,14 +80,32 @@ function Play() {
                 else if (tile.type == 'stone') {
                     tableHtml += `<td id="td${col}_${row}" class="stone"></td>`;
                 }
+                else if (tile.type == 'rubble') {
+                    tableHtml += `<td id="td${col}_${row}" class="rubble"></td>`;
+                }
                 else if (tile.type == 'grass') {
                     tableHtml += `<td id="td${col}_${row}" class="grass"></td>`;
+                }
+                else if (tile.type == 'fire') {
+                    tableHtml += `<td id="td${col}_${row}" class="fire"></td>`;
                 }
                 else if (tile.type == 'wall') {
                     tableHtml += `<td id="td${col}_${row}" class="wall"></td>`;
                 }
                 else if (tile.type == 'floor') {
                     tableHtml += `<td id="td${col}_${row}" class="floor"></td>`;
+                }
+                else if (tile.type == 'elementWater') {
+                    tableHtml += `<td id="td${col}_${row}" class="elementWater"></td>`;
+                }
+                else if (tile.type == 'elementEarth') {
+                    tableHtml += `<td id="td${col}_${row}" class="elementEarth"></td>`;
+                }
+                else if (tile.type == 'elementAir') {
+                    tableHtml += `<td id="td${col}_${row}" class="elementAir"></td>`;
+                }
+                else if (tile.type == 'elementFire') {
+                    tableHtml += `<td id="td${col}_${row}" class="elementFire"></td>`;
                 }
                 else if (tile.type == 'monster') {
                     tableHtml += `<td id="td${col}_${row}" class="monster"></td>`;
@@ -158,6 +181,31 @@ function Play() {
         setGame(clone);
     }
 
+    function updateTileType(tile, type) {
+        tile.type = type;
+    }
+
+    function updateHeroHp(n) {
+        hero.hp += n;
+    }
+
+    function updateElement(element) {
+        switch (element) {
+            case 'water':
+                hero.water = true;
+                break;
+            case 'earth':
+                hero.earth = true;
+                break;
+            case 'air':
+                hero.air = true;
+                break;
+            case 'fire':
+                hero.fire = true;
+                break;
+        }
+    }
+
     function decideMovement(direction) {
         let tileCords = nextCords(direction, hero.tile);
         let nextX = tileCords.x;
@@ -168,9 +216,8 @@ function Play() {
         if (mapEdge === '') {
             let nextTile = findTileOnMapByXY(mapHeroIsOn, nextX, nextY);
             let valid = validateTile(nextTile);
-            if (valid === ''){
+            if (valid === '') {
                 updateTile(nextTile);
-
             }
         } else {
             let mapCords = nextCords(direction, mapHeroIsOn);
@@ -186,6 +233,68 @@ function Play() {
             }
         }
     }
+
+    function validateTile(tile) {
+        switch (tile.type) {
+            case 'grass':
+                return '';
+            case 'water':
+                return hero.water ? '' : 'water';
+            case 'stone':
+                return 'stone';
+            case 'rubble':
+                if (hero.earth) {
+                    updateTileType(tile, 'grass');
+                    return '';
+                } else {
+                    return 'rubble';
+                }
+            case 'wall':
+                if (hero.fire) {
+                    updateTileType(tile, 'fire');
+                    updateHeroHp(-5);
+                    return '';
+                } else {
+                    return 'wall';
+                }
+            case 'floor':
+                return '';
+            case 'fire':
+                if (hero.fire && hero.air) {
+                    updateTileType(tile, 'grass');
+                    return '';
+                } else if (hero.fire) {
+                    return '';
+                } else {
+                    updateHeroHp(-10);
+                    return '';
+                }
+            case 'elementWater':
+                updateElement('water');
+                updateTileType(tile, 'grass');
+                updateHeroHp(20);
+                return '';
+            case 'elementEarth':
+                updateElement('earth');
+                updateTileType(tile, 'grass');
+                updateHeroHp(20);
+                return '';
+            case 'elementAir':
+                updateElement('air');
+                updateTileType(tile, 'grass');
+                updateHeroHp(20);
+                return '';
+            case 'elementFire':
+                updateElement('fire');
+                updateTileType(tile, 'grass');
+                updateHeroHp(20);
+                return '';
+        }
+    }
+
+    
+
+
 
     function nextCords(direction, obj) {
         let nextX = obj.x;
@@ -244,11 +353,6 @@ function Play() {
         }
     }
 
-    function validateTile(tile) {
-        return '';
-
-    }
-
     return (
         <div>
             {displayHero()}
@@ -257,9 +361,9 @@ function Play() {
             <div id="grid"></div>
             <div>
                 <center>
-            <button type="button" className="btn w-25 btn-success" onClick={() => saveGame(game)}>Save Game Dont use this yet</button>
+                    <button type="button" className="btn w-25 btn-success" onClick={() => saveGame(game)}>Save Game Dont use this yet</button>
                 </center>
-             </div>
+            </div>
         </div>
 
 

@@ -45,7 +45,8 @@ Accept: application/json
     "earth": "false",
     "fire": "false",
     "keys": 0,
-    "gold": 50
+    "gold": 50,
+    "gameId": 1
 
 }
 //this is also failing for the same reasons

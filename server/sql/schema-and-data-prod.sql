@@ -116,10 +116,10 @@ insert into map values
 
 
 insert into hero values
-	(1, 1, 1, 10, 3, false, false, false, false, 0, 50);
-    
-insert into monster values
-	(1, 2, 20);
+	(1, 1, 1, 100, 3, false, false, false, false, 0, 50);
+--     
+-- insert into monster values
+-- 	(1, 2, 20);
     
 
 select * from tile;
