@@ -15,6 +15,9 @@ export async function findAllGames() {
 
 
 export async function findGameById(id) {
+    const init = { method: "POST", headers: { 
+        "Authorization": `Bearer ${localStorage.getItem("BG_TOKEN")}` 
+    } };
     const response = await fetch(`${baseUrl}/${id}`);
     if (response.status === 200){
         return response.json();

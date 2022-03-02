@@ -2,6 +2,7 @@ package learn.roguelike.domain;
 
 import learn.roguelike.data.GameRepository;
 import learn.roguelike.models.Game;
+import learn.roguelike.models.Map;
 import learn.roguelike.models.Player;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +27,7 @@ public class GameService {
         return repository.findAll();
     }
 
-    public Game findById(int gameId){ return repository.findById(gameId).orElse(null);
+    public Game findById(int gameId){ return repository.findByGameId(gameId);
     }
 
     public Result<Game> add(Game game){
@@ -39,7 +40,26 @@ public class GameService {
         return result;
 
     }
+    public Result<Game> createNewGame(Game game){
+        Result<Game> result = validate(game);
+        Game defaultGame = findById(1);
 
+
+        if(!result.isSuccess()){
+            return result;
+        }
+        game.setGameId(0);
+        game = repository.save(game);
+        List<Map> defaultMaps = defaultGame.getMaps();
+        for(int i = 0; i < defaultMaps.size(); i++){
+            Map map = new Map();
+        }
+
+        game = repository.save(game);
+        result.setPayload(game);
+        return result;
+
+    }
     public Result<Void> update(Game game){
         Result<Void> result = validate(game);
         if(!result.isSuccess()){

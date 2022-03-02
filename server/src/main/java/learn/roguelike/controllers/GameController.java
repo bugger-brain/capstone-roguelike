@@ -65,6 +65,29 @@ public class GameController {
 
     }
 
+    @PostMapping("/create")
+    public ResponseEntity<Object> postNewGame (@RequestBody Game game, BindingResult bindingResult,
+                                       ServletRequest request){
+
+        if (bindingResult.hasErrors()) {
+            return new ResponseEntity<Object>(makeResult(bindingResult), HttpStatus.BAD_REQUEST);
+        }
+
+        Result<Game> result = service.createNewGame(game);
+        if (result.isSuccess()) {
+
+            String url = String.format("http://%s:%s/api/game/%s",
+                    request.getServerName(),
+                    request.getServerPort(),
+                    game.getGameId());
+
+            return ResponseEntity.created(URI.create(url))
+                    .body(game);
+        }
+        return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+
+    }
+
     @PutMapping("/edit/{gameId}")
     public ResponseEntity<Object> put(@PathVariable int gameId,
                                       @RequestBody @Valid Game game,
