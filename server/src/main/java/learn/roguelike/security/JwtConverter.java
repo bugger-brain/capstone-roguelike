@@ -2,7 +2,7 @@ package learn.roguelike.security;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
-import learn.roguelike.models.AppUser;
+import learn.roguelike.models.Player;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
@@ -19,19 +19,19 @@ public class JwtConverter {
     private final int EXPIRATION_MINUTES = 15;
     private final int EXPIRATION_MILLIS = EXPIRATION_MINUTES * 60 * 1000;
 
-    public String getTokenFromUser(AppUser user) {
+    public String getTokenFromUser(Player player) {
 
         return Jwts.builder()
                 .setIssuer(ISSUER)
-                .setSubject(user.getUsername())
-                .claim("id", user.getId())
-                .claim("authorities", String.join(",", user.getAuthorityNames()))
+                .setSubject(player.getUsername())
+                .claim("id", player.getPlayerId())
+                .claim("auth", player.getAuth())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_MILLIS))
                 .signWith(key)
                 .compact();
     }
 
-    public AppUser getUserFromToken(String token) {
+    public Player getUserFromToken(String token) {
 
         if (token == null) {
             return null;
@@ -44,18 +44,15 @@ public class JwtConverter {
                     .build()
                     .parseClaimsJws(token);
 
-            AppUser user = new AppUser();
+            Player player = new Player();
 
-            user.setUsername(jws.getBody().getSubject());
-            user.setId(jws.getBody().get("id", Integer.class));
+            player.setUsername(jws.getBody().getSubject());
+            player.setPlayerId(jws.getBody().get("id", Integer.class));
 
-            String authStr = jws.getBody().get("authorities", String.class);
-            List<String> authorities = Arrays.stream(authStr.split(","))
-                    .filter(a -> a != null && a.trim().length() != 0)
-                    .collect(Collectors.toList());
-            user.setAuthorityNames(authorities);
+            String authStr = jws.getBody().get("auth", String.class);
+            player.setAuth(authStr);
 
-            return user;
+            return player;
 
         } catch (JwtException e) {
             System.out.println(e);

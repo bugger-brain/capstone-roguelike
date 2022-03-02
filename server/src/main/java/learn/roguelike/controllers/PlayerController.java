@@ -4,8 +4,10 @@ import learn.roguelike.domain.Result;
 import learn.roguelike.domain.PlayerService;
 import learn.roguelike.domain.ResultType;
 import learn.roguelike.models.Player;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +15,11 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.ServletRequest;
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
+@ConditionalOnWebApplication
 @RequestMapping("/api/player")
 public class PlayerController {
 
@@ -39,7 +43,9 @@ public class PlayerController {
         }
         return ResponseEntity.ok(player);
     }
-    @PostMapping
+
+
+    @PostMapping("/create")
     public ResponseEntity<Object> post(@RequestBody Player player, BindingResult bindingResult,
                                             ServletRequest request){
 
@@ -61,6 +67,7 @@ public class PlayerController {
         return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
 
     }
+
 
     @PutMapping("/edit/{username}")
     public ResponseEntity<Object> put(@PathVariable String username,
@@ -85,6 +92,36 @@ public class PlayerController {
                 return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
         }
     }
+//
+//    @PutMapping("/user/update")
+//    public ResponseEntity<Object> update(
+//            @RequestBody AppUser user,
+//            @AuthenticationPrincipal AppUser principal) {
+//
+//        // can't update if not an admin
+//        if (!principal.hasAuthority("ADMIN")) {
+//            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+//        }
+//
+//        // don't bother updating a user that doesn't exist
+//        var existing = service.findByAppUserId(user.getId());
+//        if (existing == null) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//
+//        // can't update another ADMIN
+//        if (existing.isEnabled() && existing.hasAuthority("ADMIN")
+//                && existing.getId() != principal.getId()) {
+//            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+//        }
+//
+//        var result = service.update(user);
+//        if (!result.isSuccess()) {
+//            return new ResponseEntity<>(result.getMessages(), HttpStatus.BAD_REQUEST);
+//        }
+//
+//        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//    }
 
     @DeleteMapping("/{username}")
     public ResponseEntity<Void> delete(@PathVariable String username) {
@@ -94,6 +131,7 @@ public class PlayerController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
 
     private Result<Void> makeResult(BindingResult bindingResult) {
         Result<Void> result = new Result<>();

@@ -26,4 +26,6 @@ public class Player {
     @JoinColumn(name = "player_id")
     private List<Game> games = new ArrayList<>();
 
+    private String auth;
+
 }
