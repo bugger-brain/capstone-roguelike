@@ -21,7 +21,6 @@ public class Map {
     @Column(name="game_id")
     private int gameId;
 
-
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "map_id")
     private List<Tile> tiles = new ArrayList<>();
