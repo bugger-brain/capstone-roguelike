@@ -5,8 +5,8 @@ import {saveGame} from "../services/game-api";
 
 function Play() {
 
-    const mapSize = 1;
-    const gameSize = 3;
+    const mapSize = 15;
+    const gameSize = 1;
 
     const [game, setGame] = useState(JSON.parse(localStorage.getItem("game")));
 
@@ -132,15 +132,11 @@ function Play() {
                 x = 0;
                 break;
         }
-        // let rtn = {
-        //     x: x,
-        //     y: y
-        // }
-        traverseTile(x, y);
+        let nextTile = findTileOnMapByXY(mapHeroIsOn, x, y);
+        updateTile(nextTile);
     }
 
-    function traverseMap(x, y) {
-        const nextMap = findMapByXY(x, y);
+    function updateMap(nextMap) {
         mapHeroIsOn = nextMap;
 
         const clone = { ...game };
@@ -151,8 +147,7 @@ function Play() {
         setGame(clone);
     }
 
-    function traverseTile(x, y) {
-        const nextTile = findTileOnMapByXY(mapHeroIsOn, x, y);
+    function updateTile(nextTile) {
         hero.tile = nextTile;
 
         const clone = { ...game };
@@ -168,21 +163,27 @@ function Play() {
         let nextX = tileCords.x;
         let nextY = tileCords.y;
         let mapEdge = hitWhichEdgeOf(mapSize, nextX, nextY);
-
+        console.log(mapHeroIsOn);
+        // debugger;
         if (mapEdge === '') {
-            // let  = analyseTile();
-            traverseTile(nextX, nextY);
+            let nextTile = findTileOnMapByXY(mapHeroIsOn, nextX, nextY);
+            let valid = validateTile(nextTile);
+            if (valid === ''){
+                updateTile(nextTile);
+
+            }
         } else {
             let mapCords = nextCords(direction, mapHeroIsOn);
             let nextMapX = mapCords.x;
             let nextMapY = mapCords.y;
             let gameEdge = hitWhichEdgeOf(gameSize, nextMapX, nextMapY);
-
             if (gameEdge === '') {
-                traverseMap(nextMapX, nextMapY);
+                let nextMap = findMapByXY(nextMapX, nextMapY);
+                updateMap(nextMap);
                 adjustHero(direction, nextX, nextY);
+            } else {
+                // do nothing
             }
-
         }
     }
 
@@ -215,16 +216,12 @@ function Play() {
     function hitWhichEdgeOf(size, x, y) {
         if (x > size) {
             return 'right';
-            // x = 0;
         } else if (x < 0) {
             return 'left';
-            // x = size;
         } else if (y > size) {
             return 'down';
-            // y = 0;
         } else if (y < 0) {
             return 'up';
-            // y = size;
         } else {
             return '';
         }
@@ -247,11 +244,15 @@ function Play() {
         }
     }
 
+    function validateTile(tile) {
+        return '';
+
+    }
+
     return (
         <div>
             {displayHero()}
             <br /><br />
-
             <h3 className="login-text">Map {mapHeroIsOn.x}{mapHeroIsOn.y}</h3>
             <div id="grid"></div>
             <div>

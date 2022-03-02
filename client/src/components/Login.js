@@ -3,21 +3,28 @@ import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../contexts/AuthContext";
 import { findPlayerByUsername } from "../services/player-api";
 
-const blankCandidate = {
-    username: "",
-    password: ""
-};
 
 function Login() {
 
+    const [candidate, setCandidate] = useState({
+        username: "",
+        password: ""
+    });
+
     const navigate = useNavigate();
-    const [candidate, setCandidate] = useState(blankCandidate);
     const [hasError, setHasError] = useState(false);
+
     const authContext = useContext(AuthContext);
 
     const onSubmit = event => {
         event.preventDefault();
         login(candidate);
+        // event.preventDefault();
+        // login(candidate)
+        //     .then(principal => {
+        //         authContext.login(principal);
+        //         navigate.push("/");
+        //     }).catch(() => setHasError(true));
     };
 
     const onChange = event => {
