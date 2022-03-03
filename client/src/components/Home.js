@@ -21,8 +21,11 @@ function Home() {
         findGameById(1)
             .then(json => 
                 {
-                    localStorage.setItem("game", JSON.stringify(json))
+                    localStorage.setItem("game", JSON.stringify(json));
                 })
+            .then(()=>{
+                navigate("/play");
+            })
             .catch(console.log)
     }
 
@@ -30,8 +33,9 @@ function Home() {
         let confirmAction = window.confirm("Greetings! As a guest, you will not be able to save your game or register your high score to the leaderboard. Are you sure you want to continue?");
         if (confirmAction) {
             findDefaultGame();
-            navigate("/play");
+            
         } else {
+
         }
     }
 
