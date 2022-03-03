@@ -16,7 +16,7 @@ function App() {
 
   // const [username, setUsername] = useState();
   const player = JSON.parse(localStorage.getItem("player"));
-  
+
   const [credentials, setCredentials] = useState();
   const [initialized, setInitialized] = useState(false);
 
@@ -37,7 +37,6 @@ function App() {
 
   const considerRedirect = (Component, ...authorities) => {
     if (initialized) {
-
       if (credentials && (authorities.length === 0 || credentials.hasAuthority(...authorities))) {
         return <Component />;
       } else {
@@ -51,7 +50,7 @@ function App() {
     <AuthContext.Provider value={ auth }>
       <div className="container">
         <BrowserRouter>
-        <Nav />
+          <Nav />
           <Routes>
             <Route path="/" element={<Home />} />
             
@@ -59,10 +58,11 @@ function App() {
             <Route path="login" element={<Login />}/>
             <Route path="/play" element={<Play />} />
                
-            <Route path ="/leaderboard" element={<LeaderBoard />} />
 
-            <Route path ="/about" element={<Rules />} />
-               
+            <Route path="/leaderboard" element={<LeaderBoard />} />
+
+            <Route path="/about" element={<Rules />} />
+
             <Route path="/register" element={<Register />} />
           </Routes>
         </BrowserRouter>

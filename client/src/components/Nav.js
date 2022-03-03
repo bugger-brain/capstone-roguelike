@@ -9,7 +9,8 @@ function Nav(){
     const navigate = useNavigate();
 
     const auth = useContext(AuthContext);
-    const { credentials } = auth;
+    // const { credentials } = auth;
+    const credentials = auth.credentials;
 
     function logout() {
         localStorage.clear();
@@ -43,8 +44,8 @@ function Nav(){
                         
                     </ul>
                     <div className="justify-content-end">
-                        {credentials && credentials.hasAuthority("USER", "ADMIN") &&
-                        //{ player && player.username &&
+                        {/* {credentials && hasAuthority("USER", "ADMIN") && */}
+                        { player && player.username &&
                         <>
                             <h3>{player.username}</h3>
                             <button className="btn btn-dark me-2" onClick={logout}>Logout</button>

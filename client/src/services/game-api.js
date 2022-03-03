@@ -13,8 +13,10 @@ export async function findAllGames() {
     return Promise.reject("Could not fetch games. ");
 }
 
-
 export async function findGameById(id) {
+    const init = { method: "POST", headers: { 
+        "Authorization": `Bearer ${localStorage.getItem("TOKEN")}` 
+    } };
     const response = await fetch(`${baseUrl}/${id}`);
     if (response.status === 200){
         return response.json();
@@ -24,18 +26,40 @@ export async function findGameById(id) {
     return Promise.reject("Game not found");
 }
 
-export async function addGame(game) {   //"Authorization": `Bearer ${localStorage.getItem("BG_TOKEN")}`
+export async function addGame(game) {   
     const init = {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
             "Accept": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem("BG_TOKEN")}`
+            "Authorization": `Bearer ${localStorage.getItem("TOKEN")}`
         },
         body: JSON.stringify(game)
     }
 
     const response = await fetch(`${baseUrl}`, init);
+    if (response.status === 201) {
+        return response.json();
+    } else if (response.status === 400) {
+        const messages = await response.json();
+        return Promise.reject({ status: response.status, messages });
+    }
+
+    return Promise.reject({ status: response.status });
+}
+
+export async function createGame(game) {   
+    const init = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("TOKEN")}`
+        },
+        body: JSON.stringify(game)
+    }
+
+    const response = await fetch(`${baseUrl}/create`, init);
     if (response.status === 201) {
         return response.json();
     } else if (response.status === 400) {
@@ -52,7 +76,7 @@ export async function updateGame(game) {
         headers: {
             "Content-Type": "application/json",
             "Accept": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem("BG_TOKEN")}`
+            "Authorization": `Bearer ${localStorage.getItem("TOKEN")}`
         },
         body: JSON.stringify(game)
     };
@@ -70,7 +94,7 @@ export async function updateGame(game) {
 
 export async function deleteGameById(id) {
     const init = { method: "DELETE", headers: { 
-        "Authorization": `Bearer ${localStorage.getItem("BG_TOKEN")}` 
+        "Authorization": `Bearer ${localStorage.getItem("TOKEN")}` 
     } };
     const response = await fetch(`${baseUrl}/${id}`, init);
     if (response.status === 204) {
