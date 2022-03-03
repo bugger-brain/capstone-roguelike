@@ -28,7 +28,6 @@ public class Hero {
 
 
     @Column(name="game_id")
-
     private int gameId;
 
 }
