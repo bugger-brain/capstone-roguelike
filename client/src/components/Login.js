@@ -2,6 +2,8 @@ import { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../contexts/AuthContext";
 import { findPlayerByUsername } from "../services/player-api";
+import { login } from '../services/auth-api';
+
 
 
 function Login() {
@@ -33,14 +35,14 @@ function Login() {
 
     
 
-    function login(candidate) {
-        findPlayerByUsername(candidate.username)
-            .then(player => {
-                localStorage.setItem("player", JSON.stringify(player));
-                navigate("/dashboard");
-            })
-            .catch(() => setHasError(true));
-    }
+    // function login(candidate) {
+    //     findPlayerByUsername(candidate.username)
+    //         .then(player => {
+    //             localStorage.setItem("player", JSON.stringify(player));
+    //             navigate("/dashboard");
+    //         })
+    //         .catch(() => setHasError(true));
+    // }
 
     return (
         <div>

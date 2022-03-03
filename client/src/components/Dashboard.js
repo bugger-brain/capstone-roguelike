@@ -31,7 +31,7 @@ function Dashboard() {
                .then(json => setGame(json))
                .catch(console.error)
         
-    localStorage.setItem("game", JSON.stringify(game));
+        localStorage.setItem("game", JSON.stringify(game));
     }
 
 
@@ -45,12 +45,6 @@ function Dashboard() {
         <div>
             <div>
                 <br></br>
-                <div>
-                    {/* <center>
-                        <button type="button" className="btn p-3 btn-lrg btn-danger">
-                            Edit Profile
-                        </button> </center> */}
-                </div>
                 <div>
                     <center>
                         <button type="button" className="btn btn-lrg btn-info" onClick={()=> {CreateNewGame()}} >
