@@ -37,8 +37,6 @@ function Dashboard() {
     }
 
 
-
-
    
     function CreateNewGame() { 
     setWaiting(true);  
@@ -66,7 +64,9 @@ function Dashboard() {
 
     function displayGames() {
         // display default if games == null
-      
+        if(games.length == 0){
+
+        }
         return games.map(g => (
             <GameLoadCard game={g} />
         ));

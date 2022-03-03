@@ -3,19 +3,21 @@ import { saveGame} from "../services/game-api";
 import "./Play.css";
 import { putTile } from "../services/tile-api";
 import { updateHero } from "../services/hero-api";
+import { useNavigate } from "react-router-dom";
+
 function Play() {
 
     const mapSize = 15;
     const gameSize = 1;
 
     const [game, setGame] = useState(JSON.parse(localStorage.getItem("game")));
-
+    const navigate = useNavigate();
     const maps = game.maps;
     const hero = game.hero;
     let mapHeroIsOn = loadMapHeroIsOn(game.hero.tile);
 
     const [heroState, setHeroState] = useState(hero);
-
+    const[waiting,setWaiting] = useState(false);
     useEffect(() => {
         mapHeroIsOn = loadMapHeroIsOn(hero.tile);
         document.addEventListener('keydown', onkeydown);
@@ -27,8 +29,10 @@ function Play() {
     }, [heroState]);
 
     function saveCurrentGame(game) {
-            // saveGame(game)
-            //     .catch(console.error)  //don't know if this works yet
+            saveGame(game)
+                .then(() => navigate("/dashboard"))
+                .catch(console.error)
+           
         
     }
 
@@ -356,7 +360,7 @@ function Play() {
             <div id="grid"></div>
             <div>
                 <center>
-                    <button type="button" className="btn w-25 btn-success" onClick={() => saveCurrentGame(game)}>Save Game Dont use this yet</button>
+                    <button type="button" className="btn w-25 btn-success" disabled ={waiting} onClick={() => saveCurrentGame(game)}>Save Game Dont use this yet</button>
                 </center>
             </div>
         </div>
