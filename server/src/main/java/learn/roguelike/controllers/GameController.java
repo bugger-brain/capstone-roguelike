@@ -111,7 +111,29 @@ public class GameController {
                 return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
         }
     }
+    @PutMapping("/save/{gameId}")
+    public ResponseEntity<Object> putGame(@PathVariable int gameId,
+                                      @RequestBody @Valid Game game,
+                                      BindingResult bindingResult) {
 
+        if (game == null || game.getGameId() != gameId) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        if (bindingResult.hasErrors()) {
+            return new ResponseEntity<Object>(makeResult(bindingResult), HttpStatus.BAD_REQUEST);
+        }
+
+        Result<Void> result = service.saveGame(game);
+        switch (result.getType()) {
+            case SUCCESS:
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            case NOT_FOUND:
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            default:
+                return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+        }
+    }
     @DeleteMapping("/{gameId}")
     public ResponseEntity<Void> delete(@PathVariable int gameId) {
         boolean success = service.deleteById(gameId);

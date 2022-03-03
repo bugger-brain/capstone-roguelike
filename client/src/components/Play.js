@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
-import { updateGame} from "../services/game-api";
+import { saveGame} from "../services/game-api";
 import "./Play.css";
-import { saveGame } from "../services/game-api";
-
-
+import { putTile } from "../services/tile-api";
+import { updateHero } from "../services/hero-api";
 function Play() {
 
     const mapSize = 15;
@@ -28,9 +27,14 @@ function Play() {
     }, [heroState]);
 
 
-    function saveGame(game) {
-        updateGame(game);
+    function saveCurrentGame(game) {
+            saveGame(game)
+                .catch(console.error)
+        
     }
+
+
+
     function loadMapHeroIsOn(heroTile) {
         let heroTileId = heroTile.tileId;
         for (let i = 0; i < maps.length; i++) {
@@ -361,7 +365,7 @@ function Play() {
             <div id="grid"></div>
             <div>
                 <center>
-                    <button type="button" className="btn w-25 btn-success" onClick={() => saveGame(game)}>Save Game Dont use this yet</button>
+                    <button type="button" className="btn w-25 btn-success" onClick={() => saveCurrentGame(game)}>Save Game Dont use this yet</button>
                 </center>
             </div>
         </div>

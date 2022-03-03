@@ -34,9 +34,14 @@ Authorization: Bearer {{jwt}}
     "blueprint": false
 
 }
+
+
 //getting this error
 //JWT validity cannot be asserted and should not be trusted.
 
+###
+GET {{url}}/42 HTTP/1.1
+Authorization: Bearer {{jwt}}
 
 ###
 PUT {{url}}/edit/4 HTTP/1.1
