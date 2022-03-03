@@ -42,7 +42,6 @@ public class GameService {
         return repository.findAll();
     }
 
-<<<<<<< HEAD
 
 
     public Game findById(int gameId){
@@ -52,16 +51,12 @@ public class GameService {
 
     }
 
-    public List<Game> findGamesByPlayerId(int playerId){
-        List<Game> games=  repository.findGamesByPlayerId(playerId);
-        for(Game g: games){
+    public List<Game> findGamesByPlayerId(int playerId) {
+        List<Game> games = repository.findGamesByPlayerId(playerId);
+        for (Game g : games) {
             g.setHero(heroRepository.findByGameId(g.getGameId()));
         }
         return games;
-=======
-    public Game findById(int gameId){ return repository.findByGameId(gameId);
->>>>>>> c8f573dc88ba45336adda98ccbc164b79153669d
-
     }
 
     public Result<Game> add(Game game){
