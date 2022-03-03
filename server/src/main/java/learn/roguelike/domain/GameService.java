@@ -117,7 +117,7 @@ public class GameService {
         //generating new heroId, updating w new gameId, Tile
         Hero hero = new Hero();
         hero.setGameId(game.getGameId());
-        hero.setHp(500);
+        hero.setHp(50);
         hero.setLives(3);
         hero.setAir(false);
         hero.setWater(false);

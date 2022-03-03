@@ -12,7 +12,6 @@ function Dashboard() {
     const [games, setGames]=useState(player.games);
     const [waiting, setWaiting] = useState(false)
     
-   
     const [game, setGame] = useState({});
 
     // game to be posted
@@ -25,6 +24,10 @@ function Dashboard() {
     useEffect(()=> {
         fetchGames(); 
     }, []);
+
+    useEffect(() => {
+        playerRankings()
+    } )
    
     function fetchGames() {
         findGamesByPlayerId(player.playerId)
@@ -34,6 +37,33 @@ function Dashboard() {
                     console.log(games);
                 })
             .catch(console.log)
+    }
+
+    const playerRankings = () => {
+        
+        
+        let scores = [];
+        for (let i = 0; i< games.length; i++){
+            scores.push(games[i].score)
+        }
+        
+        scores.sort((a, b) => { return b.score - a.score });
+        let tableHtml = "";
+        for (let row = 0; row < scores.length; row++) {
+            tableHtml += "<tr>";
+            for (let col = 0; col < 2; col++) {
+                if(col == 1 ){
+                    tableHtml +=  `<td id="td${row}_${col}">${scores[row]}</td>`;
+                }else{
+                    tableHtml += `<td id="td${row}_${col}">${row +1}</td>`;
+                }
+            }
+            tableHtml += "</tr>"
+
+        }
+    
+        document.getElementById("playerBoard").innerHTML = tableHtml;
+       
     }
 
 
@@ -86,7 +116,18 @@ function Dashboard() {
                 <div>
                     {displayGames()}
                 </div>
-
+                <center><h3 style={{ color: 'white' }}>My High Scores</h3></center>  
+            <table className="table table-bordered table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">Rank</th>
+                        {/* <th scope="col">Username</th> */}
+                        <th scope="col">Score</th>
+                    </tr>
+                </thead>
+                <tbody id="playerBoard">
+                </tbody>
+            </table>
 
             </div>
         </div>
