@@ -25,7 +25,7 @@ function Register() {
         if (player.passwordHash !== player.confirmPassword) {
             setErr("passwords do not match");
         } else {
-            console.log("here")
+            console.log(player);
             createPlayer(player)
                 .then(() => {
                     navigate("/dashboard");

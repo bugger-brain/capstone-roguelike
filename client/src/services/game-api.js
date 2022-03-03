@@ -89,6 +89,25 @@ export async function updateGame(game) {
     return Promise.reject("Could not save game.");
 }
 
+export async function saveGame(game) {
+    const init = {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("TOKEN")}`
+        },
+        body: JSON.stringify(game)
+    };
+    const response = await fetch(`${baseUrl}/save/${game.gameId}`, init);
+    if (response.status === 204) {
+        return Promise.resolve();
+    } else if (response.status === 403) {
+        return Promise.reject(403);
+    }
+    return Promise.reject("Could not save game.");
+}
+
 
 
 

@@ -22,10 +22,10 @@ public class Player {
     @NotBlank(message="Password is required")
     private String passwordHash;
 
+    private String auth;
+
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "player_id")
     private List<Game> games = new ArrayList<>();
-
-    private String auth;
 
 }
