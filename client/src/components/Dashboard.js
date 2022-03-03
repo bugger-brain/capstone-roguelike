@@ -24,21 +24,14 @@ function Dashboard() {
         isBlueprint: false
     }
 
-<<<<<<< HEAD
-   
-=======
->>>>>>> cfcdf3a41269e092c3a2997ca8a3c35b8ecd9b3b
 
     function CreateNewGame() {      //consider separating out POSTS for each Model into other functions
           
         createGame(newGame)
                .then(json => setGame(json))
                .catch(console.error)
-<<<<<<< HEAD
         
     localStorage.setItem("game", JSON.stringify(game));
-=======
->>>>>>> cfcdf3a41269e092c3a2997ca8a3c35b8ecd9b3b
     }
 
 
