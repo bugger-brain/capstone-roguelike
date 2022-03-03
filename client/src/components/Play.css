@@ -95,6 +95,7 @@
   border-style: solid;
   background-color: #194f11
 }
+
 .elementAir {
   width: 25px;
   height: 25px;
@@ -103,6 +104,7 @@
   border-style: solid;
   background-color: #feebee
 }
+
 .elementFire {
   width: 25px;
   height: 25px;
@@ -111,6 +113,25 @@
   border-style: solid;
   background-color: #ff9901
 }
+
+.gameObjectiveAlert {
+  width: 25px;
+  height: 25px;
+  border-width: 0px;
+  border-color: black;
+  border-style: solid;
+  background-color: #6db00a
+}
+
+.finishTheGame {
+  width: 25px;
+  height: 25px;
+  border-width: 0px;
+  border-color: black;
+  border-style: solid;
+  background-color: #b90ec8
+}
+
 
 .blank {
   width: 25px;
