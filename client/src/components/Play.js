@@ -4,7 +4,6 @@ import { saveGame} from "../services/game-api";
 import "./Play.css";
 import { putTile } from "../services/tile-api";
 import { updateHero } from "../services/hero-api";
-import { useNavigate } from "react-router-dom";
 
 function Play() {
 
