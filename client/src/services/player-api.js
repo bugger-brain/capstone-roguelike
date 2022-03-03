@@ -33,6 +33,14 @@ export async function createPlayer(player) {
         body: JSON.stringify(player)
     }
 
+    const response = await fetch(`${baseUrl}/create`, init);
+    if (response.status === 201) {
+        return Promise.resolve();
+    } else if (response.status === 400) {
+        const messages = await response.json();
+        return Promise.reject({ status: response.status, messages });
+    }
 
+    return Promise.reject({ status: response.status });
 
 }
