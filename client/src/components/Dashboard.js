@@ -11,6 +11,7 @@ function Dashboard() {
     const [games, setGames] = useState(player.games);
     // const games = player.games;
 
+    const [waiting, setWaiting] = useState(false)
     const [hasGames, setHasGames] = useState(false);
 
 
@@ -28,9 +29,22 @@ function Dashboard() {
             .catch(console.error)                
     }
 
-    function CreateNewGame() {
-        createGame(newGame)             //none of this works 
-            .then(json => setGame(json))
+   
+    function CreateNewGame() { 
+    setWaiting(true);  
+    
+        createGame(newGame)             
+            .then(json => {
+                setGame(json); //this does nothing
+                fetchGames();
+            })
+            .then(()=> {
+                let currentGame = games[games.length-1];
+                console.log(currentGame);
+                //console.log(game);
+                localStorage.setItem("game", JSON.stringify(currentGame));
+                setWaiting(false);
+        })
             .catch(console.error)
         // console.log(game);
         let newGameId = game.gameId;  //basically we need to grab the id from the game we generated in order to get the rest of the data

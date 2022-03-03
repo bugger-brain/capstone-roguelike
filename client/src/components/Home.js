@@ -3,7 +3,7 @@ import Login from "./Login";
 import './Home.css';
 import Register from './Register';
 import { useState } from "react";
-
+import { findGameById} from "../services/game-api";
 
 function Home() {
 
@@ -17,12 +17,25 @@ function Home() {
     function cancelRegister() {
         setHitRegisterButton(false);
     }
+    function findDefaultGame() {
+        findGameById(1)
+            .then(json => 
+                {
+                    localStorage.setItem("game", JSON.stringify(json));
+                })
+            .then(()=>{
+                navigate("/play");
+            })
+            .catch(console.log)
+    }
 
     function confirmAction() {
         let confirmAction = window.confirm("Greetings! As a guest, you will not be able to save your game or register your high score to the leaderboard. Are you sure you want to continue?");
         if (confirmAction) {
-            navigate("/play");
+            findDefaultGame();
+            
         } else {
+
         }
     }
 

@@ -81,7 +81,6 @@ export async function createGame(game) {
     const response = await fetch(`${baseUrl}/create`, init);
     if (response.status === 201) {
         let j = response.json();
-        debugger;
         return j;
     } else if (response.status === 400) {
         const messages = await response.json();
