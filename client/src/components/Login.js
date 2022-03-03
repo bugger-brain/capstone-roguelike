@@ -35,14 +35,15 @@ function Login() {
 
     
 
-    // function login(candidate) {
-    //     findPlayerByUsername(candidate.username)
-    //         .then(player => {
-    //             localStorage.setItem("player", JSON.stringify(player));
-    //             navigate("/dashboard");
-    //         })
-    //         .catch(() => setHasError(true));
-    // }
+    function login(candidate) {
+        findPlayerByUsername(candidate.username)
+            .then(player => {
+                localStorage.setItem("player", JSON.stringify(player));
+                navigate("/dashboard");
+            })
+            .catch(() => setHasError(true));
+
+    }
 
     return (
         <div>

@@ -25,16 +25,6 @@ function Dashboard() {
             .catch(console.error)
     }
 
-<<<<<<< HEAD
-
-    function CreateNewGame() {      //consider separating out POSTS for each Model into other functions
-          
-        createGame(newGame)
-               .then(json => setGame(json))
-               .catch(console.error)
-        
-        localStorage.setItem("game", JSON.stringify(game));
-=======
     function CreateNewGame() {      
         createGame(newGame)             //none of this works 
             .then(json => setGame(json))
@@ -44,7 +34,6 @@ function Dashboard() {
     localStorage.setItem("game", JSON.stringify(game));
         //navigate("/play");
         //getting this error: JWT strings must contain exactly 2 period characters. Found: 0
->>>>>>> da9780cc8692e8da6ee716fe1430719f4f1b945b
     }
 
 

@@ -42,14 +42,8 @@ public class GameService {
         return repository.findAll();
     }
 
-
-<<<<<<< HEAD
-    public Game findById(int gameId){ return repository.findByGameId(gameId);
-=======
-
     public Game findById(int gameId){ return repository.findByGameId(gameId);
 
->>>>>>> da9780cc8692e8da6ee716fe1430719f4f1b945b
     }
 
     public Result<Game> add(Game game){
