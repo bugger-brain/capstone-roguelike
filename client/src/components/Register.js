@@ -27,7 +27,10 @@ function Register() {
         } else {
             console.log(player);
             createPlayer(player)
-                .then(() => navigate("/login"))
+                .then(() => {
+                    navigate("/dashboard");
+                    localStorage.setItem("player", JSON.stringify(player));
+                })
                 .catch(err => {
                     if (err.status === 400) {
                         setErr(err.messages[0]);

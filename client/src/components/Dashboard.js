@@ -43,7 +43,8 @@ function Dashboard() {
     }
 
     function displayGames() {
-        // console.log(games);
+        // display default if games == null
+      
         return games.map(g => (
             <GameLoadCard game={g} />
         ));
