@@ -26,14 +26,11 @@ function Play() {
         displayMapTiles();
     }, [heroState]);
 
-
     function saveCurrentGame(game) {
             // saveGame(game)
             //     .catch(console.error)  //don't know if this works yet
         
     }
-
-
 
     function loadMapHeroIsOn(heroTile) {
         let heroTileId = heroTile.tileId;
@@ -215,7 +212,7 @@ function Play() {
         let nextX = tileCords.x;
         let nextY = tileCords.y;
         let mapEdge = hitWhichEdgeOf(mapSize, nextX, nextY);
-        console.log(mapHeroIsOn);
+        // console.log(mapHeroIsOn);
         // debugger;
         if (mapEdge === '') {
             let nextTile = findTileOnMapByXY(mapHeroIsOn, nextX, nextY);
@@ -296,10 +293,6 @@ function Play() {
         }
     }
 
-    
-
-
-
     function nextCords(direction, obj) {
         let nextX = obj.x;
         let nextY = obj.y;
@@ -317,13 +310,11 @@ function Play() {
                 nextX++;
                 break;
         }
-
         let rtn = {
             x: nextX,
             y: nextY
         };
         return rtn;
-
     }
 
     function hitWhichEdgeOf(size, x, y) {
@@ -369,9 +360,6 @@ function Play() {
                 </center>
             </div>
         </div>
-
-
-
     );
 }
 

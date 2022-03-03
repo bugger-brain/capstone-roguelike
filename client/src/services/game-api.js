@@ -36,7 +36,9 @@ export async function findGameById(id) {
     } };
     const response = await fetch(`${baseUrl}/${id}`, init);
     if (response.status === 200){
-        return response.json();
+        let j = response.json();
+        debugger;
+        return j;
     } else if (response.status === 404) {
         return Promise.reject(404);
     }
@@ -78,7 +80,9 @@ export async function createGame(game) {
 
     const response = await fetch(`${baseUrl}/create`, init);
     if (response.status === 201) {
-        return response.json();
+        let j = response.json();
+        debugger;
+        return j;
     } else if (response.status === 400) {
         const messages = await response.json();
         return Promise.reject({ status: response.status, messages });

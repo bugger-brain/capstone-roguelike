@@ -42,6 +42,7 @@ public class GameService {
         return repository.findAll();
     }
 
+<<<<<<< HEAD
 
 
     public Game findById(int gameId){
@@ -57,6 +58,9 @@ public class GameService {
             g.setHero(heroRepository.findByGameId(g.getGameId()));
         }
         return games;
+=======
+    public Game findById(int gameId){ return repository.findByGameId(gameId);
+>>>>>>> c8f573dc88ba45336adda98ccbc164b79153669d
 
     }
 
@@ -110,9 +114,7 @@ public class GameService {
                 tile = tileRepository.save(tile);
                 if(i == 0 && k ==0){
                     heroTile = tile;
-
                 }
-
             }
         }
 

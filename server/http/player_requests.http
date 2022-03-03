@@ -35,7 +35,7 @@ Authorization: Bearer {{jwt}}
 }
 
 ###
-DELETE {{url}}/test HTTP/1.1
+DELETE {{url}}/abc HTTP/1.1
 
 ###
 POST {{authurl}}/authenticate HTTP/1.1

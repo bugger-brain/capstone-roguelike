@@ -12,16 +12,19 @@ function Home() {
 
     function onClickRegister() {
         setHitRegisterButton(true);
-        // navigate("/register");
+    }
+
+    function cancelRegister() {
+        setHitRegisterButton(false);
     }
 
     function confirmAction() {
         let confirmAction = window.confirm("Greetings! As a guest, you will not be able to save your game or register your high score to the leaderboard. Are you sure you want to continue?");
         if (confirmAction) {
-          navigate("/play");
+            navigate("/play");
         } else {
         }
-      }
+    }
 
     return (
         <body className="body">
@@ -36,10 +39,15 @@ function Home() {
                 <div id="login">
                     <center>
                         {hitRegisterButton ? <Register /> : <Login />}
-                        
+
                         <div id="accountHelp" className="form-text">No account? No problem! Click below to join now or play as a guest.</div>
                         <br></br>
                         <button type="create" onClick={onClickRegister} className="btn btn-sm btn-danger">Create Account</button> <button type="create" onClick={confirmAction} className="btn btn-sm btn-success">Play As Guest</button>
+                        {hitRegisterButton &&
+                            <div>
+                                <button type="button" onClick={cancelRegister} className="btn btn-sm btn-secondary">Cancel</button>
+                            </div>
+                        }
                     </center>
                 </div>
                 <br></br>

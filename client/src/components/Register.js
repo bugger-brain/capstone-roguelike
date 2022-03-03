@@ -25,19 +25,20 @@ function Register() {
         if (player.passwordHash !== player.confirmPassword) {
             setErr("passwords do not match");
         } else {
-            console.log("here")
             createPlayer(player)
-                .then(() => navigate("/login"))
+                .then(() => {
+                    localStorage.setItem("player", JSON.stringify(player));
+                    navigate("/dashboard");
+                })
                 .catch(err => {
                     if (err.status === 400) {
                         setErr(err.messages[0]);
                     } else {
-                        navigate("/register", err.toString());
+                        navigate("/");
                     }
                 });
         }
     }
-
 
     return (
         <div>
@@ -63,7 +64,7 @@ function Register() {
                     {err && <div className="alert alert-danger">{err}</div>}
                     <div className="mb-2">
                         <button type="submit" className="btn btn-primary me-1">Submit</button>
-                        <Link to="/login" className="btn btn-secondary">Cancel</Link>
+                        {/* <Link to="/login" className="btn btn-secondary">Cancel</Link> */}
                     </div>
                 </form>
             </center>

@@ -64,8 +64,9 @@ function Dashboard() {
        
     }
 
-
     function displayGames() {
+        // display default if games == null
+      
         return games.map(g => (
             <GameLoadCard game={g} />
         ));
@@ -75,12 +76,6 @@ function Dashboard() {
         <div>
             <div>
                 <br></br>
-                <div>
-                    {/* <center>
-                        <button type="button" className="btn p-3 btn-lrg btn-danger">
-                            Edit Profile
-                        </button> </center> */}
-                </div>
                 <div>
                     <center>
                         <button type="button" className="btn btn-lrg btn-info" disabled = {waiting} onClick={()=> {CreateNewGame()}} >
