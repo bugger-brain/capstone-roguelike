@@ -25,17 +25,16 @@ function Register() {
         if (player.passwordHash !== player.confirmPassword) {
             setErr("passwords do not match");
         } else {
-            console.log(player);
             createPlayer(player)
                 .then(() => {
-                    navigate("/dashboard");
                     localStorage.setItem("player", JSON.stringify(player));
+                    navigate("/dashboard");
                 })
                 .catch(err => {
                     if (err.status === 400) {
                         setErr(err.messages[0]);
                     } else {
-                        navigate("/register", err.toString());
+                        navigate("/");
                     }
                 });
         }

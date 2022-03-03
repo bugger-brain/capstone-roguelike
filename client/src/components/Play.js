@@ -4,6 +4,8 @@ import { saveGame} from "../services/game-api";
 import "./Play.css";
 import { putTile } from "../services/tile-api";
 import { updateHero } from "../services/hero-api";
+import { useNavigate } from "react-router-dom";
+
 function Play() {
 
     const mapSize = 15;
@@ -21,8 +23,7 @@ function Play() {
     let mapHeroIsOn = loadMapHeroIsOn(game.hero.tile);
 
     const [heroState, setHeroState] = useState(hero);
-
-    // load initial data
+    const[waiting,setWaiting] = useState(false);
     useEffect(() => {
         setGameAlert(false);
         mapHeroIsOn = loadMapHeroIsOn(hero.tile);
@@ -35,8 +36,14 @@ function Play() {
     }, [heroState]);
 
     function saveCurrentGame(game) {
+    if(!localStorage.getItem("player")){
+        alert("Sorry this feature is for members only :(")
+    }else{
             saveGame(game)
+                .then(() => navigate("/dashboard"))
                 .catch(console.error)
+    } 
+        
     }
 
     function loadMapHeroIsOn(heroTile) {
@@ -429,7 +436,7 @@ function Play() {
             <div id="grid"></div>
             <div>
                 <center>
-                    <button type="button" className="btn w-25 btn-success" onClick={() => saveCurrentGame(game)}>Save Game Dont use this yet</button>
+                    <button type="button" className="btn w-25 btn-success" disabled ={waiting} onClick={() => saveCurrentGame(game)}>Save Game</button>
                 </center>
             </div>
         </div>

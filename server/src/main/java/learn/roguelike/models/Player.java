@@ -22,7 +22,7 @@ public class Player {
     @NotBlank(message="Password is required")
     private String passwordHash;
 
-    private String auth;
+    private String auth = "USER";
 
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "player_id")

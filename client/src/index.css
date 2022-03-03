@@ -20,8 +20,8 @@ code {
 }
 
 form {
-  width: 500px;
-  height: 250px;
+  width: 400px;
+  height: 270px;
   border-left: 5px #1c1c1c;
   border-right: 5px #1c1c1c;
   border-top: 5px #1c1c1c;
@@ -52,7 +52,7 @@ form {
 
 form.register-form {
   width: 500px;
-  height: 500px;
+  height: 430px;
   border-left: 5px #1c1c1c;
   border-right: 5px #1c1c1c;
   border-top: 5px #1c1c1c;
@@ -64,4 +64,8 @@ form.register-form {
 
 .rules-text {
   color: ivory;
+}
+
+.text {
+  color: rgb(216, 70, 70);
 }
