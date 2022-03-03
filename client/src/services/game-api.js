@@ -13,7 +13,6 @@ export async function findAllGames() {
     return Promise.reject("Could not fetch games. ");
 }
 
-
 export async function findGameById(id) {
     const init = { method: "POST", headers: { 
         "Authorization": `Bearer ${localStorage.getItem("TOKEN")}` 

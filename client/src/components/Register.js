@@ -7,7 +7,7 @@ function Register() {
 
     const [player, setPlayer] = useState({
         username: "",
-        password: "",
+        passwordHash: "",
         confirmPassword: ""
     });
     const [err, setErr] = useState();
@@ -22,9 +22,10 @@ function Register() {
 
     const onSubmit = (evt) => {
         evt.preventDefault();
-        if (player.password !== player.confirmPassword) {
+        if (player.passwordHash !== player.confirmPassword) {
             setErr("passwords do not match");
         } else {
+            console.log("here")
             createPlayer(player)
                 .then(() => navigate("/login"))
                 .catch(err => {
@@ -50,8 +51,8 @@ function Register() {
                     </div>
                     <div className="w-25 p-3">
                         <label for="registerPassword" className="form-label" className="register-text">Password</label>
-                        <input type="password" name="password" className="form-control" id="registerPassword" required
-                            value={player.password} onChange={onChange} />
+                        <input type="password" name="passwordHash" className="form-control" id="registerPassword" required
+                            value={player.passwordHash} onChange={onChange} />
                     </div>
                     <div className="w-25 p-3">
                         <label for="registerRepassword" className="form-label" className="register-text">Confirm Password</label>

@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext  } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import GameLoadCard from "./GameLoadCard";
 import { createGame, findGameById } from "../services/game-api";
@@ -9,25 +9,36 @@ function Dashboard() {
     const navigate = useNavigate();
     const player = JSON.parse(localStorage.getItem("player"));
     const games = player.games;
+
+    //game fetched from blueprint
     const [defaultGame, setDefaultGame] = useState({
         score: 0,
         blueprint: true
     });
+
     const [game, setGame] = useState({});
-    const newGame ={
+
+    // game to be posted
+    const newGame = {
         score: 0,
         isBlueprint: false
     }
 
+<<<<<<< HEAD
    
+=======
+>>>>>>> cfcdf3a41269e092c3a2997ca8a3c35b8ecd9b3b
 
     function CreateNewGame() {      //consider separating out POSTS for each Model into other functions
           
         createGame(newGame)
                .then(json => setGame(json))
                .catch(console.error)
+<<<<<<< HEAD
         
     localStorage.setItem("game", JSON.stringify(game));
+=======
+>>>>>>> cfcdf3a41269e092c3a2997ca8a3c35b8ecd9b3b
     }
 
 

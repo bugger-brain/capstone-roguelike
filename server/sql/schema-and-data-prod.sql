@@ -96,5 +96,8 @@ insert into hero values
 -- 	(1, 2, 20);
     
 
+select * from game;
 select * from tile;
+select * from map;
 select * from hero;
+select * from player;
