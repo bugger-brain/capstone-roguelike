@@ -45,6 +45,7 @@ function Home() {
                         <button type="create" onClick={onClickRegister} className="btn btn-sm btn-danger">Create Account</button> <button type="create" onClick={confirmAction} className="btn btn-sm btn-success">Play As Guest</button>
                         {hitRegisterButton &&
                             <div>
+                                <br></br>
                                 <button type="button" onClick={cancelRegister} className="btn btn-sm btn-secondary">Cancel</button>
                             </div>
                         }
