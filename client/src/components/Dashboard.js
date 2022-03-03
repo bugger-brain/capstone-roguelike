@@ -108,6 +108,8 @@ function Dashboard() {
     }
 
     function displayGames() {
+        // display default if games == null
+      
         return games.map(g => (
             <GameLoadCard game={g} />
         ));

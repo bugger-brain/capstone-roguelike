@@ -26,7 +26,10 @@ function Register() {
             setErr("passwords do not match");
         } else {
             createPlayer(player)
-                .then(() => navigate("/login"))
+                .then(() => {
+                    navigate("/dashboard");
+                    localStorage.setItem("player", JSON.stringify(player));
+                })
                 .catch(err => {
                     if (err.status === 400) {
                         setErr(err.messages[0]);
@@ -62,7 +65,7 @@ function Register() {
                     {err && <div className="alert alert-danger">{err}</div>}
                     <div className="mb-2">
                         <button type="submit" className="btn btn-primary me-1">Submit</button>
-                        <Link to="/login" className="btn btn-secondary">Cancel</Link>
+                        <Link to="/" className="btn btn-secondary">Cancel</Link>
                     </div>
                 </form>
             </center>
