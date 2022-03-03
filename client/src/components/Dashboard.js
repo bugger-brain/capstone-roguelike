@@ -1,10 +1,8 @@
 import { useState, useEffect, useContext  } from "react";
 import { useNavigate } from "react-router-dom";
 import GameLoadCard from "./GameLoadCard";
-import { addGame, findGameById } from "../services/game-api";
-import { addMap } from "../services/map-api";
-import { addTile } from "../services/tile-api";
-import { addHero } from "../services/hero-api";
+import { createGame, findGameById } from "../services/game-api";
+
 
 function Dashboard() {
 
@@ -22,22 +20,14 @@ function Dashboard() {
     }
 
    
-   
-
-    
-
-   
-
 
     function CreateNewGame() {      //consider separating out POSTS for each Model into other functions
-            addGame(newGame)
-               .then(json => setGame(json)) //this doesn't load right away
+          
+        createGame(newGame)
+               .then(json => setGame(json))
                .catch(console.error)
         
-        
-       
-        
-      
+    localStorage.setItem("game", JSON.stringify(game));
     }
 
 

@@ -51,7 +51,6 @@ public class GameService {
     }
     public Result<Game> createNewGame(Game game){
         Result<Game> result = validate(game);
-        //Result<Map> mapResult; should add validation eventually
         Game defaultGame = findById(1);
         if(!result.isSuccess()){
             return null;
@@ -67,7 +66,7 @@ public class GameService {
                 map.setX(defaultMaps.get(i).getX());
                 map.setY(defaultMaps.get(i).getY());
                 map = mapRepository.save(map);
-                //result.setPayload((T) map); //is this going to mess stuff up
+                System.out.println(map.getMapId());
             }
        // }
         Tile tile = new Tile();
@@ -79,7 +78,7 @@ public class GameService {
                 tile.setX(temp.getX());
                 tile.setY(temp.getY());
                 tile = tileRepository.save(tile);
-                //result.setPayload((T) tile);
+                System.out.print(tile.getTileId());
             }
         }
 
@@ -93,7 +92,6 @@ public class GameService {
         hero.setEarth(false);
         hero.setFire(false);
         hero.setTile(game.getMaps().get(0).getTiles().get(0));
-        //result.setPayload((T) hero);
 
         return result;
 

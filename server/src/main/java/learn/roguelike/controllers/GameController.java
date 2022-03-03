@@ -76,7 +76,7 @@ public class GameController {
         Result<Game> result = service.createNewGame(game);
         if (result.isSuccess()) {
 
-            String url = String.format("http://%s:%s/api/game/create/%s",
+            String url = String.format("http://%s:%s/api/game/%s",
                     request.getServerName(),
                     request.getServerPort(),
                     game.getGameId());
