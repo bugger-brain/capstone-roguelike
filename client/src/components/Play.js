@@ -29,10 +29,13 @@ function Play() {
     }, [heroState]);
 
     function saveCurrentGame(game) {
+    if(!localStorage.getItem("player")){
+        alert("Sorry this feature is for members only :(")
+    }else{
             saveGame(game)
                 .then(() => navigate("/dashboard"))
                 .catch(console.error)
-           
+    } 
         
     }
 
@@ -360,7 +363,7 @@ function Play() {
             <div id="grid"></div>
             <div>
                 <center>
-                    <button type="button" className="btn w-25 btn-success" disabled ={waiting} onClick={() => saveCurrentGame(game)}>Save Game Dont use this yet</button>
+                    <button type="button" className="btn w-25 btn-success" disabled ={waiting} onClick={() => saveCurrentGame(game)}>Save Game</button>
                 </center>
             </div>
         </div>
