@@ -49,7 +49,7 @@ async function updateHero(hero) {
         headers: {
             "Content-Type": "application/json",
             "Accept": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem("BG_TOKEN")}`
+            "Authorization": `Bearer ${localStorage.getItem("TOKEN")}`
         },
         body: JSON.stringify(hero)
     };
@@ -64,7 +64,7 @@ async function updateHero(hero) {
 
 export async function deleteById(id) {
     const init = { method: "DELETE", headers: { 
-        "Authorization": `Bearer ${localStorage.getItem("BG_TOKEN")}` 
+        "Authorization": `Bearer ${localStorage.getItem("TOKEN")}` 
     
     } };
     const response = await fetch(`${baseUrl}/${id}`, init);

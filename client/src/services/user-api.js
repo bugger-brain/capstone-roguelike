@@ -27,7 +27,7 @@ export async function changePassword(password) {
         headers: {
             "Content-Type": "application/json",
             "Accept": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem("BG_TOKEN")}`
+            "Authorization": `Bearer ${localStorage.getItem("TOKEN")}`
         },
         body: JSON.stringify({ password })
     }
@@ -48,7 +48,7 @@ export async function findUsers() {
         method: "GET",
         headers: {
             "Accept": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem("BG_TOKEN")}`
+            "Authorization": `Bearer ${localStorage.getItem("TOKEN")}`
         }
     }
     const response = await fetch(`${baseUrl}/user`, init);
@@ -64,7 +64,7 @@ export async function findUserById(id) {
         method: "GET",
         headers: {
             "Accept": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem("BG_TOKEN")}`
+            "Authorization": `Bearer ${localStorage.getItem("TOKEN")}`
         }
     }
     const response = await fetch(`${baseUrl}/user/${id}`, init);
@@ -80,7 +80,7 @@ export async function findRoles() {
         method: "GET",
         headers: {
             "Accept": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem("BG_TOKEN")}`
+            "Authorization": `Bearer ${localStorage.getItem("TOKEN")}`
         }
     }
     const response = await fetch(`${baseUrl}/user/role`, init);
@@ -98,7 +98,7 @@ export async function updateUser(user) {
         headers: {
             "Content-Type": "application/json",
             "Accept": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem("BG_TOKEN")}`
+            "Authorization": `Bearer ${localStorage.getItem("TOKEN")}`
         },
         body: JSON.stringify(user)
     }

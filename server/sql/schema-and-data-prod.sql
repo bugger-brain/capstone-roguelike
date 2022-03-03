@@ -5,7 +5,8 @@ use roguelike;
 create table player(
 	player_id int primary key auto_increment,
     username varchar(255) not null unique,
-    password_hash varchar(255) not null
+    password_hash varchar(255) not null,
+    auth varchar(50) not null 
 );
 
 create table game(
@@ -67,40 +68,13 @@ create table monster(
 		foreign key (tile_id)
         references tile(tile_id)
 );
-
-
-create table app_role (
-    app_role_id int primary key auto_increment,
-    `name` varchar(50) not null unique
-);
-
-create table player_role (
-    player_id int not null,
-    app_role_id int not null,
-    constraint pk_player_role
-        primary key (player_id, app_role_id),
-    constraint fk_player_role_user_id
-        foreign key (player_id)
-         references player(player_id),
-	constraint fk_player_role_role_id
-         foreign key (app_role_id)
-         references app_role(app_role_id)
-);
-
-insert into app_role (`name`) values
-    ('USER'),
-    ('ADMIN');
     
 -- qwe123
 insert into player values
-	(1, 'pagoto', '$2a$10$3hxoSGXtjbIoMKcriQmSNuGTZr3X8qyir./R3uzw3jbWn6ZMofKC2'), 
-    (2, 'steph', '$2a$10$3hxoSGXtjbIoMKcriQmSNuGTZr3X8qyir./R3uzw3jbWn6ZMofKC2'),
-    (3, 'shred', '$2a$10$3hxoSGXtjbIoMKcriQmSNuGTZr3X8qyir./R3uzw3jbWn6ZMofKC2');
-    
-insert into player_role (player_id, app_role_id) values
-	(1, 2),
-    (2, 1),
-    (3, 1);
+	(1, 'pagoto', '$2a$10$3hxoSGXtjbIoMKcriQmSNuGTZr3X8qyir./R3uzw3jbWn6ZMofKC2', 'ADMIN'), 
+    (2, 'steph', '$2a$10$3hxoSGXtjbIoMKcriQmSNuGTZr3X8qyir./R3uzw3jbWn6ZMofKC2', 'ADMIN'),
+    (3, 'shred', '$2a$10$3hxoSGXtjbIoMKcriQmSNuGTZr3X8qyir./R3uzw3jbWn6ZMofKC2', 'USER');
+
     
 insert into game values
 	(1, 1, false, 0),
@@ -116,8 +90,8 @@ insert into map values
 
 
 insert into hero values
-	(1, 1, 1, 100, 3, false, false, false, false, 0, 50);
---     
+	(1, 1, 1, 10, 3, false, false, false, false, 0, 50);
+    
 -- insert into monster values
 -- 	(1, 2, 20);
     

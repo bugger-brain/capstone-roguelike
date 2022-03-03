@@ -49,7 +49,7 @@ async function updateMap(map) {
         headers: {
             "Content-Type": "application/json",
             "Accept": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem("BG_TOKEN")}`
+            "Authorization": `Bearer ${localStorage.getItem("TOKEN")}`
         },
         body: JSON.stringify(map)
     };
@@ -67,7 +67,7 @@ async function updateMap(map) {
 
 export async function deleteById(id) {
     const init = { method: "DELETE", headers: { 
-        "Authorization": `Bearer ${localStorage.getItem("BG_TOKEN")}` 
+        "Authorization": `Bearer ${localStorage.getItem("TOKEN")}` 
     
     } };
     const response = await fetch(`${baseUrl}/${id}`, init);

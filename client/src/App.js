@@ -9,6 +9,7 @@ import Nav from "./components/Nav";
 import LeaderBoard from "./components/LeaderBoard";
 import Register from "./components/Register";
 import { logout, refresh } from "./services/auth-api";
+import Login from "./components/Login";
 import Rules from "./components/Rules";
 
 function App() {
@@ -39,23 +40,24 @@ function App() {
       if (credentials && (authorities.length === 0 || credentials.hasAuthority(...authorities))) {
         return <Component />;
       } else {
-        return <Route path="/login" />;
+        return <Route path="/" />;
       }
     }
     return null;
   };
 
   return (
-    <AuthContext.Provider value={{ auth }}>
+    <AuthContext.Provider value={ auth }>
       <div className="container">
         <BrowserRouter>
           <Nav />
           <Routes>
             <Route path="/" element={<Home />} />
-            {considerRedirect(Dashboard, "USER")}
+            
             <Route path="/dashboard" element={player ? <Dashboard /> : <Home />} />
-
+            <Route path="login" element={<Login />}/>
             <Route path="/play" element={<Play />} />
+               
 
             <Route path="/leaderboard" element={<LeaderBoard />} />
 

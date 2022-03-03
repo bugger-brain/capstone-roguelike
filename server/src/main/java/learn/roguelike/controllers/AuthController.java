@@ -1,6 +1,6 @@
 package learn.roguelike.controllers;
 
-import learn.roguelike.models.AppUser;
+import learn.roguelike.models.Player;
 import learn.roguelike.security.JwtConverter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.http.HttpStatus;
@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 @ConditionalOnWebApplication
@@ -47,8 +46,8 @@ public class AuthController {
             Authentication authentication = authenticationManager.authenticate(authToken);
 
             if (authentication.isAuthenticated()) {
-                AppUser user = (AppUser) authentication.getPrincipal();
-                String jwtToken = converter.getTokenFromUser(user);
+                Player player = (Player) authentication.getPrincipal();
+                String jwtToken = converter.getTokenFromUser(player);
 
                 HashMap<String, Object> map = new HashMap<>();
                 map.put("jwt", jwtToken);
@@ -64,9 +63,9 @@ public class AuthController {
     }
 
     @PostMapping("/refresh_token")
-    public ResponseEntity<Object> refresh(@AuthenticationPrincipal AppUser user,
+    public ResponseEntity<Object> refresh(@AuthenticationPrincipal Player player,
                                           HttpServletResponse response) {
-        String jwtToken = converter.getTokenFromUser(user);
+        String jwtToken = converter.getTokenFromUser(player);
 
         HashMap<String, Object> map = new HashMap<>();
         map.put("jwt", jwtToken);

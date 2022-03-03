@@ -14,6 +14,9 @@ export async function findAllGames() {
 }
 
 export async function findGameById(id) {
+    const init = { method: "POST", headers: { 
+        "Authorization": `Bearer ${localStorage.getItem("TOKEN")}` 
+    } };
     const response = await fetch(`${baseUrl}/${id}`);
     if (response.status === 200){
         return response.json();
@@ -23,13 +26,13 @@ export async function findGameById(id) {
     return Promise.reject("Game not found");
 }
 
-export async function addGame(game) {   //"Authorization": `Bearer ${localStorage.getItem("BG_TOKEN")}`
+export async function addGame(game) {   //"Authorization": `Bearer ${localStorage.getItem("TOKEN")}`
     const init = {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
             "Accept": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem("BG_TOKEN")}`
+            "Authorization": `Bearer ${localStorage.getItem("TOKEN")}`
         },
         body: JSON.stringify(game)
     }
@@ -51,7 +54,7 @@ export async function updateGame(game) {
         headers: {
             "Content-Type": "application/json",
             "Accept": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem("BG_TOKEN")}`
+            "Authorization": `Bearer ${localStorage.getItem("TOKEN")}`
         },
         body: JSON.stringify(game)
     };
@@ -69,7 +72,7 @@ export async function updateGame(game) {
 
 export async function deleteGameById(id) {
     const init = { method: "DELETE", headers: { 
-        "Authorization": `Bearer ${localStorage.getItem("BG_TOKEN")}` 
+        "Authorization": `Bearer ${localStorage.getItem("TOKEN")}` 
     } };
     const response = await fetch(`${baseUrl}/${id}`, init);
     if (response.status === 204) {

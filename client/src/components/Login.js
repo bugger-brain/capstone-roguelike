@@ -16,22 +16,22 @@ function Login() {
 
     const authContext = useContext(AuthContext);
 
-    const onSubmit = event => {
-        event.preventDefault();
-        login(candidate);
-        // event.preventDefault();
-        // login(candidate)
-        //     .then(principal => {
-        //         authContext.login(principal);
-        //         navigate.push("/");
-        //     }).catch(() => setHasError(true));
-    };
-
     const onChange = event => {
         const next = { ...candidate };
         next[event.target.name] = event.target.value;
         setCandidate(next);
     };
+
+    const onSubmit = event => {
+        event.preventDefault();
+        login(candidate)
+            .then(principal => {
+                authContext.login(principal);
+                navigate("/dashboard");
+            }).catch(() => setHasError(true));
+    };
+
+    
 
     function login(candidate) {
         findPlayerByUsername(candidate.username)
@@ -46,6 +46,7 @@ function Login() {
         <div>
             <center>
                 <form onSubmit={onSubmit}>
+                <h4 className='register-text'>Login</h4>
                     <div className="w-25 ">
                         <label htmlFor="loginUsername" className="form-label" className="login-text">Username</label>
                         <input type="text" className="form-control" name="username" id="loginUsername"
