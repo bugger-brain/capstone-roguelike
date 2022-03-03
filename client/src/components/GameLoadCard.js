@@ -21,7 +21,7 @@ function GameLoadCard({ game }) {
     return (
         <div className="card bg-info w-25 p-3">
             {/* <p><b>Game Id: {game.gameId}</b></p> */}
-            <p><b>Game progress: {calculateGameProgress(game)}</b></p>
+            {/* <p><b>Game progress: {calculateGameProgress(game)}</b></p> */}
             <p><b>Score: {game.score}</b></p>
             <div className="btn-group">
                 <button type="button" className="btn w-25 btn-success" onClick={() => loadGame(game)}>Load</button>

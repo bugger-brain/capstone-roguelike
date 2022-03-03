@@ -1,24 +1,30 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { saveGame} from "../services/game-api";
 import "./Play.css";
 import { putTile } from "../services/tile-api";
 import { updateHero } from "../services/hero-api";
-import { useNavigate } from "react-router-dom";
 
 function Play() {
 
     const mapSize = 15;
     const gameSize = 1;
 
-    const [game, setGame] = useState(JSON.parse(localStorage.getItem("game")));
     const navigate = useNavigate();
+    const [game, setGame] = useState(JSON.parse(localStorage.getItem("game")));
+    const [gameAlert, setGameAlert] = useState();
+
     const maps = game.maps;
     const hero = game.hero;
+    // console.log("here");
+
+
     let mapHeroIsOn = loadMapHeroIsOn(game.hero.tile);
 
     const [heroState, setHeroState] = useState(hero);
     const[waiting,setWaiting] = useState(false);
     useEffect(() => {
+        setGameAlert(false);
         mapHeroIsOn = loadMapHeroIsOn(hero.tile);
         document.addEventListener('keydown', onkeydown);
         return () => document.removeEventListener("keydown", onkeydown);
@@ -57,12 +63,13 @@ function Play() {
         const t = hero.tile;
         return (
             <>
-                <p className="login-text">hero{hero.heroId}</p>
-                <p className="login-text">hp: {hero.hp}</p>
-                <p className="login-text">lives: {hero.lives}</p>
+                <p className="login-text"><b>Hero</b></p>
+                <p className="login-text">HP: {hero.hp}</p>
+                {/* <p className="login-text">Lives: {hero.lives}</p> */}
+                <p className="login-text">Score: {hero.lives}</p>
                 {/* <p className="login-text">elements: {hero. display truthy in map }</p> */}
-                <p className="login-text">gold: {hero.gold}</p>
-                <p className="login-text">loc: {t.tileId}{t.type}{t.x}{t.y}</p>
+                {/* <p className="login-text">gold: {hero.gold}</p> */}
+                {/* <p className="login-text">loc: {t.tileId}{t.type}{t.x}{t.y}</p> */}
             </>
         );
     }
@@ -114,6 +121,12 @@ function Play() {
                 }
                 else if (tile.type == 'elementFire') {
                     tableHtml += `<td id="td${col}_${row}" class="elementFire"></td>`;
+                }
+                else if (tile.type == 'gameObjectiveAlert') {
+                    tableHtml += `<td id="td${col}_${row}" class="gameObjectiveAlert"></td>`;
+                }
+                else if (tile.type == 'finishTheGame') {
+                    tableHtml += `<td id="td${col}_${row}" class="finishTheGame"></td>`;
                 }
                 else if (tile.type == 'monster') {
                     tableHtml += `<td id="td${col}_${row}" class="monster"></td>`;
@@ -195,6 +208,14 @@ function Play() {
 
     function updateHeroHp(n) {
         hero.hp += n;
+        if (hero.hp <= 0) {
+            window.confirm("You have died. The world has fallen into chaos - this save will be deleted.");
+            navigate("/dashboard");
+        }
+    }
+
+    function updateScore(n) {
+        game.score += n;
     }
 
     function updateElement(element) {
@@ -281,23 +302,50 @@ function Play() {
                 updateElement('water');
                 updateTileType(tile, 'grass');
                 updateHeroHp(20);
+                updateScore(20);
                 return '';
             case 'elementEarth':
                 updateElement('earth');
                 updateTileType(tile, 'grass');
                 updateHeroHp(20);
+                updateScore(20);
                 return '';
             case 'elementAir':
                 updateElement('air');
                 updateTileType(tile, 'grass');
                 updateHeroHp(20);
+                updateScore(20);
                 return '';
             case 'elementFire':
                 updateElement('fire');
                 updateTileType(tile, 'grass');
                 updateHeroHp(20);
+                updateScore(20);
+                return '';
+            case 'gameObjectiveAlert':
+                if (!gameAlert){
+                    gameObjectiveAlert();
+                }
+                return '';
+            case 'finishTheGame':
+                if (hero.water && hero.earth && hero.air && hero.fire)
+                {
+                    finishTheGame();
+                }
                 return '';
         }
+    }
+
+    function gameObjectiveAlert() {
+        window.alert("Welcome Hero! Collect all four elemental powers then return here to save the world!!");
+        setGameAlert(true);
+        console.log(gameAlert);
+
+    }
+
+    function finishTheGame() {
+        window.alert("You used your powers to save the world. Congratulations you beat the game!!");
+
     }
 
     function nextCords(direction, obj) {
@@ -355,11 +403,35 @@ function Play() {
         }
     }
 
+    function displayMapName() {
+        let x = mapHeroIsOn.x;
+        let y = mapHeroIsOn.y;
+        if (x == 0 && y == 0){
+            return(
+                <h3 className="login-text">Map - River Planes</h3>
+            );
+        } else if (x == 1 && y == 0){
+            return(
+                <h3 className="login-text">Map - Stone Hills</h3>
+            );
+        } else if (x == 0 && y == 1){
+            return(
+                <h3 className="login-text">Map - Wooden Home</h3>
+            );
+        } else if (x == 1    && y == 1){
+            return(
+                <h3 className="login-text">Map - Ring of Flame</h3>
+            );
+        }
+    }
+
+
     return (
         <div>
             {displayHero()}
             <br /><br />
-            <h3 className="login-text">Map {mapHeroIsOn.x}{mapHeroIsOn.y}</h3>
+            {/* <h3 className="login-text">Map {mapHeroIsOn.x}{mapHeroIsOn.y}</h3> */}
+            {displayMapName()}
             <div id="grid"></div>
             <div>
                 <center>
