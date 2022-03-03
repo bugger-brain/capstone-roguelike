@@ -11,8 +11,6 @@ function Dashboard() {
     const [games, setGames] = useState(player.games);
     // const games = player.games;
 
-
-
     const [game, setGame] = useState({});
 
     // game to be posted
