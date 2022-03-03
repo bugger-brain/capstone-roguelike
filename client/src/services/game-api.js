@@ -1,9 +1,26 @@
 const baseUrl = `${window.API_URL}/api/game`
 
 export async function findAllGames() {
-    
+    const init = {
+        method: "GET",
+        headers: {
+            "Accept": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("TOKEN")}`
+        }
+    }
+    const response = await fetch(baseUrl, init);
+    if (response.status === 200){
+        let j = response.json();
+        return j;
+    } else if (response.status === 403) {
+        return Promise.reject(403);
+    }
+    return Promise.reject("Could not fetch games. ");
+}
 
-    const response = await fetch(baseUrl);
+export async function findGamesByPlayerId(playerId){
+    
+    const response = await fetch(`${baseUrl}/player/${playerId}`);
     if (response.status === 200){
         let j = response.json();
         return j;
@@ -14,10 +31,10 @@ export async function findAllGames() {
 }
 
 export async function findGameById(id) {
-    const init = { method: "POST", headers: { 
+    const init = { method: "GET", headers: { 
         "Authorization": `Bearer ${localStorage.getItem("TOKEN")}` 
     } };
-    const response = await fetch(`${baseUrl}/${id}`);
+    const response = await fetch(`${baseUrl}/${id}`, init);
     if (response.status === 200){
         return response.json();
     } else if (response.status === 404) {
@@ -32,7 +49,7 @@ export async function addGame(game) {
         headers: {
             "Content-Type": "application/json",
             "Accept": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem("TOKEN")}`
+            //"Authorization": `Bearer ${localStorage.getItem("TOKEN")}`
         },
         body: JSON.stringify(game)
     }

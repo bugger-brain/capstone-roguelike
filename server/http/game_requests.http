@@ -11,6 +11,11 @@ Authorization: Bearer {{jwt}}
 
 ###
 
+GET {{url}}/player/1 HTTP/1.1
+//Authorization: Bearer {{jwt}}
+
+###
+
 POST {{url}} HTTP/1.1
 Content-Type: application/json
 Accept: application/json
@@ -31,7 +36,8 @@ Authorization: Bearer {{jwt}}
 
 {
     "score": 0,
-    "blueprint": false
+    "blueprint": false,
+    "playerId": 1
 
 }
 
@@ -40,7 +46,11 @@ Authorization: Bearer {{jwt}}
 //JWT validity cannot be asserted and should not be trusted.
 
 ###
-GET {{url}}/42 HTTP/1.1
+GET {{url}}/56 HTTP/1.1
+Authorization: Bearer {{jwt}}
+
+###
+GET {{url}}/44 HTTP/1.1
 Authorization: Bearer {{jwt}}
 
 ###

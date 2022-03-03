@@ -42,6 +42,12 @@ public class GameController {
         return ResponseEntity.ok(game);
     }
 
+    @GetMapping("/player/{playerId}")
+    public List<Game> getGamesByPlayerId(@PathVariable int playerId) {
+        List<Game> games = service.findGamesByPlayerId(playerId);
+        return games;
+    }
+
     @PostMapping
     public ResponseEntity<Object> post(@RequestBody Game game, BindingResult bindingResult,
                                        ServletRequest request){

@@ -44,7 +44,19 @@ public class GameService {
 
 
 
-    public Game findById(int gameId){ return repository.findByGameId(gameId);
+    public Game findById(int gameId){
+        Game game = repository.findByGameId(gameId);
+        game.setHero(heroRepository.findByGameId(gameId));
+        return game;
+
+    }
+
+    public List<Game> findGamesByPlayerId(int playerId){
+        List<Game> games=  repository.findGamesByPlayerId(playerId);
+        for(Game g: games){
+            g.setHero(heroRepository.findByGameId(g.getGameId()));
+        }
+        return games;
 
     }
 
@@ -116,7 +128,8 @@ public class GameService {
         hero.setFire(false);
         hero.setTile(heroTile);
         hero = heroRepository.save(hero);
-        //System.out.println(hero.getHeroId()+ " " + hero.getTile().getTileId() + " " + hero.getGameId());
+
+        game.setHero(heroRepository.findByHeroId(hero.getHeroId()));
         return result;
 
     }

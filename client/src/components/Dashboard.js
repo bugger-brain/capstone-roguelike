@@ -1,14 +1,16 @@
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import GameLoadCard from "./GameLoadCard";
-import { createGame, findGameById } from "../services/game-api";
+import { createGame, findGameById, findGamesByPlayerId } from "../services/game-api";
+import { findHeroById } from "../services/hero-api";
 
 
 function Dashboard() {
 
     const navigate = useNavigate();
     const player = JSON.parse(localStorage.getItem("player"));
-    const games = player.games;
+    const [games, setGames]=useState(player.games);
+    const [waiting, setWaiting] = useState(false)
     
    
     const [game, setGame] = useState({});
@@ -16,24 +18,50 @@ function Dashboard() {
     // game to be posted
     const newGame = {
         score: 0,
-        isBlueprint: false
+        isBlueprint: false,
+        playerId: player.playerId
     }
     
-    function startGame(newGameId) {
-        findGameById(newGameId) //this is what we will actually be able to load the maps from
-            .then(json => localStorage.setItem("game", JSON.stringify(json)))
-            .catch(console.error)
+    useEffect(()=> {
+        fetchGames(); 
+    }, []);
+   
+    function fetchGames() {
+        findGamesByPlayerId(player.playerId)
+            .then(json => 
+                {
+                    setGames(json);
+                    console.log(games);
+                })
+            .catch(console.log)
     }
 
-    function CreateNewGame() {      
-        createGame(newGame)             //none of this works 
-            .then(json => setGame(json))
+
+
+
+   
+    function CreateNewGame() { 
+    setWaiting(true);  
+    
+        createGame(newGame)             
+            .then(json => {
+                setGame(json); //this does nothing
+                fetchGames();
+            })
+            .then(()=> {
+                let currentGame = games[games.length-1];
+                console.log(currentGame);
+                //console.log(game);
+                localStorage.setItem("game", JSON.stringify(currentGame));
+                setWaiting(false);
+        })
             .catch(console.error)
-    let newGameId = game.gameId;  //basically we need to grab the id from the game we generated in order to get the rest of the data
-    startGame(newGameId);
-    localStorage.setItem("game", JSON.stringify(game));
-        //navigate("/play");
-        //getting this error: JWT strings must contain exactly 2 period characters. Found: 0
+        
+    
+       
+        
+         navigate("/play");
+       
     }
 
 
@@ -55,10 +83,11 @@ function Dashboard() {
                 </div>
                 <div>
                     <center>
-                        <button type="button" className="btn btn-lrg btn-info" onClick={()=> {CreateNewGame()}} >
+                        <button type="button" className="btn btn-lrg btn-info" disabled = {waiting} onClick={()=> {CreateNewGame()}} >
                             Start a New Game!
                         </button></center>
                 </div>
+                
                 <div>
                     {displayGames()}
                 </div>

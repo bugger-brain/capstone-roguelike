@@ -28,8 +28,8 @@ function Play() {
 
 
     function saveCurrentGame(game) {
-            saveGame(game)
-                .catch(console.error)
+            // saveGame(game)
+            //     .catch(console.error)  //don't know if this works yet
         
     }
 
