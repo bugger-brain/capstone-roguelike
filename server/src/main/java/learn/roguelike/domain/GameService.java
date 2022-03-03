@@ -151,7 +151,7 @@ public class GameService {
             map = game.getMaps().get(i);
             if(mapService.findByMapId(map.getMapId())!=null){
                 mapRepository.save(map);
-               
+
             }else{
                 result.addMessage("map not found", ResultType.INVALID);
             }
