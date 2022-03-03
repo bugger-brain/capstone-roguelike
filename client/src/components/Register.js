@@ -14,6 +14,12 @@ function Register() {
 
     const navigate = useNavigate();
 
+    const [hasGames, setHasGames] = useState(false);
+
+    function onClick() {
+        setHasGames(true);
+    }
+
     const onChange = (evt) => {
         const clone = { ...player };
         clone[evt.target.name] = evt.target.value;
@@ -63,7 +69,7 @@ function Register() {
 
                     {err && <div className="alert alert-danger">{err}</div>}
                     <div className="mb-2">
-                        <button type="submit" className="btn btn-primary me-1">Submit</button>
+                        <button type="submit" onClick={onClick} className="btn btn-primary me-1">Submit</button>
                         {/* <Link to="/login" className="btn btn-secondary">Cancel</Link> */}
                     </div>
                 </form>
