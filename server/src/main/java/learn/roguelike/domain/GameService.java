@@ -96,9 +96,7 @@ public class GameService {
                 tile = tileRepository.save(tile);
                 if(i == 0 && k ==0){
                     heroTile = tile;
-
                 }
-
             }
         }
 

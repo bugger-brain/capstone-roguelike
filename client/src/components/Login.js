@@ -32,9 +32,7 @@ function Login() {
                 navigate("/dashboard");
             }).catch(() => setHasError(true));
     };
-
-    
-
+  
     function login(candidate) {
         findPlayerByUsername(candidate.username)
             .then(player => {

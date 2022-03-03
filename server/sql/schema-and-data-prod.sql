@@ -89,8 +89,8 @@ insert into map values
     (4, 1, 1, 1);
 
 
--- insert into hero values
--- 	(1, 1, 1, 10, 3, false, false, false, false, 0, 50);
+insert into hero values
+	(1, 1, 1, 10, 3, false, false, false, false, 0, 50);
     
 -- insert into monster values
 -- 	(1, 2, 20);

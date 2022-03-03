@@ -44,11 +44,9 @@ public class PlayerController {
         return ResponseEntity.ok(player);
     }
 
-
     @PostMapping("/create")
     public ResponseEntity<Object> post(@RequestBody Player player, BindingResult bindingResult,
                                             ServletRequest request){
-
         if (bindingResult.hasErrors()) {
             return new ResponseEntity<Object>(makeResult(bindingResult), HttpStatus.BAD_REQUEST);
         }

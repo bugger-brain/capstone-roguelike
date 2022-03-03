@@ -55,7 +55,6 @@ public class HeroController {
                     .body(hero);
         }
         return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
-
     }
 
     @PutMapping("/edit/{heroId}")
