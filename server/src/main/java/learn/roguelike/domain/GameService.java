@@ -24,25 +24,28 @@ public class GameService {
     private final MapRepository mapRepository;
     private final TileRepository tileRepository;
     private final HeroRepository heroRepository;
+    private final MapService mapService;
+    private final TileService tileService;
+    private final HeroService heroService;
 
-    public GameService(GameRepository repository, MapRepository mapRepository, TileRepository tileRepository, HeroRepository heroRepository) {
+    public GameService(GameRepository repository, MapRepository mapRepository, TileRepository tileRepository, HeroRepository heroRepository, MapService mapService, TileService tileService, HeroService heroService) {
         this.repository = repository;
         this.mapRepository = mapRepository;
         this.tileRepository = tileRepository;
         this.heroRepository = heroRepository;
+        this.mapService = mapService;
+        this.tileService = tileService;
+        this.heroService = heroService;
     }
 
     public List<Game> findAll() {
         return repository.findAll();
     }
 
-<<<<<<< HEAD
-    public Game findById(int gameId){
-        Game game = repository.findById(gameId).orElse(null);
-        return game;
-=======
+
+
     public Game findById(int gameId){ return repository.findByGameId(gameId);
->>>>>>> c073e330e114d9d7aa847d5c69b1815fdf1c7e35
+
     }
 
     public Result<Game> add(Game game){
@@ -62,34 +65,48 @@ public class GameService {
             return null;
         }
 
+        //generating new gameId
         game = repository.save(game);
         result.setPayload(game);
         List<Map> defaultMaps=defaultGame.getMaps();
-        Map map = new Map();
+        int[] mapIds = new int[4];
         //if(result.isSuccess()) {
+
+        //updating defaultMaps with new gameId, generating new mapIds
             for (int i = 0; i < defaultMaps.size(); i++) {
+                Map map = new Map();
                 map.setGameId(game.getGameId());
                 map.setX(defaultMaps.get(i).getX());
                 map.setY(defaultMaps.get(i).getY());
                 map = mapRepository.save(map);
-                System.out.println(map.getMapId());
+                mapIds[i] = map.getMapId();
+                //System.out.println(map.getMapId());
             }
        // }
-        Tile tile = new Tile();
+
+        //updating Tiles with new mapId
+        Tile heroTile = new Tile();
         for(int i = 0; i < defaultMaps.size(); i++){
+            System.out.println("mapIds"+ mapIds[i]);
             for(int k = 0; k < defaultMaps.get(i).getTiles().size(); k++){
+                Tile tile = new Tile();
                 Tile temp = defaultMaps.get(i).getTiles().get(k);
                 tile.setType(temp.getType());
-                tile.setMapId(map.getMapId());
+                tile.setMapId(mapIds[i]);
                 tile.setX(temp.getX());
                 tile.setY(temp.getY());
                 tile = tileRepository.save(tile);
-                System.out.print(tile.getTileId());
+                if(i == 0 && k ==0){
+                    heroTile = tile;
+
+                }
+
             }
         }
 
-        Hero hero = new Hero();
 
+        //generating new heroId, updating w new gameId, Tile
+        Hero hero = new Hero();
         hero.setGameId(game.getGameId());
         hero.setHp(500);
         hero.setLives(3);
@@ -97,8 +114,9 @@ public class GameService {
         hero.setWater(false);
         hero.setEarth(false);
         hero.setFire(false);
-        hero.setTile(game.getMaps().get(0).getTiles().get(0));
-
+        hero.setTile(heroTile);
+        hero = heroRepository.save(hero);
+        //System.out.println(hero.getHeroId()+ " " + hero.getTile().getTileId() + " " + hero.getGameId());
         return result;
 
     }
@@ -112,6 +130,47 @@ public class GameService {
             return result;
         }
         result.addMessage("game not found", ResultType.INVALID);
+        return result;
+    }
+
+    public Result<Void> saveGame(Game game){
+        Result<Void> result = validate(game);
+        if(!result.isSuccess()){
+            return result;
+        }
+        if(findById(game.getGameId()) !=null){
+            repository.save(game);
+        }else{
+            result.addMessage("game not found", ResultType.INVALID);
+        }
+        Map map = new Map();
+        for(int i = 0; i< game.getMaps().size(); i++){
+            map = game.getMaps().get(i);
+            if(mapService.findByMapId(map.getMapId())!=null){
+                mapRepository.save(map);
+            }else{
+                result.addMessage("map not found", ResultType.INVALID);
+            }
+        }
+
+        for(int i = 0; i< game.getMaps().size(); i++){
+            for(int k = 0; k < game.getMaps().get(i).getTiles().size(); k++){
+                Tile temp = game.getMaps().get(i).getTiles().get(k);
+                if(tileService.findByTileId(temp.getTileId())!= null){
+                    tileRepository.save(temp);
+                }else{
+                    result.addMessage("tile not found", ResultType.INVALID);
+                }
+            }
+        }
+
+        if(heroService.findByHeroId(game.getHero().getHeroId()) != null){
+            heroRepository.save(game.getHero());
+
+        }else{
+            result.addMessage("hero not found", ResultType.INVALID);
+        }
+
         return result;
     }
 

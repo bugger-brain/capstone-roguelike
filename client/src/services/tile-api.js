@@ -44,7 +44,7 @@ export async function addTile(tile) {
 }
 
 
-async function updateTile(tile) {
+async function putTile(tile) {
     const init = {
         method: "PUT",
         headers: {
