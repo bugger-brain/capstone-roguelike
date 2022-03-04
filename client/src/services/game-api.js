@@ -37,7 +37,6 @@ export async function findGameById(id) {
     const response = await fetch(`${baseUrl}/${id}`, init);
     if (response.status === 200){
         let j = response.json();
-        debugger;
         return j;
     } else if (response.status === 404) {
         return Promise.reject(404);
