@@ -9,7 +9,6 @@ function Play() {
 
     const mapSize = 15;
     const gameSize = 1;
-
     const navigate = useNavigate();
     const [game, setGame] = useState(JSON.parse(localStorage.getItem("game")));
     const [gameAlert, setGameAlert] = useState();
@@ -38,6 +37,7 @@ function Play() {
     if(!localStorage.getItem("player")){
         alert("Sorry this feature is for members only :(")
     }else{
+        setWaiting(true)
             saveGame(game)
                 .then(() => navigate("/dashboard"))
                 .catch(console.error)
@@ -117,7 +117,7 @@ function Play() {
                     tableHtml += `<td id="td${col}_${row}" class="elementEarth"></td>`;
                 }
                 else if (tile.type == 'elementAir') {
-                    tableHtml += `<td id="td${col}_${row}" class="elementAir"></td>`;
+                    tableHtml += `<td id="td${col}_${row}" class="elementAir"></td>`; 
                 }
                 else if (tile.type == 'elementFire') {
                     tableHtml += `<td id="td${col}_${row}" class="elementFire"></td>`;
@@ -424,19 +424,33 @@ function Play() {
             );
         }
     }
-
+   
+        
 
     return (
         <div>
+        <div>
+            <div>
             {displayHero()}
+            <br></br>
+            </div>
             <br /><br />
             {/* <h3 className="login-text">Map {mapHeroIsOn.x}{mapHeroIsOn.y}</h3> */}
-            {displayMapName()}
-            <div id="grid"></div>
             <div>
-                <center>
+            <center>{displayMapName()}
+           <div id="grid"></div>
+           <br></br>
+            <div>
+                    <center>
                     <button type="button" className="btn w-25 btn-success" disabled ={waiting} onClick={() => saveCurrentGame(game)}>Save Game</button>
+                    {waiting && <div className="alert alert-alert" class="text"> sending you back to dashboard please hold :)</div>}
+                    </center>
+                     
+                </div>
+
                 </center>
+            </div>
+           
             </div>
         </div>
     );

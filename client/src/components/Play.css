@@ -141,3 +141,11 @@
   border-style: solid;
   background-color: #ffffff
 }
+.blank {
+  width: 25px;
+  height: 25px;
+  border-width: 0px;
+  border-color: black;
+  border-style: solid;
+  background-color: gray
+}

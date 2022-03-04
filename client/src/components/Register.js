@@ -34,7 +34,12 @@ function Register() {
             createPlayer(player)
                 .then(() => {
                     localStorage.setItem("player", JSON.stringify(player));
-                    navigate("/dashboard");
+                    
+                })
+                .then(() => {
+                    if(localStorage.getItem("player") != null){
+                        navigate("/dashboard")
+                    }
                 })
                 .catch(err => {
                     if (err.status === 400) {

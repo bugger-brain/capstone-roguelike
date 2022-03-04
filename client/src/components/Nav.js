@@ -43,15 +43,20 @@ function Nav(){
                         </li>
                         
                     </ul>
+                    <center>
                     <div className="justify-content-end">
                         {/* {credentials && hasAuthority("USER", "ADMIN") && */}
                         { player && player.username &&
                         <>
+                        
                             <h3>{player.username}</h3>
                             <button className="btn btn-dark me-2" onClick={logout}>Logout</button>
+
+
                         </> 
                         }
                     </div>
+                    </center>
                 </div>
             </div>
         </nav>

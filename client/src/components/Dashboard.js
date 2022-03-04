@@ -11,7 +11,7 @@ function Dashboard() {
     const player = JSON.parse(localStorage.getItem("player"));
     const [games, setGames]=useState(player.games);
     const [waiting, setWaiting] = useState(false)
-    
+  
     const [game, setGame] = useState({});
 
     // game to be posted
@@ -40,8 +40,6 @@ function Dashboard() {
     }
 
     const playerRankings = () => {
-        
-        
         let scores = [];
         for (let i = 0; i< games.length; i++){
             scores.push(games[i].score)
@@ -81,22 +79,27 @@ function Dashboard() {
                 console.log(currentGame);
                 //console.log(game);
                 localStorage.setItem("game", JSON.stringify(currentGame));
-                setWaiting(false);
+                
         })
+            .then(setWaiting(false))
+            .then(() => {if(waiting==false){
+                navigate("/play")
+            }
+
+            })
             .catch(console.error)
         
-    
+        
        
         
-         navigate("/play");
+         
        
     }
 
     function displayGames() {
-        // display default if games == null
-        if(games.length == 0){
-
-        }
+        // display default if games == null\
+       
+       
         return games.map(g => (
             <GameLoadCard game={g} />
         ));
@@ -117,6 +120,7 @@ function Dashboard() {
                     {displayGames()}
                 </div>
                 <center><h3 style={{ color: 'white' }}>My High Scores</h3></center>  
+
             <table className="table table-bordered table-dark">
                 <thead>
                     <tr>

@@ -64,9 +64,22 @@ form.register-form {
 
 .rules-text {
   color: ivory;
+  font-family: ;
 }
 
 .text {
   color: rgb(216, 70, 70);
+}
+
+.rules-border {
+  width: 300px;
+  height: 300px;
+  border-left: 5px #1c1c1c;
+  border-right: 5px #1c1c1c;
+  border-top: 5px #1c1c1c;
+  border-bottom: 5px #1c1c1c;
+  border-style:  inset;
+  padding: 100x 0;
+  margin: 10px auto;
 }
 
