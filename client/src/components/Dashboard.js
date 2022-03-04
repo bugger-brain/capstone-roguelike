@@ -38,8 +38,6 @@ function Dashboard() {
                 })
             .catch(console.log)
     }
-<<<<<<< HEAD
-=======
 
     const playerRankings = () => {
         
@@ -69,7 +67,6 @@ function Dashboard() {
     }
 
 
->>>>>>> 44c6405dff3ca64b3589f480f5df4c3cf9e1e875
    
     function CreateNewGame() { 
     setWaiting(true);  

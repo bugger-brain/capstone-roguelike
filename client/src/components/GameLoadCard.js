@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 function GameLoadCard({ game }) {
 
+    const player = JSON.parse(localStorage.getItem("player"));
     const navigate = useNavigate();
 
     function loadGame(game) {

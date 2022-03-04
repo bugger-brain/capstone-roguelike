@@ -13,7 +13,7 @@ function Play() {
     const navigate = useNavigate();
     const [game, setGame] = useState(JSON.parse(localStorage.getItem("game")));
 
-    const [gameMessage, setGameMessage] = useState("turtle");
+    const [gameMessage, setGameMessage] = useState("Welcome");
 
     const maps = game.maps;
     const hero = game.hero;
@@ -66,7 +66,7 @@ function Play() {
                 <p className="login-text"><b>Hero</b></p>
                 <p className="login-text">HP: {hero.hp}</p>
                 {/* <p className="login-text">Lives: {hero.lives}</p> */}
-                <p className="login-text">Score: {hero.lives}</p>
+                <p className="login-text">Score: {game.score}</p>
                 {/* <p className="login-text">elements: {hero. display truthy in map }</p> */}
                 {/* <p className="login-text">gold: {hero.gold}</p> */}
                 <p className="login-text">loc: {t.tileId}{t.type}{t.x}{t.y}</p>
@@ -277,6 +277,7 @@ function Play() {
                 if (hero.earth) {
                     updateTileType(tile, 'grass');
                     setGameMessage("The rubble moves aside.");
+                    updateScore(5);
                     return '';
                 } else {
                     return 'rubble';
@@ -286,6 +287,7 @@ function Play() {
                     updateTileType(tile, 'fire');
                     updateHeroHp(-5);
                     setGameMessage("You burn through the wall. 5 Damage taken.")
+                    updateScore(5);
                     return '';
                 } else {
                     return 'wall';
@@ -295,7 +297,8 @@ function Play() {
             case 'fire':
                 if (hero.fire && hero.air) {
                     updateTileType(tile, 'grass');
-                    setGameMessage("Wind smothers the flame beneth you.")
+                    setGameMessage("Wind smothers the flame beneth you.");
+                    updateScore(10);
                     return '';
                 } else if (hero.fire) {
                     setGameMessage("The fire passes around you.")
@@ -340,6 +343,8 @@ function Play() {
                 if (hero.water && hero.earth && hero.air && hero.fire)
                 {
                     setGameMessage("You used your powers to save the world. Congratulations you beat the game!!");
+                    updateScore(100);
+                    updateTileType(tile, 'grass');
                 }
                 return '';
         }

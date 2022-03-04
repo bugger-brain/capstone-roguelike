@@ -77,9 +77,7 @@ insert into player values
 
     
 insert into game values
-	(1, 1, false, 0),
-    (2, 2, false, 0),
-    (3, 3, false, 0);
+	(1, 1, true, 0);
     
 insert into map values
 -- game 1 for pagoto
