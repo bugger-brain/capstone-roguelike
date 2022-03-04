@@ -209,8 +209,8 @@ function Play() {
     function updateHeroHp(n) {
         hero.hp += n;
         if (hero.hp <= 0) {
-            window.confirm("You have died. The world has fallen into chaos - this save will be deleted.");
-            navigate("/dashboard");
+            setGameMessage("You died.");
+            // navigate("/dashboard");
         }
     }
 
@@ -236,6 +236,9 @@ function Play() {
     }
 
     function decideMovement(direction) {
+        if (hero.hp == 0) {
+            return;
+        }
         let tileCords = nextCords(direction, hero.tile);
         let nextX = tileCords.x;
         let nextY = tileCords.y;
