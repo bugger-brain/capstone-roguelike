@@ -4,7 +4,6 @@ import { saveGame} from "../services/game-api";
 import "./Play.css";
 import { putTile } from "../services/tile-api";
 import { updateHero } from "../services/hero-api";
-import { useNavigate } from "react-router-dom";
 
 function Play() {
 
@@ -13,19 +12,19 @@ function Play() {
 
     const navigate = useNavigate();
     const [game, setGame] = useState(JSON.parse(localStorage.getItem("game")));
-    const [gameAlert, setGameAlert] = useState();
+
+    const [gameMessage, setGameMessage] = useState("turtle");
 
     const maps = game.maps;
     const hero = game.hero;
-    // console.log("here");
-
 
     let mapHeroIsOn = loadMapHeroIsOn(game.hero.tile);
 
     const [heroState, setHeroState] = useState(hero);
-    const[waiting,setWaiting] = useState(false);
+    const[waiting, setWaiting] = useState(false);
+
+    
     useEffect(() => {
-        setGameAlert(false);
         mapHeroIsOn = loadMapHeroIsOn(hero.tile);
         document.addEventListener('keydown', onkeydown);
         return () => document.removeEventListener("keydown", onkeydown);
@@ -70,7 +69,7 @@ function Play() {
                 <p className="login-text">Score: {hero.lives}</p>
                 {/* <p className="login-text">elements: {hero. display truthy in map }</p> */}
                 {/* <p className="login-text">gold: {hero.gold}</p> */}
-                {/* <p className="login-text">loc: {t.tileId}{t.type}{t.x}{t.y}</p> */}
+                <p className="login-text">loc: {t.tileId}{t.type}{t.x}{t.y}</p>
             </>
         );
     }
@@ -241,8 +240,6 @@ function Play() {
         let nextX = tileCords.x;
         let nextY = tileCords.y;
         let mapEdge = hitWhichEdgeOf(mapSize, nextX, nextY);
-        // console.log(mapHeroIsOn);
-        // debugger;
         if (mapEdge === '') {
             let nextTile = findTileOnMapByXY(mapHeroIsOn, nextX, nextY);
             let valid = validateTile(nextTile);
@@ -267,14 +264,19 @@ function Play() {
     function validateTile(tile) {
         switch (tile.type) {
             case 'grass':
+                setGameMessage("");
                 return '';
             case 'water':
-                return hero.water ? '' : 'water';
+                if (hero.water){
+                    setGameMessage("You step through the water.");
+                    return '';
+                }
             case 'stone':
                 return 'stone';
             case 'rubble':
                 if (hero.earth) {
                     updateTileType(tile, 'grass');
+                    setGameMessage("The rubble moves aside.");
                     return '';
                 } else {
                     return 'rubble';
@@ -283,6 +285,7 @@ function Play() {
                 if (hero.fire) {
                     updateTileType(tile, 'fire');
                     updateHeroHp(-5);
+                    setGameMessage("You burn through the wall. 5 Damage taken.")
                     return '';
                 } else {
                     return 'wall';
@@ -292,11 +295,14 @@ function Play() {
             case 'fire':
                 if (hero.fire && hero.air) {
                     updateTileType(tile, 'grass');
+                    setGameMessage("Wind smothers the flame beneth you.")
                     return '';
                 } else if (hero.fire) {
+                    setGameMessage("The fire passes around you.")
                     return '';
                 } else {
                     updateHeroHp(-10);
+                    setGameMessage("You are burned by the fire. 10 Damage taken.")
                     return '';
                 }
             case 'elementWater':
@@ -304,50 +310,42 @@ function Play() {
                 updateTileType(tile, 'grass');
                 updateHeroHp(20);
                 updateScore(20);
+                setGameMessage("You become fluid, ever changing... 20 HP restored.");
                 return '';
             case 'elementEarth':
                 updateElement('earth');
                 updateTileType(tile, 'grass');
                 updateHeroHp(20);
                 updateScore(20);
+                setGameMessage("Stones around you begin to vibrate...  20 HP restored.");
                 return '';
             case 'elementAir':
                 updateElement('air');
                 updateTileType(tile, 'grass');
                 updateHeroHp(20);
                 updateScore(20);
+                setGameMessage("A powerful gust twists beneath your feet... 20 HP restored.");
                 return '';
             case 'elementFire':
                 updateElement('fire');
                 updateTileType(tile, 'grass');
                 updateHeroHp(20);
                 updateScore(20);
+                setGameMessage("Your hands glow like embers... 20 HP restored.");
                 return '';
             case 'gameObjectiveAlert':
-                if (!gameAlert){
-                    gameObjectiveAlert();
-                }
+                setGameMessage("Welcome Hero! Collect all four elemental powers then return here to save the world!!");
                 return '';
             case 'finishTheGame':
                 if (hero.water && hero.earth && hero.air && hero.fire)
                 {
-                    finishTheGame();
+                    setGameMessage("You used your powers to save the world. Congratulations you beat the game!!");
                 }
                 return '';
         }
     }
 
-    function gameObjectiveAlert() {
-        window.alert("Welcome Hero! Collect all four elemental powers then return here to save the world!!");
-        setGameAlert(true);
-        console.log(gameAlert);
 
-    }
-
-    function finishTheGame() {
-        window.alert("You used your powers to save the world. Congratulations you beat the game!!");
-
-    }
 
     function nextCords(direction, obj) {
         let nextX = obj.x;
@@ -426,14 +424,27 @@ function Play() {
         }
     }
 
+    function displayElements() {
+        return(
+            <>
+            {/* {hero.water || hero.air || hero.earth || hero.fire || <h3 className="login-text"><u>Elements</u></h3>} */}
+            {hero.water && <h4 className="login-text">Water</h4> }
+            {hero.earth && <h4 className="login-text">Earth</h4> }
+            {hero.air && <h4 className="login-text">Air</h4> }
+            {hero.fire && <h4 className="login-text">Fire</h4> }
+            </>
+        );
+    }
+
 
     return (
         <div>
             {displayHero()}
+            {displayElements()}
             <br /><br />
-            {/* <h3 className="login-text">Map {mapHeroIsOn.x}{mapHeroIsOn.y}</h3> */}
             {displayMapName()}
             <div id="grid"></div>
+            <p className="login-text">{gameMessage}</p>
             <div>
                 <center>
                     <button type="button" className="btn w-25 btn-success" disabled ={waiting} onClick={() => saveCurrentGame(game)}>Save Game</button>

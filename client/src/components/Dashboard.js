@@ -35,8 +35,6 @@ function Dashboard() {
                 })
             .catch(console.log)
     }
-
-
    
     function CreateNewGame() { 
     setWaiting(true);  
@@ -54,19 +52,15 @@ function Dashboard() {
                 setWaiting(false);
         })
             .catch(console.error)
-        
     
-       
-        
          navigate("/play");
-       
     }
 
     function displayGames() {
         // display default if games == null
         if(games.length == 0){
-
         }
+
         return games.map(g => (
             <GameLoadCard game={g} />
         ));
