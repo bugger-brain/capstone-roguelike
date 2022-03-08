@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { saveGame} from "../services/game-api";
+import { saveGame } from "../services/game-api";
 import "./Play.css";
 import { putTile } from "../services/tile-api";
 import { updateHero } from "../services/hero-api";
@@ -20,9 +20,9 @@ function Play() {
     let mapHeroIsOn = loadMapHeroIsOn(game.hero.tile);
 
     const [heroState, setHeroState] = useState(hero);
-    const[waiting, setWaiting] = useState(false);
+    const [waiting, setWaiting] = useState(false);
 
-    
+
     useEffect(() => {
         mapHeroIsOn = loadMapHeroIsOn(hero.tile);
         document.addEventListener('keydown', onkeydown);
@@ -34,15 +34,15 @@ function Play() {
     }, [heroState]);
 
     function saveCurrentGame(game) {
-    if(!localStorage.getItem("player")){
-        alert("Sorry this feature is for members only :(")
-    }else{
-        setWaiting(true)
+        if (!localStorage.getItem("player")) {
+            alert("Sorry this feature is for members only :(")
+        } else {
+            setWaiting(true)
             saveGame(game)
                 .then(() => navigate("/dashboard"))
                 .catch(console.error)
-    } 
-        
+        }
+
     }
 
     function loadMapHeroIsOn(heroTile) {
@@ -69,7 +69,7 @@ function Play() {
                 <p className="login-text">Score: {game.score}</p>
                 {/* <p className="login-text">elements: {hero. display truthy in map }</p> */}
                 {/* <p className="login-text">gold: {hero.gold}</p> */}
-                <p className="login-text">loc: {t.tileId}{t.type}{t.x}{t.y}</p>
+                {/* <p className="login-text">loc: {t.tileId}{t.type}{t.x}{t.y}</p> */}
             </>
         );
     }
@@ -117,7 +117,7 @@ function Play() {
                     tableHtml += `<td id="td${col}_${row}" class="elementEarth"></td>`;
                 }
                 else if (tile.type == 'elementAir') {
-                    tableHtml += `<td id="td${col}_${row}" class="elementAir"></td>`; 
+                    tableHtml += `<td id="td${col}_${row}" class="elementAir"></td>`;
                 }
                 else if (tile.type == 'elementFire') {
                     tableHtml += `<td id="td${col}_${row}" class="elementFire"></td>`;
@@ -270,7 +270,7 @@ function Play() {
                 setGameMessage("");
                 return '';
             case 'water':
-                if (hero.water){
+                if (hero.water) {
                     setGameMessage("You step through the water.");
                     return '';
                 }
@@ -343,8 +343,7 @@ function Play() {
                 setGameMessage("Welcome Hero! Collect all four elemental powers then return here to save the world!!");
                 return '';
             case 'finishTheGame':
-                if (hero.water && hero.earth && hero.air && hero.fire)
-                {
+                if (hero.water && hero.earth && hero.air && hero.fire) {
                     setGameMessage("You used your powers to save the world. Congratulations you beat the game!!");
                     updateScore(100);
                     updateTileType(tile, 'grass');
@@ -413,33 +412,33 @@ function Play() {
     function displayMapName() {
         let x = mapHeroIsOn.x;
         let y = mapHeroIsOn.y;
-        if (x == 0 && y == 0){
-            return(
+        if (x == 0 && y == 0) {
+            return (
                 <h3 className="login-text">Map - River Planes</h3>
             );
-        } else if (x == 1 && y == 0){
-            return(
+        } else if (x == 1 && y == 0) {
+            return (
                 <h3 className="login-text">Map - Stone Hills</h3>
             );
-        } else if (x == 0 && y == 1){
-            return(
+        } else if (x == 0 && y == 1) {
+            return (
                 <h3 className="login-text">Map - Wooden Home</h3>
             );
-        } else if (x == 1    && y == 1){
-            return(
+        } else if (x == 1 && y == 1) {
+            return (
                 <h3 className="login-text">Map - Ring of Flame</h3>
             );
         }
     }
 
     function displayElements() {
-        return(
+        return (
             <>
-            {/* {hero.water || hero.air || hero.earth || hero.fire || <h3 className="login-text"><u>Elements</u></h3>} */}
-            {hero.water && <h4 className="login-text">Water</h4> }
-            {hero.earth && <h4 className="login-text">Earth</h4> }
-            {hero.air && <h4 className="login-text">Air</h4> }
-            {hero.fire && <h4 className="login-text">Fire</h4> }
+                {/* {hero.water || hero.air || hero.earth || hero.fire || <h3 className="login-text"><u>Elements</u></h3>} */}
+                {hero.water && <h4 className="login-text">Water</h4>}
+                {hero.earth && <h4 className="login-text">Earth</h4>}
+                {hero.air && <h4 className="login-text">Air</h4>}
+                {hero.fire && <h4 className="login-text">Fire</h4>}
             </>
         );
     }
@@ -447,28 +446,26 @@ function Play() {
 
     return (
         <div>
-        <div>
             <div>
-            {displayHero()}
-            <br></br>
-            </div>
-            <br /><br />
-            {/* <h3 className="login-text">Map {mapHeroIsOn.x}{mapHeroIsOn.y}</h3> */}
-            <div>
-            <center>{displayMapName()}
-           <div id="grid"></div>
-           <br></br>
-            <div>
-                    <center>
-                    <button type="button" className="btn w-25 btn-success" disabled ={waiting} onClick={() => saveCurrentGame(game)}>Save Game</button>
-                    {waiting && <div className="alert alert-alert" class="text"> sending you back to dashboard please hold :)</div>}
+                <div>
+                    {displayHero()}
+                    <br></br>
+                </div>
+                <br /><br />
+                <div>
+                    <center>{displayMapName()}
+                        <div id="grid"></div>
+                        <div className="login-text">{gameMessage}</div>
+                        <br></br>
+                        <div>
+                            <center>
+                                <button type="button" className="btn w-25 btn-success" disabled={waiting} onClick={() => saveCurrentGame(game)}>Save Game</button>
+                                {waiting && <div className="alert alert-alert" class="text"> sending you back to dashboard please hold :)</div>}
+                            </center>
+                        </div>
                     </center>
-                     
                 </div>
 
-                </center>
-            </div>
-           
             </div>
         </div>
     );
